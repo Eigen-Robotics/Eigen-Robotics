@@ -1,0 +1,67 @@
+
+[project]
+name = "ark-framework"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "PheelaV", email = "koudas1009@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = [
+  "colorlog>=6.9.0",
+  "graphviz>=0.21",
+  "gymnasium>=1.2.0",
+  "lcm>=1.5.1",
+  "matplotlib>=3.10.5",
+  "pandas>=2.1.0",
+  "pyyaml>=6.0.2",
+  "scipy>=1.15.3",
+  "numpy==1.24.3",
+  "pydantic>=2.11.7",
+]
+
+[dependency-groups]
+dev = ["ruff>=0.12.8", "wheel>=0.45.1"]
+
+[project.optional-dependencies]
+default = ["ark_framework[sim-pybullet-gui, jupyter, cli]"]
+sim-pybullet-gui = ["pybullet==3.2.7", "opencv-python>=4.8.1.78"]
+sim-pybullet-headless = ["pybullet==3.2.7", "opencv-python-headless>=4.8.1.78"]
+jupyter = [
+    "ipython>=8.37.0",
+]
+cli = [
+    "rich>=14.1.0",
+    "typer>=0.16.0",
+]
+
+[tool.uv]
+conflicts = [
+  [
+    { extra = "sim-pybullet-gui" },
+    { extra = "sim-pybullet-headless" },
+  ],
+]
+environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
+
+
+[tool.uv.sources]
+# !!Do not update manually, this is managed by scripts/build_pybullet_macos.py
+# and depends on the entry in dependencies above, python version and
+# the platform architecture!!
+pybullet = { path = "../../.wheels/pybullet-3.2.7-cp311-cp311-macosx_15_0_arm64.whl", marker = "sys_platform == 'darwin'" }
+
+[project.scripts]
+ark = "ark.cli:main"
+
+[build-system]
+requires = ["hatchling", "setuptools", "wheel"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ark"]
+namespace = true
+include = ["src/ark/**/*.py", "src/ark/**/*.pyi", "src/ark/**/py.typed"]
+exclude = ["src/ark/**/__pycache__", "src/ark/**/*.pyc"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"src/ark" = "ark"

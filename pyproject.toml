@@ -1,0 +1,72 @@
+[project]
+name = "ark-monster"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "PheelaV", email = "koudas1009@gmail.com" }]
+requires-python = ">=3.11"
+dependencies = ["ark-framework"]
+
+# These are not included in packages, meant for non-package projects (usecase, testing, etc.)
+# --dev = --group dev (special)
+# otherwise
+# --group <group_name>
+# etc.
+[dependency-groups]
+dev = [
+  "pre-commit>=4.3.0",
+  "pytest>=8.4.1",
+  "pytest-cov>=6.2.1",
+  "ruff>=0.12.8",
+]
+
+# These become the package's extras
+# --extra default
+# or
+# --extra ml
+# or
+# ? install ark_monster[default]
+# etc.
+[project.optional-dependencies]
+robots = ["ark-robots"]
+sensors = ["ark-sensors"]
+ml = ["ark-ml"]
+alia = ["ark-alia"]
+sim-pybullet-gui = ["ark-framework[sim-pybullet-gui]"]
+sim-pybullet-headless = ["ark-framework[sim-pybullet-headless]"]
+default = ["ark_framework[default]", "ark_ml[jupyter]", "ark_monster[sensors, robots, alia]"]
+
+[tool.uv]
+conflicts = [[{ extra = "default" }, { extra = "sim-pybullet-headless" }]]
+
+[build-system]
+requires = ["uv_build>=0.8.8,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.workspace]
+members = [
+  "packages/ark_framework",
+  "packages/ark_sensors",
+  "packages/ark_robots",
+  "packages/ark_ml",
+  "packages/ark_alia",
+  "packages/ark_rosbridge",
+]
+
+[tool.uv.sources]
+ark-alia = { workspace = true }
+ark-framework = { workspace = true }
+ark-sensors = { workspace = true }
+ark-robots = { workspace = true }
+ark-ml = { workspace = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = ["--strict-markers", "--disable-warnings", "-v"]
+markers = [
+  "slow: marks tests as slow",
+  "integration: marks tests as integration tests",
+]
