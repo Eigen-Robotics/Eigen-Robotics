@@ -5,7 +5,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [{ name = "PheelaV", email = "koudas1009@gmail.com" }]
-requires-python = ">=3.11"
+requires-python = "==3.11.*"
 dependencies = [
   "colorlog>=6.9.0",
   "graphviz>=0.21",
@@ -48,8 +48,8 @@ environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
 # !!Do not update manually, this is managed by scripts/build_pybullet_macos.py
 # and depends on the entry in dependencies above, python version and
 # the platform architecture!!
-pybullet = { path = "../../.wheels/pybullet-3.2.7-cp311-cp311-macosx_15_0_arm64.whl", marker = "sys_platform == 'darwin'" }
 
+pybullet = { path = "../../.wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl", marker = "sys_platform == 'darwin'" }
 [project.scripts]
 ark = "ark.cli:main"
 

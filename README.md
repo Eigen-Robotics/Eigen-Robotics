@@ -25,12 +25,15 @@ All the packages have a source folder with a folder `/packages/**/src/ark/` that
 
 #### Requirements
 
-To get started you need to make sure `make` and `uv` is available in your path. Make is used to facilitate a convenient way to execute and orchestrate the initial installation.
+To get started you need to make sure Python 3.11, `make`, and `uv` are available in your path. Make is used to facilitate a convenient way to execute and orchestrate the initial installation.
 
-1. make
+1. Python 3.11
+    - verify with `python3 --version`
+    - ensure the reported version is `3.11.x`; the workspace is pinned to that series
+2. make
     - check by executing `make --version`
     - if not availabe, check [make website](https://www.gnu.org/software/make/#download), or install using your package manager of choice if not included with the OS by default
-2. uv
+3. uv
     - check by executing `uv --version`
     - if not available see [how to install uv](https://docs.astral.sh/uv/getting-started/installation/)
 
