@@ -1,0 +1,151 @@
+package eigen.types.generated;
+
+// ===== geometry_msgs equivalents =====
+// Use double (64-bit) to match ROS geometry precision (Point, Vector3, Quaternion, Pose, etc.).
+// Point32 explicitly uses float (32-bit).
+
+struct point_t {
+    double x;
+    double y;
+    double z;
+}
+
+struct point32_t {
+    float x;
+    float y;
+    float z;
+}
+
+struct vector3_t {
+    double x;
+    double y;
+    double z;
+}
+
+struct quaternion_t {
+    double x;
+    double y;
+    double z;
+    double w;
+}
+
+struct pose_t {
+    point_t position;
+    quaternion_t orientation;
+}
+
+struct pose_stamped_t {
+    header_t header;
+    pose_t pose;
+}
+
+struct pose_with_covariance_t {
+    pose_t pose;
+    double covariance[36]; // row-major 6x6 (x,y,z,roll,pitch,yaw)
+}
+
+struct pose_array_t {
+    header_t header;
+    int64_t poses_len;
+    pose_t poses[poses_len];
+}
+
+struct twist_t {
+    vector3_t linear;
+    vector3_t angular;
+}
+
+struct twist_stamped_t {
+    header_t header;
+    twist_t twist;
+}
+
+struct twist_with_covariance_t {
+    twist_t twist;
+    double covariance[36]; // row-major 6x6
+}
+
+struct accel_t {
+    vector3_t linear;   // linear acceleration
+    vector3_t angular;  // angular acceleration
+}
+
+struct accel_stamped_t {
+    header_t header;
+    accel_t accel;
+}
+
+struct accel_with_covariance_t {
+    accel_t accel;
+    double covariance[36]; // row-major 6x6
+}
+
+struct transform_t {
+    vector3_t translation;
+    quaternion_t rotation;
+}
+
+struct transform_stamped_t {
+    header_t header;
+    string child_frame_id;
+    transform_t transform;
+}
+
+struct wrench_t {
+    vector3_t force;
+    vector3_t torque;
+}
+
+struct wrench_stamped_t {
+    header_t header;
+    wrench_t wrench;
+}
+
+struct inertia_t {
+    double m;          // mass
+    vector3_t com;     // center of mass
+    double ixx;
+    double ixy;
+    double ixz;
+    double iyy;
+    double iyz;
+    double izz;
+}
+
+struct inertia_stamped_t {
+    header_t header;
+    inertia_t inertia;
+}
+
+struct polygon_t {
+    int64_t points_len;
+    point32_t points[points_len]; // matches ROS Polygon (Point32[])
+}
+
+struct polygon_stamped_t {
+    header_t header;
+    polygon_t polygon;
+}
+
+// (Optional) Pose2D exists in ROS but is deprecated; include if you need it:
+struct pose2d_t {
+    double x;
+    double y;
+    double theta;
+}
+
+// Convenience stamped primitives frequently used in geometry_msgs:
+struct point_stamped_t {
+    header_t header;
+    point_t point;
+}
+
+struct quaternion_stamped_t {
+    header_t header;
+    quaternion_t quaternion;
+}
+
+struct vector3_stamped_t {
+    header_t header;
+    vector3_t vector;
+}
