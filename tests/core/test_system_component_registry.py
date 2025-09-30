@@ -1,9 +1,9 @@
-"""Tests for the Ark component registrations."""
+"""Tests for the Eigen component registrations."""
 
 import pytest
 
-from ark.core.system.component import Robot, Sensor
-from ark.core.system.component_registry import (
+from eigen.core.system.component import Robot, Sensor
+from eigen.core.system.component_registry import (
     ComponentSpec,
     ComponentType,
     InvalidComponentNameError,
@@ -15,7 +15,7 @@ from ark.core.system.component_registry import (
     list_components,
     register_component,
 )
-from ark.core.system.driver import ComponentDriver, RobotDriver, SensorDriver
+from eigen.core.system.driver import ComponentDriver, RobotDriver, SensorDriver
 
 
 class TestComponentSpec:
@@ -786,4 +786,4 @@ class TestSystemComponentRegistry:
 
     def test_types_import(self):
         """Test that robot package imports work correctly."""
-        import ark.types  # noqa: F401
+        import eigen.types  # noqa: F401

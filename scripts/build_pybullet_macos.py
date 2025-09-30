@@ -21,7 +21,7 @@ import tempfile
 import urllib.request
 
 WHEELS_CACHE_DIR_PATH = Path(".wheels")
-PROJECT_TOML_PATH = Path("packages/ark_framework/pyproject.toml")
+PROJECT_TOML_PATH = Path("packages/eigen_framework/pyproject.toml")
 
 
 # This prevents package managers from failing reinstalling attempts that

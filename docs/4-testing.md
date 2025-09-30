@@ -4,7 +4,7 @@
 
 ## Overview
 
-ARK uses pytest with a structured approach that mirrors the semantic package organization. Tests are organized both by integration level and by module focus.
+EIGEN uses pytest with a structured approach that mirrors the semantic package organization. Tests are organized both by integration level and by module focus.
 
 Work-In-Progress: I expectect discussion to ensue, separation of fast unit tests vs slow integration tests should be kept in mind. Because not all components (robots, sensors, etc.) are going to be run together and some might have strictly conflicting dependencies, ephermal environments and CI/CD runs should be considered. Right now the tests do not show anything ground breaking, but they do help with a sanity check that the workspace solution works import-wise.
 
@@ -35,18 +35,18 @@ tests/
 Located in `tests/test_namespace_packages.py` - test the overall workspace functionality:
 
 ```python
-def test_ark_namespace_import():
-    """Test that ark namespace can be imported."""
-    import ark
-    assert ark is not None
+def test_eigen_namespace_import():
+    """Test that eigen namespace can be imported."""
+    import eigen
+    assert eigen is not None
 
 class TestNamespacePackageStructure:
     """Test namespace package structure and behavior."""
 
-    def test_ark_is_namespace_package(self):
-        """Test that ark is correctly recognized as namespace package."""
-        import ark
-        assert hasattr(ark, "__path__")
+    def test_eigen_is_namespace_package(self):
+        """Test that eigen is correctly recognized as namespace package."""
+        import eigen
+        assert hasattr(eigen, "__path__")
 ```
 
 ### 2. Module-Focused Tests
@@ -59,7 +59,7 @@ class TestRobotIntegration:
 
     def test_robot_main_function(self):
         """Test that robot main function works correctly."""
-        from ark.robots import main
+        from eigen.robots import main
         assert main() == "robots"
 ```
 
@@ -84,7 +84,7 @@ class TestFrankaRobot:
 ```bash
 uv run pytest                     # Run all tests
 uv run pytest -v                  # Verbose output
-uv run pytest --cov=ark           # With coverage
+uv run pytest --cov=eigen           # With coverage
 ```
 
 ### Module-Specific Tests
@@ -140,7 +140,7 @@ Place imports at the function level for namespace tests:
 ```python
 def test_robot_import(self):
     """Test robot module can be imported."""
-    from ark.robots.franka import FrankaRobot  # Import inside test
+    from eigen.robots.franka import FrankaRobot  # Import inside test
     assert FrankaRobot is not None
 ```
 
@@ -152,7 +152,7 @@ class TestFrankaRobot:
 
     def setup_method(self):
         """Set up test fixtures."""
-        from ark.robots.franka import FrankaRobot
+        from eigen.robots.franka import FrankaRobot
         self.robot_class = FrankaRobot
 ```
 
@@ -223,13 +223,13 @@ class TestRobotIntegration:
 
     def test_robot_package_imports(self):
         """Test all robot imports work."""
-        from ark.robots import main
+        from eigen.robots import main
         assert main() == "robots"
 
     def test_robot_namespace_contribution(self):
-        """Test robots contribute to ark namespace."""
-        import ark
-        assert hasattr(ark, 'robots')
+        """Test robots contribute to eigen namespace."""
+        import eigen
+        assert hasattr(eigen, 'robots')
 ```
 
 ### Specific Implementation Test

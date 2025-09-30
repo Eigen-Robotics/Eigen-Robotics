@@ -2,7 +2,7 @@
 
 import pytest
 
-from ark.core.system.component_registry import (
+from eigen.core.system.component_registry import (
     ComponentType,
     _ComponentKey,
     get_component,
@@ -17,7 +17,7 @@ class TestFrankaComponentRegistration:
     def test_franka_robot_component_is_registered(self):
         """Test that the Franka robot component is registered as default."""
         # Import to trigger registration
-        from ark.robots.franka_panda.franka_panda import FrankaPanda
+        from eigen.robots.franka_panda.franka_panda import FrankaPanda
 
         # Get the registered component
         robot_component = get_component(
@@ -29,7 +29,7 @@ class TestFrankaComponentRegistration:
     def test_franka_pybullet_driver_is_registered(self):
         """Test that the Franka PyBullet driver is registered as default."""
         # Import to trigger registration
-        from ark.robots.franka_panda.franka_pybullet_driver import (
+        from eigen.robots.franka_panda.franka_pybullet_driver import (
             FrankaPyBulletDriver,
         )
 
@@ -44,7 +44,7 @@ class TestFrankaComponentRegistration:
         """Test that the Franka Research driver is registered as default (if available)."""
         try:
             # Import to trigger registration (may fail if franky library not available)
-            from ark.robots.franka_panda.franka_driver import (
+            from eigen.robots.franka_panda.franka_driver import (
                 FrankaResearch3Driver,
             )
 
@@ -64,8 +64,8 @@ class TestFrankaComponentRegistration:
     def test_franka_component_pair_retrieval(self):
         """Test retrieving the Franka component-driver pair."""
         # Import to trigger registration
-        from ark.robots.franka_panda.franka_panda import FrankaPanda
-        from ark.robots.franka_panda.franka_pybullet_driver import (
+        from eigen.robots.franka_panda.franka_panda import FrankaPanda
+        from eigen.robots.franka_panda.franka_pybullet_driver import (
             FrankaPyBulletDriver,
         )
 
@@ -80,8 +80,8 @@ class TestFrankaComponentRegistration:
     def test_franka_components_are_default(self):
         """Test that Franka components are registered as default (library-provided)."""
         # Import to trigger registration
-        from ark.robots.franka_panda.franka_panda import FrankaPanda
-        from ark.robots.franka_panda.franka_pybullet_driver import (
+        from eigen.robots.franka_panda.franka_panda import FrankaPanda
+        from eigen.robots.franka_panda.franka_pybullet_driver import (
             FrankaPyBulletDriver,
         )
 
@@ -112,8 +112,8 @@ class TestFrankaComponentRegistration:
     def test_franka_components_in_registry_listing(self):
         """Test that Franka components appear correctly in the registry listing."""
         # Import to trigger registration
-        from ark.robots.franka_panda.franka_panda import FrankaPanda  # noqa: F401, I001
-        from ark.robots.franka_panda.franka_pybullet_driver import (
+        from eigen.robots.franka_panda.franka_panda import FrankaPanda  # noqa: F401, I001
+        from eigen.robots.franka_panda.franka_pybullet_driver import (
             FrankaPyBulletDriver,  # noqa: F401
         )
 

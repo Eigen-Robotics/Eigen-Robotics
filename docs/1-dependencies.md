@@ -1,4 +1,4 @@
-# ark-monster
+# eigen-monster
 
 [back to README](../README.md)
 
@@ -24,15 +24,15 @@ That's it (the basic)! Works on both Linux and macOS.
 ## Project Structure
 
 ```output
-ark_monster/                         # Workspace root
+eigen_monster/                         # Workspace root
 ├── Makefile                        # Cross-platform automation
 ├── scripts/
 │   └── build_pybullet_macos.py     # PyBullet build script for macOS
 ├── packages/                       # Semantic packages (workspace)
-│   ├── ark_framework/              # Core framework + types
-│   ├── ark_robots/                 # Robot implementations
-│   ├── ark_sensors/                # Sensor implementations
-│   └── ark_ml/                     # ML implementations
+│   ├── eigen_framework/              # Core framework + types
+│   ├── eigen_robots/                 # Robot implementations
+│   ├── eigen_sensors/                # Sensor implementations
+│   └── eigen_ml/                     # ML implementations
 ├── tests/                          # Integration tests
 ├── pyproject.toml                  # Workspace config
 ├── uv.lock                         # Unified lockfile
@@ -49,19 +49,19 @@ make help       # Show available commands
 
 ## Workspace Benefits
 
-ARK uses **semantic packaging** with unified namespace:
+EIGEN uses **semantic packaging** with unified namespace:
 
 ```python
-# All packages contribute to 'ark' namespace
-from ark.core import Node              # from ark-framework
-from ark.robots.franka import Robot    # from ark-robots
-from ark.sensors.realsense import Camera # from ark-sensors
-from ark.ml.rl import PolicyNetwork    # from ark-ml
+# All packages contribute to 'eigen' namespace
+from eigen.core import Node              # from eigen-framework
+from eigen.robots.franka import Robot    # from eigen-robots
+from eigen.sensors.realsense import Camera # from eigen-sensors
+from eigen.ml.rl import PolicyNetwork    # from eigen-ml
 ```
 
 ## Flexibility
 
-Work-In-Progress, the final picture will be something more aking to `install ark_robots[husky,franka]; install ark_sensors[...]` with an implicit dependency on famework. In another words, optional dependencies get grouped and abstracted away once more, similar to the `--dev` dependency group. `ark_monster` and the `/src/ark_monster/__init__.py` is a stub to glue all of this together for now, it might have more meaningful uses later or we find a way to get rid of it
+Work-In-Progress, the final picture will be something more aking to `install eigen_robots[husky,franka]; install eigen_sensors[...]` with an implicit dependency on famework. In another words, optional dependencies get grouped and abstracted away once more, similar to the `--dev` dependency group. `eigen_monster` and the `/src/eigen_monster/__init__.py` is a stub to glue all of this together for now, it might have more meaningful uses later or we find a way to get rid of it
 
 ### Install all capabilities
 
@@ -95,7 +95,7 @@ uv run python         # Run Python in the environment
 uv add <package>      # Add new dependencies (to workspace root)
 
 # Package-specific development
-cd packages/ark_robots
+cd packages/eigen_robots
 uv add numpy          # Add dependency to specific package
 
 # Testing and quality

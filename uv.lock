@@ -7,21 +7,21 @@ resolution-markers = [
     "sys_platform == 'darwin'",
 ]
 conflicts = [[
-    { package = "ark-framework", extra = "sim-pybullet-gui" },
-    { package = "ark-framework", extra = "sim-pybullet-headless" },
+    { package = "eigen-framework", extra = "sim-pybullet-gui" },
+    { package = "eigen-framework", extra = "sim-pybullet-headless" },
 ], [
-    { package = "ark-monster", extra = "default" },
-    { package = "ark-monster", extra = "sim-pybullet-headless" },
+    { package = "eigen-monster", extra = "default" },
+    { package = "eigen-monster", extra = "sim-pybullet-headless" },
 ]]
 
 [manifest]
 members = [
-    "ark-alia",
-    "ark-framework",
-    "ark-ml",
-    "ark-monster",
-    "ark-robots",
-    "ark-sensors",
+    "eigen-alia",
+    "eigen-framework",
+    "eigen-ml",
+    "eigen-monster",
+    "eigen-robots",
+    "eigen-sensors",
     "rosbridge",
 ]
 
@@ -35,20 +35,20 @@ wheels = [
 ]
 
 [[package]]
-name = "ark-alia"
+name = "eigen-alia"
 version = "0.1.0"
-source = { editable = "packages/ark_alia" }
+source = { editable = "packages/eigen_alia" }
 dependencies = [
-    { name = "ark-framework" },
+    { name = "eigen-framework" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ark-framework", editable = "packages/ark_framework" }]
+requires-dist = [{ name = "eigen-framework", editable = "packages/eigen_framework" }]
 
 [[package]]
-name = "ark-framework"
+name = "eigen-framework"
 version = "0.1.0"
-source = { editable = "packages/ark_framework" }
+source = { editable = "packages/eigen_framework" }
 dependencies = [
     { name = "colorlog" },
     { name = "graphviz" },
@@ -70,8 +70,8 @@ cli = [
 default = [
     { name = "ipython" },
     { name = "opencv-python" },
-    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "sys_platform == 'darwin' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "sys_platform == 'darwin' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
     { name = "rich" },
     { name = "typer" },
 ]
@@ -80,13 +80,13 @@ jupyter = [
 ]
 sim-pybullet-gui = [
     { name = "opencv-python" },
-    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-gui') or (sys_platform != 'darwin' and extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-gui') or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-gui') or (sys_platform == 'darwin' and extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-gui') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (sys_platform != 'darwin' and extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (sys_platform == 'darwin' and extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless')" },
 ]
 sim-pybullet-headless = [
-    { name = "opencv-python-headless", marker = "(extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (sys_platform != 'darwin' and extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (sys_platform == 'darwin' and extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless')" },
+    { name = "opencv-python-headless", marker = "(extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform != 'darwin' and extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'darwin' and extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless')" },
 ]
 
 [package.dev-dependencies]
@@ -97,7 +97,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ark-framework", extras = ["sim-pybullet-gui", "jupyter", "cli"], marker = "extra == 'default'", editable = "packages/ark_framework" },
+    { name = "eigen-framework", extras = ["sim-pybullet-gui", "jupyter", "cli"], marker = "extra == 'default'", editable = "packages/eigen_framework" },
     { name = "colorlog", specifier = ">=6.9.0" },
     { name = "graphviz", specifier = ">=0.21" },
     { name = "gymnasium", specifier = ">=1.2.0" },
@@ -127,58 +127,58 @@ dev = [
 ]
 
 [[package]]
-name = "ark-ml"
+name = "eigen-ml"
 version = "0.1.0"
-source = { editable = "packages/ark_ml" }
+source = { editable = "packages/eigen_ml" }
 dependencies = [
-    { name = "ark-framework" },
+    { name = "eigen-framework" },
 ]
 
 [package.optional-dependencies]
 jupyter = [
-    { name = "ark-framework", extra = ["jupyter"] },
+    { name = "eigen-framework", extra = ["jupyter"] },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "ark-framework", editable = "packages/ark_framework" },
-    { name = "ark-framework", extras = ["jupyter"], marker = "extra == 'jupyter'", editable = "packages/ark_framework" },
+    { name = "eigen-framework", editable = "packages/eigen_framework" },
+    { name = "eigen-framework", extras = ["jupyter"], marker = "extra == 'jupyter'", editable = "packages/eigen_framework" },
 ]
 provides-extras = ["jupyter"]
 
 [[package]]
-name = "ark-monster"
+name = "eigen-monster"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "ark-framework" },
+    { name = "eigen-framework" },
 ]
 
 [package.optional-dependencies]
 alia = [
-    { name = "ark-alia" },
+    { name = "eigen-alia" },
 ]
 default = [
-    { name = "ark-alia" },
-    { name = "ark-framework", extra = ["default"], marker = "extra == 'extra-11-ark-monster-default' or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
-    { name = "ark-ml", extra = ["jupyter"], marker = "extra == 'extra-11-ark-monster-default' or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
-    { name = "ark-robots" },
-    { name = "ark-sensors" },
+    { name = "eigen-alia" },
+    { name = "eigen-framework", extra = ["default"], marker = "extra == 'extra-11-eigen-monster-default' or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "eigen-ml", extra = ["jupyter"], marker = "extra == 'extra-11-eigen-monster-default' or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "eigen-robots" },
+    { name = "eigen-sensors" },
 ]
 ml = [
-    { name = "ark-ml" },
+    { name = "eigen-ml" },
 ]
 robots = [
-    { name = "ark-robots" },
+    { name = "eigen-robots" },
 ]
 sensors = [
-    { name = "ark-sensors" },
+    { name = "eigen-sensors" },
 ]
 sim-pybullet-gui = [
-    { name = "ark-framework", extra = ["sim-pybullet-gui"], marker = "(extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-gui') or (extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-gui')" },
+    { name = "eigen-framework", extra = ["sim-pybullet-gui"], marker = "(extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui')" },
 ]
 sim-pybullet-headless = [
-    { name = "ark-framework", extra = ["sim-pybullet-headless"], marker = "(extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "eigen-framework", extra = ["sim-pybullet-headless"], marker = "(extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
 ]
 
 [package.dev-dependencies]
@@ -191,16 +191,16 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ark-alia", marker = "extra == 'alia'", editable = "packages/ark_alia" },
-    { name = "ark-framework", editable = "packages/ark_framework" },
-    { name = "ark-framework", extras = ["default"], marker = "extra == 'default'", editable = "packages/ark_framework" },
-    { name = "ark-framework", extras = ["sim-pybullet-gui"], marker = "extra == 'sim-pybullet-gui'", editable = "packages/ark_framework" },
-    { name = "ark-framework", extras = ["sim-pybullet-headless"], marker = "extra == 'sim-pybullet-headless'", editable = "packages/ark_framework" },
-    { name = "ark-ml", marker = "extra == 'ml'", editable = "packages/ark_ml" },
-    { name = "ark-ml", extras = ["jupyter"], marker = "extra == 'default'", editable = "packages/ark_ml" },
-    { name = "ark-monster", extras = ["sensors", "robots", "alia"], marker = "extra == 'default'" },
-    { name = "ark-robots", marker = "extra == 'robots'", editable = "packages/ark_robots" },
-    { name = "ark-sensors", marker = "extra == 'sensors'", editable = "packages/ark_sensors" },
+    { name = "eigen-alia", marker = "extra == 'alia'", editable = "packages/eigen_alia" },
+    { name = "eigen-framework", editable = "packages/eigen_framework" },
+    { name = "eigen-framework", extras = ["default"], marker = "extra == 'default'", editable = "packages/eigen_framework" },
+    { name = "eigen-framework", extras = ["sim-pybullet-gui"], marker = "extra == 'sim-pybullet-gui'", editable = "packages/eigen_framework" },
+    { name = "eigen-framework", extras = ["sim-pybullet-headless"], marker = "extra == 'sim-pybullet-headless'", editable = "packages/eigen_framework" },
+    { name = "eigen-ml", marker = "extra == 'ml'", editable = "packages/eigen_ml" },
+    { name = "eigen-ml", extras = ["jupyter"], marker = "extra == 'default'", editable = "packages/eigen_ml" },
+    { name = "eigen-monster", extras = ["sensors", "robots", "alia"], marker = "extra == 'default'" },
+    { name = "eigen-robots", marker = "extra == 'robots'", editable = "packages/eigen_robots" },
+    { name = "eigen-sensors", marker = "extra == 'sensors'", editable = "packages/eigen_sensors" },
 ]
 provides-extras = ["robots", "sensors", "ml", "alia", "sim-pybullet-gui", "sim-pybullet-headless", "default"]
 
@@ -213,11 +213,11 @@ dev = [
 ]
 
 [[package]]
-name = "ark-robots"
+name = "eigen-robots"
 version = "0.1.0"
-source = { editable = "packages/ark_robots" }
+source = { editable = "packages/eigen_robots" }
 dependencies = [
-    { name = "ark-framework" },
+    { name = "eigen-framework" },
     { name = "scipy" },
 ]
 
@@ -228,22 +228,22 @@ franka = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ark-framework", editable = "packages/ark_framework" },
+    { name = "eigen-framework", editable = "packages/eigen_framework" },
     { name = "franky", marker = "extra == 'franka'", specifier = ">=0.0.1" },
     { name = "scipy", specifier = ">=1.15.3" },
 ]
 provides-extras = ["franka"]
 
 [[package]]
-name = "ark-sensors"
+name = "eigen-sensors"
 version = "0.1.0"
-source = { editable = "packages/ark_sensors" }
+source = { editable = "packages/eigen_sensors" }
 dependencies = [
-    { name = "ark-framework" },
+    { name = "eigen-framework" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ark-framework", editable = "packages/ark_framework" }]
+requires-dist = [{ name = "eigen-framework", editable = "packages/eigen_framework" }]
 
 [[package]]
 name = "asttokens"
@@ -268,7 +268,7 @@ name = "click"
 version = "8.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz", hash = "sha256:e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4", size = 276943, upload-time = "2025-09-18T17:32:23.696Z" }
 wheels = [
@@ -298,7 +298,7 @@ name = "colorlog"
 version = "6.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d3/7a/359f4d5df2353f26172b3cc39ea32daa39af8de522205f512f458923e677/colorlog-6.9.0.tar.gz", hash = "sha256:bfba54a1b93b94f54e1f4fe48395725a3d92fd2a4af702f6bd70946bdc0c6ac2", size = 16624, upload-time = "2024-10-29T18:34:51.011Z" }
 wheels = [
@@ -353,7 +353,7 @@ wheels = [
 
 [package.optional-dependencies]
 toml = [
-    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
 ]
 
 [[package]]
@@ -483,12 +483,12 @@ name = "ipython"
 version = "9.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
     { name = "decorator" },
     { name = "ipython-pygments-lexers" },
     { name = "jedi" },
     { name = "matplotlib-inline" },
-    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (sys_platform == 'win32' and extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (sys_platform == 'win32' and extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
     { name = "prompt-toolkit" },
     { name = "pygments" },
     { name = "stack-data" },
@@ -676,7 +676,7 @@ name = "opencv-python-headless"
 version = "4.11.0.86"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy", marker = "(extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra != 'extra-11-ark-monster-sim-pybullet-headless' and extra == 'extra-13-ark-framework-sim-pybullet-headless') or (extra != 'extra-11-ark-monster-default' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "numpy", marker = "(extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra != 'extra-11-eigen-monster-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra != 'extra-11-eigen-monster-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/36/2f/5b2b3ba52c864848885ba988f24b7f105052f68da9ab0e693cc7c25b0b30/opencv-python-headless-4.11.0.86.tar.gz", hash = "sha256:996eb282ca4b43ec6a3972414de0e2331f5d9cda2b41091a49739c19fb843798", size = 95177929, upload-time = "2025-01-16T13:53:40.22Z" }
 wheels = [
@@ -925,7 +925,7 @@ name = "pytest"
 version = "8.4.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-ark-monster-default' and extra == 'extra-11-ark-monster-sim-pybullet-headless') or (extra == 'extra-13-ark-framework-sim-pybullet-gui' and extra == 'extra-13-ark-framework-sim-pybullet-headless')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-monster-default' and extra == 'extra-11-eigen-monster-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
@@ -1004,13 +1004,13 @@ wheels = [
 [[package]]
 name = "rosbridge"
 version = "0.1.0"
-source = { editable = "packages/ark_rosbridge" }
+source = { editable = "packages/eigen_rosbridge" }
 dependencies = [
-    { name = "ark-framework" },
+    { name = "eigen-framework" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ark-framework", editable = "packages/ark_framework" }]
+requires-dist = [{ name = "eigen-framework", editable = "packages/eigen_framework" }]
 
 [[package]]
 name = "ruff"

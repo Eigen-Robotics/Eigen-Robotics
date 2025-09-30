@@ -1,4 +1,4 @@
-# Comprehensive ARK Packaging Approaches Comparison
+# Comprehensive EIGEN Packaging Approaches Comparison
 
 [back to README](../README.md)
 
@@ -7,30 +7,30 @@
 ### Approach 1 Granular Packages
 
 ```output
-ark_repositories/                       # Multiple repositories
-├── ark_framework/                      # Core package
-│   ├── src/ark_framework/
+eigen_repositories/                       # Multiple repositories
+├── eigen_framework/                      # Core package
+│   ├── src/eigen_framework/
 │   │   ├── core/
 │   │   ├── communication/
 │   │   └── __init__.py
 │   └── pyproject.toml
-├── ark_robots_franka/                  # Franka robot package
-│   ├── src/ark_robots_franka/
+├── eigen_robots_franka/                  # Franka robot package
+│   ├── src/eigen_robots_franka/
 │   │   ├── robot.py
 │   │   └── __init__.py
 │   └── pyproject.toml
-├── ark_robots_unitree/                 # Unitree robot package
-│   ├── src/ark_robots_unitree/
+├── eigen_robots_unitree/                 # Unitree robot package
+│   ├── src/eigen_robots_unitree/
 │   │   ├── robot.py
 │   │   └── __init__.py
 │   └── pyproject.toml
-├── ark_sensors_realsense/              # RealSense package
-│   ├── src/ark_sensors_realsense/
+├── eigen_sensors_realsense/              # RealSense package
+│   ├── src/eigen_sensors_realsense/
 │   │   ├── camera.py
 │   │   └── __init__.py
 │   └── pyproject.toml
-└── ark_ml_rl/                          # RL package
-    ├── src/ark_ml_rl/
+└── eigen_ml_rl/                          # RL package
+    ├── src/eigen_ml_rl/
     │   ├── algorithms/
     │   └── __init__.py
     └── pyproject.toml
@@ -39,8 +39,8 @@ ark_repositories/                       # Multiple repositories
 ### Approach 2 Single Monolithic Package
 
 ```output
-ark_robotics/                           # Single package
-├── src/ark/
+eigen_robotics/                           # Single package
+├── src/eigen/
 │   ├── core/                          # Core framework
 │   │   ├── communication/
 │   │   ├── graph/
@@ -68,34 +68,34 @@ ark_robotics/                           # Single package
 ### Approach 3 Semantic Packages (Workspace)
 
 ```output
-ark_monster/                            # Workspace root
+eigen_monster/                            # Workspace root
 ├── Makefile                           # Cross-platform setup automation
 ├── scripts/
 │   └── build_pybullet_macos.py       # macOS PyBullet builder
 ├── packages/
-│   ├── ark_framework/                 # Core abstractions + types
-│   │   ├── src/ark/
+│   ├── eigen_framework/                 # Core abstractions + types
+│   │   ├── src/eigen/
 │   │   │   ├── core/
 │   │   │   │   └── __init__.py
 │   │   │   └── types/
 │   │   │       ├── __init__.py
-│   │   │       ├── ark_type_defs/     # LCM definitions
+│   │   │       ├── eigen_type_defs/     # LCM definitions
 │   │   │       └── utils/
 │   │   └── pyproject.toml
-│   ├── ark_robots/                    # Robot embodiments
-│   │   ├── src/ark/
+│   ├── eigen_robots/                    # Robot embodiments
+│   │   ├── src/eigen/
 │   │   │   └── robots/
 │   │   │       ├── __init__.py
 │   │   │       └── main.py
 │   │   └── pyproject.toml
-│   ├── ark_sensors/                   # Perception capabilities
-│   │   ├── src/ark/
+│   ├── eigen_sensors/                   # Perception capabilities
+│   │   ├── src/eigen/
 │   │   │   └── sensors/
 │   │   │       ├── __init__.py
 │   │   │       └── main.py
 │   │   └── pyproject.toml
-│   └── ark_ml/                        # Learning capabilities
-│       ├── src/ark/
+│   └── eigen_ml/                        # Learning capabilities
+│       ├── src/eigen/
 │       │   └── ml/
 │       │       ├── __init__.py
 │       │       └── main.py
@@ -105,7 +105,7 @@ ark_monster/                            # Workspace root
 └── uv.lock                           # Unified lockfile
 ```
 
-**⚠️ Critical for Namespace Packages**: NO `__init__.py` files in any `src/ark/` directories! These break namespace package discovery.**
+**⚠️ Critical for Namespace Packages**: NO `__init__.py` files in any `src/eigen/` directories! These break namespace package discovery.**
 
 ## Individual Approach Descriptions
 
@@ -117,7 +117,7 @@ ark_monster/                            # Workspace root
 
 Work-In-Progress, this is the goal:
 
-`pip install ark-robots[franka] ark-sensors[realsense]`
+`pip install eigen-robots[franka] eigen-sensors[realsense]`
 
 Currently:
 
@@ -147,7 +147,7 @@ uv sync --extra dev                                 # Development tools
 
 **Philosophy**: Everything robotics-related lives in one package with optional dependencies.
 
-**Installation**: `pip install ark-robotics[franka,realsense,rl]`
+**Installation**: `pip install eigen-robotics[franka,realsense,rl]`
 
 **Characteristics**:
 
@@ -167,7 +167,7 @@ uv sync --extra dev                                 # Development tools
 
 **Philosophy**: Group related implementations by capability domain, manage as unified workspace.
 
-**Installation**: `pip install ark-framework ark-robots[franka] ark-sensors[realsense]`
+**Installation**: `pip install eigen-framework eigen-robots[franka] eigen-sensors[realsense]`
 
 **Characteristics**:
 
@@ -263,7 +263,7 @@ uv sync --extra dev                                 # Development tools
 **Granular Packages**:
 
 ```bash
-pip install ark-framework ark-robots-franka ark-sensors-realsense
+pip install eigen-framework eigen-robots-franka eigen-sensors-realsense
 # User must know specific package names
 # Minimal dependencies (good for edge deployment)
 ```
@@ -271,7 +271,7 @@ pip install ark-framework ark-robots-franka ark-sensors-realsense
 **Single Monolithic Package**:
 
 ```bash
-pip install ark-robotics[franka,realsense]
+pip install eigen-robotics[franka,realsense]
 # Simple, discoverable syntax
 # Pulls in some unused code (but not deps)
 ```
@@ -279,7 +279,7 @@ pip install ark-robotics[franka,realsense]
 **Semantic Packages**:
 
 ```bash
-pip install ark-framework ark-robots[franka] ark-sensors[realsense]
+pip install eigen-framework eigen-robots[franka] eigen-sensors[realsense]
 # Intuitive capability-based selection
 # Clean separation between robot and sensor capabilities
 ```
@@ -289,7 +289,7 @@ pip install ark-framework ark-robots[franka] ark-sensors[realsense]
 **Granular Packages**:
 
 ```bash
-pip install ark-framework ark-robots-franka ark-robots-unitree ark-simulation
+pip install eigen-framework eigen-robots-franka eigen-robots-unitree eigen-simulation
 # Complex multi-package installation
 # Must understand which packages provide simulation
 ```
@@ -297,7 +297,7 @@ pip install ark-framework ark-robots-franka ark-robots-unitree ark-simulation
 **Single Monolithic Package**:
 
 ```bash
-pip install ark-robotics[franka,unitree,simulation]
+pip install eigen-robotics[franka,unitree,simulation]
 # Simple syntax, all simulation features available
 # Easy to discover all robot types
 ```
@@ -305,7 +305,7 @@ pip install ark-robotics[franka,unitree,simulation]
 **Semantic Packages**:
 
 ```bash
-pip install ark-framework ark-robots[franka,unitree,simulation]
+pip install eigen-framework eigen-robots[franka,unitree,simulation]
 # Clean capability grouping
 # Simulation is logically part of robot capabilities
 ```
@@ -315,7 +315,7 @@ pip install ark-framework ark-robots[franka,unitree,simulation]
 **Granular Packages**:
 
 ```bash
-pip install ark-framework ark-robots-simulation ark-ml-rl ark-ml-il
+pip install eigen-framework eigen-robots-simulation eigen-ml-rl eigen-ml-il
 # Complex installation for ML research
 # ML algorithms in separate packages
 ```
@@ -323,7 +323,7 @@ pip install ark-framework ark-robots-simulation ark-ml-rl ark-ml-il
 **Single Monolithic Package**:
 
 ```bash
-pip install ark-robotics[simulation,rl,il]
+pip install eigen-robotics[simulation,rl,il]
 # Simple research setup
 # All ML features easily discoverable
 ```
@@ -331,7 +331,7 @@ pip install ark-robotics[simulation,rl,il]
 **Semantic Packages**:
 
 ```bash
-pip install ark-framework ark-robots[simulation] ark-ml[rl,il]
+pip install eigen-framework eigen-robots[simulation] eigen-ml[rl,il]
 # Natural separation: embodiment vs intelligence
 # ML team can evolve algorithms independently
 ```
@@ -379,7 +379,7 @@ pip install ark-framework ark-robots[simulation] ark-ml[rl,il]
 
 ## Recommendation
 
-**Semantic Packages (Approach 3)** provides the optimal balance for ARK because it:
+**Semantic Packages (Approach 3)** provides the optimal balance for EIGEN because it:
 
 1. **Matches user mental models** (capabilities, not implementations)
 2. **Provides natural team boundaries** (domain expertise)
