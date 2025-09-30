@@ -35,6 +35,144 @@ wheels = [
 ]
 
 [[package]]
+name = "asttokens"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4a/e7/82da0a03e7ba5141f05cce0d302e6eed121ae055e0456ca228bf693984bc/asttokens-3.0.0.tar.gz", hash = "sha256:0dcd8baa8d62b0c1d118b399b2ddba3c4aff271d0d7a9e0d4c1681c79035bbc7", size = 61978, upload-time = "2024-11-30T04:30:14.439Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/25/8a/c46dcc25341b5bce5472c718902eb3d38600a903b14fa6aeecef3f21a46f/asttokens-3.0.0-py3-none-any.whl", hash = "sha256:e3078351a059199dd5138cb1c706e6430c05eff2ff136af5eb4790f9d28932e2", size = 26918, upload-time = "2024-11-30T04:30:10.946Z" },
+]
+
+[[package]]
+name = "cfgv"
+version = "3.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/11/74/539e56497d9bd1d484fd863dd69cbbfa653cd2aa27abfe35653494d85e94/cfgv-3.4.0.tar.gz", hash = "sha256:e52591d4c5f5dead8e0f673fb16db7949d2cfb3f7da4582893288f0ded8fe560", size = 7114, upload-time = "2023-08-12T20:38:17.776Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c5/55/51844dd50c4fc7a33b653bfaba4c2456f06955289ca770a5dbd5fd267374/cfgv-3.4.0-py2.py3-none-any.whl", hash = "sha256:b7265b1f29fd3316bfcd2b330d63d024f2bfd8bcb8b0272f8e19a504856c48f9", size = 7249, upload-time = "2023-08-12T20:38:16.269Z" },
+]
+
+[[package]]
+name = "click"
+version = "8.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz", hash = "sha256:e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4", size = 276943, upload-time = "2025-09-18T17:32:23.696Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/d3/9dcc0f5797f070ec8edf30fbadfb200e71d9db6b84d211e3b2085a7589a0/click-8.3.0-py3-none-any.whl", hash = "sha256:9b9f285302c6e3064f4330c05f05b81945b2a39544279343e6e7c5f27a9baddc", size = 107295, upload-time = "2025-09-18T17:32:22.42Z" },
+]
+
+[[package]]
+name = "cloudpickle"
+version = "3.1.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/39/069100b84d7418bc358d81669d5748efb14b9cceacd2f9c75f550424132f/cloudpickle-3.1.1.tar.gz", hash = "sha256:b216fa8ae4019d5482a8ac3c95d8f6346115d8835911fd4aefd1a445e4242c64", size = 22113, upload-time = "2025-01-14T17:02:05.085Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl", hash = "sha256:c8c5a44295039331ee9dad40ba100a9c7297b6f988e50e87ccdf3765a668350e", size = 20992, upload-time = "2025-01-14T17:02:02.417Z" },
+]
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44", size = 27697, upload-time = "2022-10-25T02:36:22.414Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6", size = 25335, upload-time = "2022-10-25T02:36:20.889Z" },
+]
+
+[[package]]
+name = "colorlog"
+version = "6.9.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d3/7a/359f4d5df2353f26172b3cc39ea32daa39af8de522205f512f458923e677/colorlog-6.9.0.tar.gz", hash = "sha256:bfba54a1b93b94f54e1f4fe48395725a3d92fd2a4af702f6bd70946bdc0c6ac2", size = 16624, upload-time = "2024-10-29T18:34:51.011Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e3/51/9b208e85196941db2f0654ad0357ca6388ab3ed67efdbfc799f35d1f83aa/colorlog-6.9.0-py3-none-any.whl", hash = "sha256:5906e71acd67cb07a71e779c47c4bcb45fb8c2993eebe9e5adcd6a6f1b283eff", size = 11424, upload-time = "2024-10-29T18:34:49.815Z" },
+]
+
+[[package]]
+name = "contourpy"
+version = "1.3.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/54/eb9bfc647b19f2009dd5c7f5ec51c4e6ca831725f1aea7a993034f483147/contourpy-1.3.2.tar.gz", hash = "sha256:b6945942715a034c671b7fc54f9588126b0b8bf23db2696e3ca8328f3ff0ab54", size = 13466130, upload-time = "2025-04-15T17:47:53.79Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b3/b9/ede788a0b56fc5b071639d06c33cb893f68b1178938f3425debebe2dab78/contourpy-1.3.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:6a37a2fb93d4df3fc4c0e363ea4d16f83195fc09c891bc8ce072b9d084853445", size = 269636, upload-time = "2025-04-15T17:35:54.473Z" },
+    { url = "https://files.pythonhosted.org/packages/e6/75/3469f011d64b8bbfa04f709bfc23e1dd71be54d05b1b083be9f5b22750d1/contourpy-1.3.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b7cd50c38f500bbcc9b6a46643a40e0913673f869315d8e70de0438817cb7773", size = 254636, upload-time = "2025-04-15T17:35:58.283Z" },
+    { url = "https://files.pythonhosted.org/packages/8d/2f/95adb8dae08ce0ebca4fd8e7ad653159565d9739128b2d5977806656fcd2/contourpy-1.3.2-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d6658ccc7251a4433eebd89ed2672c2ed96fba367fd25ca9512aa92a4b46c4f1", size = 313053, upload-time = "2025-04-15T17:36:03.235Z" },
+    { url = "https://files.pythonhosted.org/packages/c3/a6/8ccf97a50f31adfa36917707fe39c9a0cbc24b3bbb58185577f119736cc9/contourpy-1.3.2-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:70771a461aaeb335df14deb6c97439973d253ae70660ca085eec25241137ef43", size = 352985, upload-time = "2025-04-15T17:36:08.275Z" },
+    { url = "https://files.pythonhosted.org/packages/1d/b6/7925ab9b77386143f39d9c3243fdd101621b4532eb126743201160ffa7e6/contourpy-1.3.2-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:65a887a6e8c4cd0897507d814b14c54a8c2e2aa4ac9f7686292f9769fcf9a6ab", size = 323750, upload-time = "2025-04-15T17:36:13.29Z" },
+    { url = "https://files.pythonhosted.org/packages/c2/f3/20c5d1ef4f4748e52d60771b8560cf00b69d5c6368b5c2e9311bcfa2a08b/contourpy-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3859783aefa2b8355697f16642695a5b9792e7a46ab86da1118a4a23a51a33d7", size = 326246, upload-time = "2025-04-15T17:36:18.329Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/e5/9dae809e7e0b2d9d70c52b3d24cba134dd3dad979eb3e5e71f5df22ed1f5/contourpy-1.3.2-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:eab0f6db315fa4d70f1d8ab514e527f0366ec021ff853d7ed6a2d33605cf4b83", size = 1308728, upload-time = "2025-04-15T17:36:33.878Z" },
+    { url = "https://files.pythonhosted.org/packages/e2/4a/0058ba34aeea35c0b442ae61a4f4d4ca84d6df8f91309bc2d43bb8dd248f/contourpy-1.3.2-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:d91a3ccc7fea94ca0acab82ceb77f396d50a1f67412efe4c526f5d20264e6ecd", size = 1375762, upload-time = "2025-04-15T17:36:51.295Z" },
+    { url = "https://files.pythonhosted.org/packages/09/33/7174bdfc8b7767ef2c08ed81244762d93d5c579336fc0b51ca57b33d1b80/contourpy-1.3.2-cp311-cp311-win32.whl", hash = "sha256:1c48188778d4d2f3d48e4643fb15d8608b1d01e4b4d6b0548d9b336c28fc9b6f", size = 178196, upload-time = "2025-04-15T17:36:55.002Z" },
+    { url = "https://files.pythonhosted.org/packages/5e/fe/4029038b4e1c4485cef18e480b0e2cd2d755448bb071eb9977caac80b77b/contourpy-1.3.2-cp311-cp311-win_amd64.whl", hash = "sha256:5ebac872ba09cb8f2131c46b8739a7ff71de28a24c869bcad554477eb089a878", size = 222017, upload-time = "2025-04-15T17:36:58.576Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/c0/91f1215d0d9f9f343e4773ba6c9b89e8c0cc7a64a6263f21139da639d848/contourpy-1.3.2-pp311-pypy311_pp73-macosx_10_15_x86_64.whl", hash = "sha256:5f5964cdad279256c084b69c3f412b7801e15356b16efa9d78aa974041903da0", size = 266807, upload-time = "2025-04-15T17:45:15.535Z" },
+    { url = "https://files.pythonhosted.org/packages/d4/79/6be7e90c955c0487e7712660d6cead01fa17bff98e0ea275737cc2bc8e71/contourpy-1.3.2-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:49b65a95d642d4efa8f64ba12558fcb83407e58a2dfba9d796d77b63ccfcaff5", size = 318729, upload-time = "2025-04-15T17:45:20.166Z" },
+    { url = "https://files.pythonhosted.org/packages/87/68/7f46fb537958e87427d98a4074bcde4b67a70b04900cfc5ce29bc2f556c1/contourpy-1.3.2-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:8c5acb8dddb0752bf252e01a3035b21443158910ac16a3b0d20e7fed7d534ce5", size = 221791, upload-time = "2025-04-15T17:45:24.794Z" },
+]
+
+[[package]]
+name = "coverage"
+version = "7.10.7"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/51/26/d22c300112504f5f9a9fd2297ce33c35f3d353e4aeb987c8419453b2a7c2/coverage-7.10.7.tar.gz", hash = "sha256:f4ab143ab113be368a3e9b795f9cd7906c5ef407d6173fe9675a902e1fffc239", size = 827704, upload-time = "2025-09-21T20:03:56.815Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d2/5d/c1a17867b0456f2e9ce2d8d4708a4c3a089947d0bec9c66cdf60c9e7739f/coverage-7.10.7-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:a609f9c93113be646f44c2a0256d6ea375ad047005d7f57a5c15f614dc1b2f59", size = 218102, upload-time = "2025-09-21T20:01:16.089Z" },
+    { url = "https://files.pythonhosted.org/packages/54/f0/514dcf4b4e3698b9a9077f084429681bf3aad2b4a72578f89d7f643eb506/coverage-7.10.7-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:65646bb0359386e07639c367a22cf9b5bf6304e8630b565d0626e2bdf329227a", size = 218505, upload-time = "2025-09-21T20:01:17.788Z" },
+    { url = "https://files.pythonhosted.org/packages/20/f6/9626b81d17e2a4b25c63ac1b425ff307ecdeef03d67c9a147673ae40dc36/coverage-7.10.7-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:5f33166f0dfcce728191f520bd2692914ec70fac2713f6bf3ce59c3deacb4699", size = 248898, upload-time = "2025-09-21T20:01:19.488Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/ef/bd8e719c2f7417ba03239052e099b76ea1130ac0cbb183ee1fcaa58aaff3/coverage-7.10.7-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:35f5e3f9e455bb17831876048355dca0f758b6df22f49258cb5a91da23ef437d", size = 250831, upload-time = "2025-09-21T20:01:20.817Z" },
+    { url = "https://files.pythonhosted.org/packages/a5/b6/bf054de41ec948b151ae2b79a55c107f5760979538f5fb80c195f2517718/coverage-7.10.7-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4da86b6d62a496e908ac2898243920c7992499c1712ff7c2b6d837cc69d9467e", size = 252937, upload-time = "2025-09-21T20:01:22.171Z" },
+    { url = "https://files.pythonhosted.org/packages/0f/e5/3860756aa6f9318227443c6ce4ed7bf9e70bb7f1447a0353f45ac5c7974b/coverage-7.10.7-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:6b8b09c1fad947c84bbbc95eca841350fad9cbfa5a2d7ca88ac9f8d836c92e23", size = 249021, upload-time = "2025-09-21T20:01:23.907Z" },
+    { url = "https://files.pythonhosted.org/packages/26/0f/bd08bd042854f7fd07b45808927ebcce99a7ed0f2f412d11629883517ac2/coverage-7.10.7-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:4376538f36b533b46f8971d3a3e63464f2c7905c9800db97361c43a2b14792ab", size = 250626, upload-time = "2025-09-21T20:01:25.721Z" },
+    { url = "https://files.pythonhosted.org/packages/8e/a7/4777b14de4abcc2e80c6b1d430f5d51eb18ed1d75fca56cbce5f2db9b36e/coverage-7.10.7-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:121da30abb574f6ce6ae09840dae322bef734480ceafe410117627aa54f76d82", size = 248682, upload-time = "2025-09-21T20:01:27.105Z" },
+    { url = "https://files.pythonhosted.org/packages/34/72/17d082b00b53cd45679bad682fac058b87f011fd8b9fe31d77f5f8d3a4e4/coverage-7.10.7-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:88127d40df529336a9836870436fc2751c339fbaed3a836d42c93f3e4bd1d0a2", size = 248402, upload-time = "2025-09-21T20:01:28.629Z" },
+    { url = "https://files.pythonhosted.org/packages/81/7a/92367572eb5bdd6a84bfa278cc7e97db192f9f45b28c94a9ca1a921c3577/coverage-7.10.7-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:ba58bbcd1b72f136080c0bccc2400d66cc6115f3f906c499013d065ac33a4b61", size = 249320, upload-time = "2025-09-21T20:01:30.004Z" },
+    { url = "https://files.pythonhosted.org/packages/2f/88/a23cc185f6a805dfc4fdf14a94016835eeb85e22ac3a0e66d5e89acd6462/coverage-7.10.7-cp311-cp311-win32.whl", hash = "sha256:972b9e3a4094b053a4e46832b4bc829fc8a8d347160eb39d03f1690316a99c14", size = 220536, upload-time = "2025-09-21T20:01:32.184Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/ef/0b510a399dfca17cec7bc2f05ad8bd78cf55f15c8bc9a73ab20c5c913c2e/coverage-7.10.7-cp311-cp311-win_amd64.whl", hash = "sha256:a7b55a944a7f43892e28ad4bc0561dfd5f0d73e605d1aa5c3c976b52aea121d2", size = 221425, upload-time = "2025-09-21T20:01:33.557Z" },
+    { url = "https://files.pythonhosted.org/packages/51/7f/023657f301a276e4ba1850f82749bc136f5a7e8768060c2e5d9744a22951/coverage-7.10.7-cp311-cp311-win_arm64.whl", hash = "sha256:736f227fb490f03c6488f9b6d45855f8e0fd749c007f9303ad30efab0e73c05a", size = 220103, upload-time = "2025-09-21T20:01:34.929Z" },
+    { url = "https://files.pythonhosted.org/packages/ec/16/114df1c291c22cac3b0c127a73e0af5c12ed7bbb6558d310429a0ae24023/coverage-7.10.7-py3-none-any.whl", hash = "sha256:f7941f6f2fe6dd6807a1208737b8a0cbcf1cc6d7b07d24998ad2d63590868260", size = 209952, upload-time = "2025-09-21T20:03:53.918Z" },
+]
+
+[package.optional-dependencies]
+toml = [
+    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+]
+
+[[package]]
+name = "cycler"
+version = "0.12.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a9/95/a3dbbb5028f35eafb79008e7522a75244477d2838f38cbb722248dabc2a8/cycler-0.12.1.tar.gz", hash = "sha256:88bb128f02ba341da8ef447245a9e138fae777f6a23943da4540077d3601eb1c", size = 7615, upload-time = "2023-10-07T05:32:18.335Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl", hash = "sha256:85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30", size = 8321, upload-time = "2023-10-07T05:32:16.783Z" },
+]
+
+[[package]]
+name = "decorator"
+version = "5.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/43/fa/6d96a0978d19e17b68d634497769987b16c8f4cd0a7a05048bec693caa6b/decorator-5.2.1.tar.gz", hash = "sha256:65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360", size = 56711, upload-time = "2025-02-24T04:41:34.073Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/8c/f3147f5c4b73e7550fe5f9352eaa956ae838d5c51eb58e7a25b9f3e2643b/decorator-5.2.1-py3-none-any.whl", hash = "sha256:d316bb415a2d9e2d2b3abcc4084c6502fc09240e292cd76a76afc106a1c8e04a", size = 9190, upload-time = "2025-02-24T04:41:32.565Z" },
+]
+
+[[package]]
+name = "distlib"
+version = "0.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/8e/709914eb2b5749865801041647dc7f4e6d00b549cfe88b65ca192995f07c/distlib-0.4.0.tar.gz", hash = "sha256:feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d", size = 614605, upload-time = "2025-07-17T16:52:00.465Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/33/6b/e0547afaf41bf2c42e52430072fa5658766e3d65bd4b03a563d1b6336f57/distlib-0.4.0-py2.py3-none-any.whl", hash = "sha256:9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16", size = 469047, upload-time = "2025-07-17T16:51:58.613Z" },
+]
+
+[[package]]
 name = "eigen-alia"
 version = "0.1.0"
 source = { editable = "packages/eigen_alia" }
@@ -56,10 +194,14 @@ dependencies = [
     { name = "lcm" },
     { name = "matplotlib" },
     { name = "numpy" },
+    { name = "opencv-python" },
     { name = "pandas" },
+    { name = "pillow" },
     { name = "pydantic" },
     { name = "pyyaml" },
+    { name = "rich" },
     { name = "scipy" },
+    { name = "typer" },
 ]
 
 [package.optional-dependencies]
@@ -70,8 +212,8 @@ cli = [
 default = [
     { name = "ipython" },
     { name = "opencv-python" },
-    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "sys_platform == 'darwin' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "sys_platform == 'darwin' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "rich" },
     { name = "typer" },
 ]
@@ -80,13 +222,13 @@ jupyter = [
 ]
 sim-pybullet-gui = [
     { name = "opencv-python" },
-    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (sys_platform != 'darwin' and extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (sys_platform == 'darwin' and extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless')" },
 ]
 sim-pybullet-headless = [
-    { name = "opencv-python-headless", marker = "(extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform != 'darwin' and extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'darwin' and extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless')" },
+    { name = "opencv-python-headless", marker = "(extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless')" },
 ]
 
 [package.dev-dependencies]
@@ -97,25 +239,29 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "eigen-framework", extras = ["sim-pybullet-gui", "jupyter", "cli"], marker = "extra == 'default'", editable = "packages/eigen_framework" },
     { name = "colorlog", specifier = ">=6.9.0" },
+    { name = "eigen-framework", extras = ["sim-pybullet-gui", "jupyter", "cli"], marker = "extra == 'default'", editable = "packages/eigen_framework" },
     { name = "graphviz", specifier = ">=0.21" },
     { name = "gymnasium", specifier = ">=1.2.0" },
     { name = "ipython", marker = "extra == 'jupyter'", specifier = ">=8.37.0" },
     { name = "lcm", specifier = ">=1.5.1" },
     { name = "matplotlib", specifier = ">=3.10.5" },
     { name = "numpy", specifier = "==1.24.3" },
+    { name = "opencv-python", specifier = ">=4.8.1.78" },
     { name = "opencv-python", marker = "extra == 'sim-pybullet-gui'", specifier = ">=4.8.1.78" },
     { name = "opencv-python-headless", marker = "extra == 'sim-pybullet-headless'", specifier = ">=4.8.1.78" },
     { name = "pandas", specifier = ">=2.1.0" },
+    { name = "pillow", specifier = ">=10.3.0" },
     { name = "pybullet", marker = "sys_platform == 'darwin' and extra == 'sim-pybullet-gui'", path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" },
     { name = "pybullet", marker = "sys_platform == 'darwin' and extra == 'sim-pybullet-headless'", path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" },
     { name = "pybullet", marker = "sys_platform != 'darwin' and extra == 'sim-pybullet-gui'", specifier = "==3.2.7" },
     { name = "pybullet", marker = "sys_platform != 'darwin' and extra == 'sim-pybullet-headless'", specifier = "==3.2.7" },
     { name = "pydantic", specifier = ">=2.11.7" },
     { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "rich", specifier = ">=14.1.0" },
     { name = "rich", marker = "extra == 'cli'", specifier = ">=14.1.0" },
     { name = "scipy", specifier = ">=1.15.3" },
+    { name = "typer", specifier = ">=0.16.0" },
     { name = "typer", marker = "extra == 'cli'", specifier = ">=0.16.0" },
 ]
 provides-extras = ["default", "sim-pybullet-gui", "sim-pybullet-headless", "jupyter", "cli"]
@@ -160,8 +306,8 @@ alia = [
 ]
 default = [
     { name = "eigen-alia" },
-    { name = "eigen-framework", extra = ["default"], marker = "extra == 'extra-11-eigen-robotics-default' or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-    { name = "eigen-ml", extra = ["jupyter"], marker = "extra == 'extra-11-eigen-robotics-default' or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "eigen-framework", extra = ["default"], marker = "extra == 'extra-14-eigen-robotics-default' or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+    { name = "eigen-ml", extra = ["jupyter"], marker = "extra == 'extra-14-eigen-robotics-default' or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "eigen-robots" },
     { name = "eigen-sensors" },
 ]
@@ -175,10 +321,10 @@ sensors = [
     { name = "eigen-sensors" },
 ]
 sim-pybullet-gui = [
-    { name = "eigen-framework", extra = ["sim-pybullet-gui"], marker = "(extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui') or (extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui')" },
+    { name = "eigen-framework", extra = ["sim-pybullet-gui"], marker = "(extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui')" },
 ]
 sim-pybullet-headless = [
-    { name = "eigen-framework", extra = ["sim-pybullet-headless"], marker = "(extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "eigen-framework", extra = ["sim-pybullet-headless"], marker = "(extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
 ]
 
 [package.dev-dependencies]
@@ -244,144 +390,6 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "eigen-framework", editable = "packages/eigen_framework" }]
-
-[[package]]
-name = "asttokens"
-version = "3.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/4a/e7/82da0a03e7ba5141f05cce0d302e6eed121ae055e0456ca228bf693984bc/asttokens-3.0.0.tar.gz", hash = "sha256:0dcd8baa8d62b0c1d118b399b2ddba3c4aff271d0d7a9e0d4c1681c79035bbc7", size = 61978, upload-time = "2024-11-30T04:30:14.439Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/25/8a/c46dcc25341b5bce5472c718902eb3d38600a903b14fa6aeecef3f21a46f/asttokens-3.0.0-py3-none-any.whl", hash = "sha256:e3078351a059199dd5138cb1c706e6430c05eff2ff136af5eb4790f9d28932e2", size = 26918, upload-time = "2024-11-30T04:30:10.946Z" },
-]
-
-[[package]]
-name = "cfgv"
-version = "3.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/11/74/539e56497d9bd1d484fd863dd69cbbfa653cd2aa27abfe35653494d85e94/cfgv-3.4.0.tar.gz", hash = "sha256:e52591d4c5f5dead8e0f673fb16db7949d2cfb3f7da4582893288f0ded8fe560", size = 7114, upload-time = "2023-08-12T20:38:17.776Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c5/55/51844dd50c4fc7a33b653bfaba4c2456f06955289ca770a5dbd5fd267374/cfgv-3.4.0-py2.py3-none-any.whl", hash = "sha256:b7265b1f29fd3316bfcd2b330d63d024f2bfd8bcb8b0272f8e19a504856c48f9", size = 7249, upload-time = "2023-08-12T20:38:16.269Z" },
-]
-
-[[package]]
-name = "click"
-version = "8.3.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz", hash = "sha256:e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4", size = 276943, upload-time = "2025-09-18T17:32:23.696Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/db/d3/9dcc0f5797f070ec8edf30fbadfb200e71d9db6b84d211e3b2085a7589a0/click-8.3.0-py3-none-any.whl", hash = "sha256:9b9f285302c6e3064f4330c05f05b81945b2a39544279343e6e7c5f27a9baddc", size = 107295, upload-time = "2025-09-18T17:32:22.42Z" },
-]
-
-[[package]]
-name = "cloudpickle"
-version = "3.1.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/52/39/069100b84d7418bc358d81669d5748efb14b9cceacd2f9c75f550424132f/cloudpickle-3.1.1.tar.gz", hash = "sha256:b216fa8ae4019d5482a8ac3c95d8f6346115d8835911fd4aefd1a445e4242c64", size = 22113, upload-time = "2025-01-14T17:02:05.085Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl", hash = "sha256:c8c5a44295039331ee9dad40ba100a9c7297b6f988e50e87ccdf3765a668350e", size = 20992, upload-time = "2025-01-14T17:02:02.417Z" },
-]
-
-[[package]]
-name = "colorama"
-version = "0.4.6"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44", size = 27697, upload-time = "2022-10-25T02:36:22.414Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6", size = 25335, upload-time = "2022-10-25T02:36:20.889Z" },
-]
-
-[[package]]
-name = "colorlog"
-version = "6.9.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/d3/7a/359f4d5df2353f26172b3cc39ea32daa39af8de522205f512f458923e677/colorlog-6.9.0.tar.gz", hash = "sha256:bfba54a1b93b94f54e1f4fe48395725a3d92fd2a4af702f6bd70946bdc0c6ac2", size = 16624, upload-time = "2024-10-29T18:34:51.011Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e3/51/9b208e85196941db2f0654ad0357ca6388ab3ed67efdbfc799f35d1f83aa/colorlog-6.9.0-py3-none-any.whl", hash = "sha256:5906e71acd67cb07a71e779c47c4bcb45fb8c2993eebe9e5adcd6a6f1b283eff", size = 11424, upload-time = "2024-10-29T18:34:49.815Z" },
-]
-
-[[package]]
-name = "contourpy"
-version = "1.3.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "numpy" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/66/54/eb9bfc647b19f2009dd5c7f5ec51c4e6ca831725f1aea7a993034f483147/contourpy-1.3.2.tar.gz", hash = "sha256:b6945942715a034c671b7fc54f9588126b0b8bf23db2696e3ca8328f3ff0ab54", size = 13466130, upload-time = "2025-04-15T17:47:53.79Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/b9/ede788a0b56fc5b071639d06c33cb893f68b1178938f3425debebe2dab78/contourpy-1.3.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:6a37a2fb93d4df3fc4c0e363ea4d16f83195fc09c891bc8ce072b9d084853445", size = 269636, upload-time = "2025-04-15T17:35:54.473Z" },
-    { url = "https://files.pythonhosted.org/packages/e6/75/3469f011d64b8bbfa04f709bfc23e1dd71be54d05b1b083be9f5b22750d1/contourpy-1.3.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b7cd50c38f500bbcc9b6a46643a40e0913673f869315d8e70de0438817cb7773", size = 254636, upload-time = "2025-04-15T17:35:58.283Z" },
-    { url = "https://files.pythonhosted.org/packages/8d/2f/95adb8dae08ce0ebca4fd8e7ad653159565d9739128b2d5977806656fcd2/contourpy-1.3.2-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d6658ccc7251a4433eebd89ed2672c2ed96fba367fd25ca9512aa92a4b46c4f1", size = 313053, upload-time = "2025-04-15T17:36:03.235Z" },
-    { url = "https://files.pythonhosted.org/packages/c3/a6/8ccf97a50f31adfa36917707fe39c9a0cbc24b3bbb58185577f119736cc9/contourpy-1.3.2-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:70771a461aaeb335df14deb6c97439973d253ae70660ca085eec25241137ef43", size = 352985, upload-time = "2025-04-15T17:36:08.275Z" },
-    { url = "https://files.pythonhosted.org/packages/1d/b6/7925ab9b77386143f39d9c3243fdd101621b4532eb126743201160ffa7e6/contourpy-1.3.2-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:65a887a6e8c4cd0897507d814b14c54a8c2e2aa4ac9f7686292f9769fcf9a6ab", size = 323750, upload-time = "2025-04-15T17:36:13.29Z" },
-    { url = "https://files.pythonhosted.org/packages/c2/f3/20c5d1ef4f4748e52d60771b8560cf00b69d5c6368b5c2e9311bcfa2a08b/contourpy-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3859783aefa2b8355697f16642695a5b9792e7a46ab86da1118a4a23a51a33d7", size = 326246, upload-time = "2025-04-15T17:36:18.329Z" },
-    { url = "https://files.pythonhosted.org/packages/8c/e5/9dae809e7e0b2d9d70c52b3d24cba134dd3dad979eb3e5e71f5df22ed1f5/contourpy-1.3.2-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:eab0f6db315fa4d70f1d8ab514e527f0366ec021ff853d7ed6a2d33605cf4b83", size = 1308728, upload-time = "2025-04-15T17:36:33.878Z" },
-    { url = "https://files.pythonhosted.org/packages/e2/4a/0058ba34aeea35c0b442ae61a4f4d4ca84d6df8f91309bc2d43bb8dd248f/contourpy-1.3.2-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:d91a3ccc7fea94ca0acab82ceb77f396d50a1f67412efe4c526f5d20264e6ecd", size = 1375762, upload-time = "2025-04-15T17:36:51.295Z" },
-    { url = "https://files.pythonhosted.org/packages/09/33/7174bdfc8b7767ef2c08ed81244762d93d5c579336fc0b51ca57b33d1b80/contourpy-1.3.2-cp311-cp311-win32.whl", hash = "sha256:1c48188778d4d2f3d48e4643fb15d8608b1d01e4b4d6b0548d9b336c28fc9b6f", size = 178196, upload-time = "2025-04-15T17:36:55.002Z" },
-    { url = "https://files.pythonhosted.org/packages/5e/fe/4029038b4e1c4485cef18e480b0e2cd2d755448bb071eb9977caac80b77b/contourpy-1.3.2-cp311-cp311-win_amd64.whl", hash = "sha256:5ebac872ba09cb8f2131c46b8739a7ff71de28a24c869bcad554477eb089a878", size = 222017, upload-time = "2025-04-15T17:36:58.576Z" },
-    { url = "https://files.pythonhosted.org/packages/ff/c0/91f1215d0d9f9f343e4773ba6c9b89e8c0cc7a64a6263f21139da639d848/contourpy-1.3.2-pp311-pypy311_pp73-macosx_10_15_x86_64.whl", hash = "sha256:5f5964cdad279256c084b69c3f412b7801e15356b16efa9d78aa974041903da0", size = 266807, upload-time = "2025-04-15T17:45:15.535Z" },
-    { url = "https://files.pythonhosted.org/packages/d4/79/6be7e90c955c0487e7712660d6cead01fa17bff98e0ea275737cc2bc8e71/contourpy-1.3.2-pp311-pypy311_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:49b65a95d642d4efa8f64ba12558fcb83407e58a2dfba9d796d77b63ccfcaff5", size = 318729, upload-time = "2025-04-15T17:45:20.166Z" },
-    { url = "https://files.pythonhosted.org/packages/87/68/7f46fb537958e87427d98a4074bcde4b67a70b04900cfc5ce29bc2f556c1/contourpy-1.3.2-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:8c5acb8dddb0752bf252e01a3035b21443158910ac16a3b0d20e7fed7d534ce5", size = 221791, upload-time = "2025-04-15T17:45:24.794Z" },
-]
-
-[[package]]
-name = "coverage"
-version = "7.10.7"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/51/26/d22c300112504f5f9a9fd2297ce33c35f3d353e4aeb987c8419453b2a7c2/coverage-7.10.7.tar.gz", hash = "sha256:f4ab143ab113be368a3e9b795f9cd7906c5ef407d6173fe9675a902e1fffc239", size = 827704, upload-time = "2025-09-21T20:03:56.815Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d2/5d/c1a17867b0456f2e9ce2d8d4708a4c3a089947d0bec9c66cdf60c9e7739f/coverage-7.10.7-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:a609f9c93113be646f44c2a0256d6ea375ad047005d7f57a5c15f614dc1b2f59", size = 218102, upload-time = "2025-09-21T20:01:16.089Z" },
-    { url = "https://files.pythonhosted.org/packages/54/f0/514dcf4b4e3698b9a9077f084429681bf3aad2b4a72578f89d7f643eb506/coverage-7.10.7-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:65646bb0359386e07639c367a22cf9b5bf6304e8630b565d0626e2bdf329227a", size = 218505, upload-time = "2025-09-21T20:01:17.788Z" },
-    { url = "https://files.pythonhosted.org/packages/20/f6/9626b81d17e2a4b25c63ac1b425ff307ecdeef03d67c9a147673ae40dc36/coverage-7.10.7-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:5f33166f0dfcce728191f520bd2692914ec70fac2713f6bf3ce59c3deacb4699", size = 248898, upload-time = "2025-09-21T20:01:19.488Z" },
-    { url = "https://files.pythonhosted.org/packages/b0/ef/bd8e719c2f7417ba03239052e099b76ea1130ac0cbb183ee1fcaa58aaff3/coverage-7.10.7-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:35f5e3f9e455bb17831876048355dca0f758b6df22f49258cb5a91da23ef437d", size = 250831, upload-time = "2025-09-21T20:01:20.817Z" },
-    { url = "https://files.pythonhosted.org/packages/a5/b6/bf054de41ec948b151ae2b79a55c107f5760979538f5fb80c195f2517718/coverage-7.10.7-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4da86b6d62a496e908ac2898243920c7992499c1712ff7c2b6d837cc69d9467e", size = 252937, upload-time = "2025-09-21T20:01:22.171Z" },
-    { url = "https://files.pythonhosted.org/packages/0f/e5/3860756aa6f9318227443c6ce4ed7bf9e70bb7f1447a0353f45ac5c7974b/coverage-7.10.7-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:6b8b09c1fad947c84bbbc95eca841350fad9cbfa5a2d7ca88ac9f8d836c92e23", size = 249021, upload-time = "2025-09-21T20:01:23.907Z" },
-    { url = "https://files.pythonhosted.org/packages/26/0f/bd08bd042854f7fd07b45808927ebcce99a7ed0f2f412d11629883517ac2/coverage-7.10.7-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:4376538f36b533b46f8971d3a3e63464f2c7905c9800db97361c43a2b14792ab", size = 250626, upload-time = "2025-09-21T20:01:25.721Z" },
-    { url = "https://files.pythonhosted.org/packages/8e/a7/4777b14de4abcc2e80c6b1d430f5d51eb18ed1d75fca56cbce5f2db9b36e/coverage-7.10.7-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:121da30abb574f6ce6ae09840dae322bef734480ceafe410117627aa54f76d82", size = 248682, upload-time = "2025-09-21T20:01:27.105Z" },
-    { url = "https://files.pythonhosted.org/packages/34/72/17d082b00b53cd45679bad682fac058b87f011fd8b9fe31d77f5f8d3a4e4/coverage-7.10.7-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:88127d40df529336a9836870436fc2751c339fbaed3a836d42c93f3e4bd1d0a2", size = 248402, upload-time = "2025-09-21T20:01:28.629Z" },
-    { url = "https://files.pythonhosted.org/packages/81/7a/92367572eb5bdd6a84bfa278cc7e97db192f9f45b28c94a9ca1a921c3577/coverage-7.10.7-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:ba58bbcd1b72f136080c0bccc2400d66cc6115f3f906c499013d065ac33a4b61", size = 249320, upload-time = "2025-09-21T20:01:30.004Z" },
-    { url = "https://files.pythonhosted.org/packages/2f/88/a23cc185f6a805dfc4fdf14a94016835eeb85e22ac3a0e66d5e89acd6462/coverage-7.10.7-cp311-cp311-win32.whl", hash = "sha256:972b9e3a4094b053a4e46832b4bc829fc8a8d347160eb39d03f1690316a99c14", size = 220536, upload-time = "2025-09-21T20:01:32.184Z" },
-    { url = "https://files.pythonhosted.org/packages/fe/ef/0b510a399dfca17cec7bc2f05ad8bd78cf55f15c8bc9a73ab20c5c913c2e/coverage-7.10.7-cp311-cp311-win_amd64.whl", hash = "sha256:a7b55a944a7f43892e28ad4bc0561dfd5f0d73e605d1aa5c3c976b52aea121d2", size = 221425, upload-time = "2025-09-21T20:01:33.557Z" },
-    { url = "https://files.pythonhosted.org/packages/51/7f/023657f301a276e4ba1850f82749bc136f5a7e8768060c2e5d9744a22951/coverage-7.10.7-cp311-cp311-win_arm64.whl", hash = "sha256:736f227fb490f03c6488f9b6d45855f8e0fd749c007f9303ad30efab0e73c05a", size = 220103, upload-time = "2025-09-21T20:01:34.929Z" },
-    { url = "https://files.pythonhosted.org/packages/ec/16/114df1c291c22cac3b0c127a73e0af5c12ed7bbb6558d310429a0ae24023/coverage-7.10.7-py3-none-any.whl", hash = "sha256:f7941f6f2fe6dd6807a1208737b8a0cbcf1cc6d7b07d24998ad2d63590868260", size = 209952, upload-time = "2025-09-21T20:03:53.918Z" },
-]
-
-[package.optional-dependencies]
-toml = [
-    { name = "tomli", marker = "python_full_version <= '3.11' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
-]
-
-[[package]]
-name = "cycler"
-version = "0.12.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a9/95/a3dbbb5028f35eafb79008e7522a75244477d2838f38cbb722248dabc2a8/cycler-0.12.1.tar.gz", hash = "sha256:88bb128f02ba341da8ef447245a9e138fae777f6a23943da4540077d3601eb1c", size = 7615, upload-time = "2023-10-07T05:32:18.335Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl", hash = "sha256:85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30", size = 8321, upload-time = "2023-10-07T05:32:16.783Z" },
-]
-
-[[package]]
-name = "decorator"
-version = "5.2.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/43/fa/6d96a0978d19e17b68d634497769987b16c8f4cd0a7a05048bec693caa6b/decorator-5.2.1.tar.gz", hash = "sha256:65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360", size = 56711, upload-time = "2025-02-24T04:41:34.073Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/4e/8c/f3147f5c4b73e7550fe5f9352eaa956ae838d5c51eb58e7a25b9f3e2643b/decorator-5.2.1-py3-none-any.whl", hash = "sha256:d316bb415a2d9e2d2b3abcc4084c6502fc09240e292cd76a76afc106a1c8e04a", size = 9190, upload-time = "2025-02-24T04:41:32.565Z" },
-]
-
-[[package]]
-name = "distlib"
-version = "0.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/96/8e/709914eb2b5749865801041647dc7f4e6d00b549cfe88b65ca192995f07c/distlib-0.4.0.tar.gz", hash = "sha256:feec40075be03a04501a973d81f633735b4b69f98b05450592310c0f401a4e0d", size = 614605, upload-time = "2025-07-17T16:52:00.465Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/33/6b/e0547afaf41bf2c42e52430072fa5658766e3d65bd4b03a563d1b6336f57/distlib-0.4.0-py2.py3-none-any.whl", hash = "sha256:9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16", size = 469047, upload-time = "2025-07-17T16:51:58.613Z" },
-]
 
 [[package]]
 name = "executing"
@@ -483,12 +491,12 @@ name = "ipython"
 version = "9.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "decorator" },
     { name = "ipython-pygments-lexers" },
     { name = "jedi" },
     { name = "matplotlib-inline" },
-    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (sys_platform == 'win32' and extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (sys_platform == 'win32' and extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform == 'emscripten' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform == 'win32' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "prompt-toolkit" },
     { name = "pygments" },
     { name = "stack-data" },
@@ -676,7 +684,7 @@ name = "opencv-python-headless"
 version = "4.11.0.86"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy", marker = "(extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-11-eigen-robotics-sim-pybullet-headless' and extra == 'extra-13-eigen-framework-sim-pybullet-headless') or (extra != 'extra-11-eigen-robotics-default' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "numpy", marker = "(extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/36/2f/5b2b3ba52c864848885ba988f24b7f105052f68da9ab0e693cc7c25b0b30/opencv-python-headless-4.11.0.86.tar.gz", hash = "sha256:996eb282ca4b43ec6a3972414de0e2331f5d9cda2b41091a49739c19fb843798", size = 95177929, upload-time = "2025-01-16T13:53:40.22Z" }
 wheels = [
@@ -925,7 +933,7 @@ name = "pytest"
 version = "8.4.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-11-eigen-robotics-default' and extra == 'extra-11-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-13-eigen-framework-sim-pybullet-gui' and extra == 'extra-13-eigen-framework-sim-pybullet-headless')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
