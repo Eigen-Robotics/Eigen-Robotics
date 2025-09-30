@@ -18,7 +18,8 @@ class string_t(object):
     def __init__(self):
         self.data = ""
         """
-        ROS: std_msgs/String
+        The string data, which can hold any sequence of characters.
+        This field stores the actual string content.
         LCM Type: string
         """
 

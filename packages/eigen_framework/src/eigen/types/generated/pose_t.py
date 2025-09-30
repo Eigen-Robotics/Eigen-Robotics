@@ -7,21 +7,23 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-import eigen.types.generated
-
 class pose_t(object):
 
     __slots__ = ["position", "orientation"]
 
-    __typenames__ = ["eigen.types.generated.point_t", "eigen.types.generated.quaternion_t"]
+    __typenames__ = ["float", "float"]
 
-    __dimensions__ = [None, None]
+    __dimensions__ = [[3], [4]]
 
     def __init__(self):
-        self.position = eigen.types.generated.point_t()
-        """ LCM Type: eigen.types.generated.point_t """
-        self.orientation = eigen.types.generated.quaternion_t()
-        """ LCM Type: eigen.types.generated.quaternion_t """
+        self.position = [ 0.0 for dim0 in range(3) ]
+        """ LCM Type: float[3] """
+        self.orientation = [ 0.0 for dim0 in range(4) ]
+        """
+        [x, y, z]
+        LCM Type: float[4]
+        """
+
 
     def encode(self):
         buf = BytesIO()
@@ -30,10 +32,8 @@ class pose_t(object):
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        assert self.position._get_packed_fingerprint() == eigen.types.generated.point_t._get_packed_fingerprint()
-        self.position._encode_one(buf)
-        assert self.orientation._get_packed_fingerprint() == eigen.types.generated.quaternion_t._get_packed_fingerprint()
-        self.orientation._encode_one(buf)
+        buf.write(struct.pack('>3f', *self.position[:3]))
+        buf.write(struct.pack('>4f', *self.orientation[:4]))
 
     @staticmethod
     def decode(data: bytes):
@@ -48,15 +48,14 @@ class pose_t(object):
     @staticmethod
     def _decode_one(buf):
         self = pose_t()
-        self.position = eigen.types.generated.point_t._decode_one(buf)
-        self.orientation = eigen.types.generated.quaternion_t._decode_one(buf)
+        self.position = struct.unpack('>3f', buf.read(12))
+        self.orientation = struct.unpack('>4f', buf.read(16))
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
         if pose_t in parents: return 0
-        newparents = parents + [pose_t]
-        tmphash = (0x2d70dd60bd541272+ eigen.types.generated.point_t._get_hash_recursive(newparents)+ eigen.types.generated.quaternion_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0xaff8430a89bc6633) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

@@ -11,15 +11,17 @@ import eigen.types.generated
 
 class header_t(object):
 
-    __slots__ = ["stamp", "frame_id"]
+    __slots__ = ["seq", "stamp", "frame_id"]
 
-    __typenames__ = ["eigen.types.generated.time_t", "string"]
+    __typenames__ = ["int64_t", "eigen.types.generated.stamp_t", "string"]
 
-    __dimensions__ = [None, None]
+    __dimensions__ = [None, None, None]
 
     def __init__(self):
-        self.stamp = eigen.types.generated.time_t()
-        """ LCM Type: eigen.types.generated.time_t """
+        self.seq = 0
+        """ LCM Type: int64_t """
+        self.stamp = eigen.types.generated.stamp_t()
+        """ LCM Type: eigen.types.generated.stamp_t """
         self.frame_id = ""
         """ LCM Type: string """
 
@@ -30,7 +32,8 @@ class header_t(object):
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        assert self.stamp._get_packed_fingerprint() == eigen.types.generated.time_t._get_packed_fingerprint()
+        buf.write(struct.pack(">q", self.seq))
+        assert self.stamp._get_packed_fingerprint() == eigen.types.generated.stamp_t._get_packed_fingerprint()
         self.stamp._encode_one(buf)
         __frame_id_encoded = self.frame_id.encode('utf-8')
         buf.write(struct.pack('>I', len(__frame_id_encoded)+1))
@@ -50,7 +53,8 @@ class header_t(object):
     @staticmethod
     def _decode_one(buf):
         self = header_t()
-        self.stamp = eigen.types.generated.time_t._decode_one(buf)
+        self.seq = struct.unpack(">q", buf.read(8))[0]
+        self.stamp = eigen.types.generated.stamp_t._decode_one(buf)
         __frame_id_len = struct.unpack('>I', buf.read(4))[0]
         self.frame_id = buf.read(__frame_id_len)[:-1].decode('utf-8', 'replace')
         return self
@@ -59,7 +63,7 @@ class header_t(object):
     def _get_hash_recursive(parents):
         if header_t in parents: return 0
         newparents = parents + [header_t]
-        tmphash = (0xdbd9f72ca7ef48e7+ eigen.types.generated.time_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0xdbb33f435c19b8ea+ eigen.types.generated.stamp_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

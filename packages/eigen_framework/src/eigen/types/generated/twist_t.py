@@ -7,21 +7,23 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-import eigen.types.generated
-
 class twist_t(object):
 
-    __slots__ = ["linear", "angular"]
+    __slots__ = ["linear_velocity", "angular_velocity"]
 
-    __typenames__ = ["eigen.types.generated.vector3_t", "eigen.types.generated.vector3_t"]
+    __typenames__ = ["float", "float"]
 
-    __dimensions__ = [None, None]
+    __dimensions__ = [[3], [3]]
 
     def __init__(self):
-        self.linear = eigen.types.generated.vector3_t()
-        """ LCM Type: eigen.types.generated.vector3_t """
-        self.angular = eigen.types.generated.vector3_t()
-        """ LCM Type: eigen.types.generated.vector3_t """
+        self.linear_velocity = [ 0.0 for dim0 in range(3) ]
+        """ LCM Type: float[3] """
+        self.angular_velocity = [ 0.0 for dim0 in range(3) ]
+        """
+        [v_x, v_y, v_z]
+        LCM Type: float[3]
+        """
+
 
     def encode(self):
         buf = BytesIO()
@@ -30,10 +32,8 @@ class twist_t(object):
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        assert self.linear._get_packed_fingerprint() == eigen.types.generated.vector3_t._get_packed_fingerprint()
-        self.linear._encode_one(buf)
-        assert self.angular._get_packed_fingerprint() == eigen.types.generated.vector3_t._get_packed_fingerprint()
-        self.angular._encode_one(buf)
+        buf.write(struct.pack('>3f', *self.linear_velocity[:3]))
+        buf.write(struct.pack('>3f', *self.angular_velocity[:3]))
 
     @staticmethod
     def decode(data: bytes):
@@ -48,15 +48,14 @@ class twist_t(object):
     @staticmethod
     def _decode_one(buf):
         self = twist_t()
-        self.linear = eigen.types.generated.vector3_t._decode_one(buf)
-        self.angular = eigen.types.generated.vector3_t._decode_one(buf)
+        self.linear_velocity = struct.unpack('>3f', buf.read(12))
+        self.angular_velocity = struct.unpack('>3f', buf.read(12))
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
         if twist_t in parents: return 0
-        newparents = parents + [twist_t]
-        tmphash = (0x3a4144772922add7+ eigen.types.generated.vector3_t._get_hash_recursive(newparents)+ eigen.types.generated.vector3_t._get_hash_recursive(newparents)) & 0xffffffffffffffff
+        tmphash = (0x9ad5eeee5b094a6) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

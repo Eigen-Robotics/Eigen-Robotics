@@ -7,30 +7,31 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-class vector3_t(object):
+class position_t(object):
+    """ Robotics ////////////////// """
 
     __slots__ = ["x", "y", "z"]
 
-    __typenames__ = ["double", "double", "double"]
+    __typenames__ = ["float", "float", "float"]
 
     __dimensions__ = [None, None, None]
 
     def __init__(self):
         self.x = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.y = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.z = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
 
     def encode(self):
         buf = BytesIO()
-        buf.write(vector3_t._get_packed_fingerprint())
+        buf.write(position_t._get_packed_fingerprint())
         self._encode_one(buf)
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        buf.write(struct.pack(">ddd", self.x, self.y, self.z))
+        buf.write(struct.pack(">fff", self.x, self.y, self.z))
 
     @staticmethod
     def decode(data: bytes):
@@ -38,31 +39,31 @@ class vector3_t(object):
             buf = data
         else:
             buf = BytesIO(data)
-        if buf.read(8) != vector3_t._get_packed_fingerprint():
+        if buf.read(8) != position_t._get_packed_fingerprint():
             raise ValueError("Decode error")
-        return vector3_t._decode_one(buf)
+        return position_t._decode_one(buf)
 
     @staticmethod
     def _decode_one(buf):
-        self = vector3_t()
-        self.x, self.y, self.z = struct.unpack(">ddd", buf.read(24))
+        self = position_t()
+        self.x, self.y, self.z = struct.unpack(">fff", buf.read(12))
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
-        if vector3_t in parents: return 0
-        tmphash = (0x573f2fdd2f76508f) & 0xffffffffffffffff
+        if position_t in parents: return 0
+        tmphash = (0x2a14f112c253ac0c) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None
 
     @staticmethod
     def _get_packed_fingerprint():
-        if vector3_t._packed_fingerprint is None:
-            vector3_t._packed_fingerprint = struct.pack(">Q", vector3_t._get_hash_recursive([]))
-        return vector3_t._packed_fingerprint
+        if position_t._packed_fingerprint is None:
+            position_t._packed_fingerprint = struct.pack(">Q", position_t._get_hash_recursive([]))
+        return position_t._packed_fingerprint
 
     def get_hash(self):
         """Get the LCM hash of the struct"""
-        return struct.unpack(">Q", vector3_t._get_packed_fingerprint())[0]
+        return struct.unpack(">Q", position_t._get_packed_fingerprint())[0]
 

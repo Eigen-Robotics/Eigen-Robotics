@@ -8,8 +8,6 @@ import numpy as np
 from eigen.types.generated import (
     bullet_dynamics_t,
     comms_info_t,
-    double_array_t,
-    double_vector_t,
     ee_pos_t,
     flag_t,
     float_array_t,
@@ -46,6 +44,7 @@ from eigen.types.generated import (
     velocity_2d_t,
     wheel_config_t,
     wheeled_velocity_t,
+    double_vector_t
 )
 
 

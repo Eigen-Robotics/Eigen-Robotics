@@ -7,7 +7,7 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-class float32_t_msg(object):
+class float_t(object):
 
     __slots__ = ["data"]
 
@@ -18,14 +18,14 @@ class float32_t_msg(object):
     def __init__(self):
         self.data = 0.0
         """
-        ROS: std_msgs/Float32
+        The floating-point value.
         LCM Type: float
         """
 
 
     def encode(self):
         buf = BytesIO()
-        buf.write(float32_t_msg._get_packed_fingerprint())
+        buf.write(float_t._get_packed_fingerprint())
         self._encode_one(buf)
         return buf.getvalue()
 
@@ -38,19 +38,19 @@ class float32_t_msg(object):
             buf = data
         else:
             buf = BytesIO(data)
-        if buf.read(8) != float32_t_msg._get_packed_fingerprint():
+        if buf.read(8) != float_t._get_packed_fingerprint():
             raise ValueError("Decode error")
-        return float32_t_msg._decode_one(buf)
+        return float_t._decode_one(buf)
 
     @staticmethod
     def _decode_one(buf):
-        self = float32_t_msg()
+        self = float_t()
         self.data = struct.unpack(">f", buf.read(4))[0]
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
-        if float32_t_msg in parents: return 0
+        if float_t in parents: return 0
         tmphash = (0x856e135c782a36e9) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
@@ -58,11 +58,11 @@ class float32_t_msg(object):
 
     @staticmethod
     def _get_packed_fingerprint():
-        if float32_t_msg._packed_fingerprint is None:
-            float32_t_msg._packed_fingerprint = struct.pack(">Q", float32_t_msg._get_hash_recursive([]))
-        return float32_t_msg._packed_fingerprint
+        if float_t._packed_fingerprint is None:
+            float_t._packed_fingerprint = struct.pack(">Q", float_t._get_hash_recursive([]))
+        return float_t._packed_fingerprint
 
     def get_hash(self):
         """Get the LCM hash of the struct"""
-        return struct.unpack(">Q", float32_t_msg._get_packed_fingerprint())[0]
+        return struct.unpack(">Q", float_t._get_packed_fingerprint())[0]
 

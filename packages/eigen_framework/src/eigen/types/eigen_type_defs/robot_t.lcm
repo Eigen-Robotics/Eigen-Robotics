@@ -1,5 +1,16 @@
 package eigen.types.generated;
 
+struct header_t {
+    int64_t seq;
+    stamp_t stamp;
+    string frame_id;
+}
+
+struct stamp_t {
+    int64_t sec;
+    int64_t nsec;
+}
+
 struct joint_group_command_t {
     string name;
     int64_t n;
@@ -11,7 +22,7 @@ struct joint_single_command_t {
     float cmd;
 }
 
-struct task_space_command_t {
+struct task_space_command_t { 
     string name;
     position_t position;
     quaternion_t quaternion;

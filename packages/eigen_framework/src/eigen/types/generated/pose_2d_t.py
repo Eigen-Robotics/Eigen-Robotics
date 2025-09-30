@@ -7,31 +7,30 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-class pose2d_t(object):
-    """ (Optional) Pose2D exists in ROS but is deprecated; include if you need it: """
+class pose_2d_t(object):
 
     __slots__ = ["x", "y", "theta"]
 
-    __typenames__ = ["double", "double", "double"]
+    __typenames__ = ["float", "float", "float"]
 
     __dimensions__ = [None, None, None]
 
     def __init__(self):
         self.x = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.y = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.theta = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
 
     def encode(self):
         buf = BytesIO()
-        buf.write(pose2d_t._get_packed_fingerprint())
+        buf.write(pose_2d_t._get_packed_fingerprint())
         self._encode_one(buf)
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        buf.write(struct.pack(">ddd", self.x, self.y, self.theta))
+        buf.write(struct.pack(">fff", self.x, self.y, self.theta))
 
     @staticmethod
     def decode(data: bytes):
@@ -39,31 +38,31 @@ class pose2d_t(object):
             buf = data
         else:
             buf = BytesIO(data)
-        if buf.read(8) != pose2d_t._get_packed_fingerprint():
+        if buf.read(8) != pose_2d_t._get_packed_fingerprint():
             raise ValueError("Decode error")
-        return pose2d_t._decode_one(buf)
+        return pose_2d_t._decode_one(buf)
 
     @staticmethod
     def _decode_one(buf):
-        self = pose2d_t()
-        self.x, self.y, self.theta = struct.unpack(">ddd", buf.read(24))
+        self = pose_2d_t()
+        self.x, self.y, self.theta = struct.unpack(">fff", buf.read(12))
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
-        if pose2d_t in parents: return 0
-        tmphash = (0x7491c1074c104593) & 0xffffffffffffffff
+        if pose_2d_t in parents: return 0
+        tmphash = (0xb3f79e70d04fabca) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None
 
     @staticmethod
     def _get_packed_fingerprint():
-        if pose2d_t._packed_fingerprint is None:
-            pose2d_t._packed_fingerprint = struct.pack(">Q", pose2d_t._get_hash_recursive([]))
-        return pose2d_t._packed_fingerprint
+        if pose_2d_t._packed_fingerprint is None:
+            pose_2d_t._packed_fingerprint = struct.pack(">Q", pose_2d_t._get_hash_recursive([]))
+        return pose_2d_t._packed_fingerprint
 
     def get_hash(self):
         """Get the LCM hash of the struct"""
-        return struct.unpack(">Q", pose2d_t._get_packed_fingerprint())[0]
+        return struct.unpack(">Q", pose_2d_t._get_packed_fingerprint())[0]
 

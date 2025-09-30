@@ -1,0 +1,142 @@
+package eigen.types.generated;
+
+// This file defines standard message types used in LCM.
+
+////////////////// General Purpose //////////////////
+
+struct flag_t {
+    // The flag value, it can be any integer value depending on the application.
+    int16_t flag;
+}
+
+
+struct int_64_t {
+    // The 64-bit integer.
+    int64_t data;
+}
+
+
+struct float_t {
+    // The floating-point value.
+    float data;
+}
+
+
+struct float_vector_t {
+    // The size of the data vector (the number of floating-point values).
+    int64_t n;
+
+    // The data vector itself, which holds 'n' floating-point numbers.
+    float data[n];
+}
+
+
+struct double_vector_t {
+    // The size of the data vector (the number of double-precision floating-point values).
+    int64_t n;
+
+    // The data vector itself, which holds 'n' double-precision floating-point numbers.
+    double data[n];
+}
+
+struct int64_vector_t {
+    int64_t n;
+    int64_t data[n];
+}
+
+
+struct float_array_t {
+    // The number of rows in the array.
+    int64_t m;
+
+    // The number of columns in the array.
+    int64_t n;
+
+    // The data array itself, which holds 'm x n' floating-point numbers.
+    float data[m][n];
+}
+
+
+struct double_array_t {
+    // The number of rows in the array.
+    int64_t m;
+
+    // The number of columns in the array.
+    int64_t n;
+
+    // The data array itself, which holds 'm x n' double-precision floating-point numbers.
+    double data[m][n];
+}
+
+struct string_t {
+    // The string data, which can hold any sequence of characters.
+    // This field stores the actual string content.
+    string data;
+}
+
+
+
+
+////////////////// Robotics //////////////////
+
+struct position_t {
+    float x;
+    float y;
+    float z;
+}
+
+struct quaternion_t {
+    float x;
+    float y;
+    float z;
+    float w;
+}
+
+struct pose_t {
+    float position[3];      // [x, y, z]
+    float orientation[4];   // [x, y, z, w]
+}
+
+struct pose_2d_t {
+    float x;
+    float y;
+    float theta;
+}
+
+struct velocity_2d_t {
+    float v_x;
+    float v_y;
+    float w;
+}
+
+struct wheeled_velocity_t {
+    float linear;
+    float angular;
+}
+
+struct twist_t {
+    float linear_velocity[3];    // [v_x, v_y, v_z]
+    float angular_velocity[3];   // [omega_x, omega_y, omega_z]
+}
+
+struct robot_init_t {
+    string name;
+    float position[3];
+    float orientation[4];
+    int64_t n;              // number of actuated joints
+    float q_init[n];
+}
+
+
+
+
+
+////////////////// Simulation //////////////////
+
+struct rigid_body_state_t {
+    string name;
+    float position[3];
+    float orientation[4];
+    float lin_velocity[3];
+    float ang_velocity[3];
+}

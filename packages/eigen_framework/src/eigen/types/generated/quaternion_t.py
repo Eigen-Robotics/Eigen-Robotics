@@ -11,19 +11,19 @@ class quaternion_t(object):
 
     __slots__ = ["x", "y", "z", "w"]
 
-    __typenames__ = ["double", "double", "double", "double"]
+    __typenames__ = ["float", "float", "float", "float"]
 
     __dimensions__ = [None, None, None, None]
 
     def __init__(self):
         self.x = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.y = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.z = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
         self.w = 0.0
-        """ LCM Type: double """
+        """ LCM Type: float """
 
     def encode(self):
         buf = BytesIO()
@@ -32,7 +32,7 @@ class quaternion_t(object):
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        buf.write(struct.pack(">dddd", self.x, self.y, self.z, self.w))
+        buf.write(struct.pack(">ffff", self.x, self.y, self.z, self.w))
 
     @staticmethod
     def decode(data: bytes):
@@ -47,13 +47,13 @@ class quaternion_t(object):
     @staticmethod
     def _decode_one(buf):
         self = quaternion_t()
-        self.x, self.y, self.z, self.w = struct.unpack(">dddd", buf.read(32))
+        self.x, self.y, self.z, self.w = struct.unpack(">ffff", buf.read(16))
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
         if quaternion_t in parents: return 0
-        tmphash = (0x9b1dee9dfc8c0515) & 0xffffffffffffffff
+        tmphash = (0xa019400fc7475bab) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None

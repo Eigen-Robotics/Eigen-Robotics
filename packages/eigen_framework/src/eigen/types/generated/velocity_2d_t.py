@@ -7,30 +7,30 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-class point32_t(object):
+class velocity_2d_t(object):
 
-    __slots__ = ["x", "y", "z"]
+    __slots__ = ["v_x", "v_y", "w"]
 
     __typenames__ = ["float", "float", "float"]
 
     __dimensions__ = [None, None, None]
 
     def __init__(self):
-        self.x = 0.0
+        self.v_x = 0.0
         """ LCM Type: float """
-        self.y = 0.0
+        self.v_y = 0.0
         """ LCM Type: float """
-        self.z = 0.0
+        self.w = 0.0
         """ LCM Type: float """
 
     def encode(self):
         buf = BytesIO()
-        buf.write(point32_t._get_packed_fingerprint())
+        buf.write(velocity_2d_t._get_packed_fingerprint())
         self._encode_one(buf)
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        buf.write(struct.pack(">fff", self.x, self.y, self.z))
+        buf.write(struct.pack(">fff", self.v_x, self.v_y, self.w))
 
     @staticmethod
     def decode(data: bytes):
@@ -38,31 +38,31 @@ class point32_t(object):
             buf = data
         else:
             buf = BytesIO(data)
-        if buf.read(8) != point32_t._get_packed_fingerprint():
+        if buf.read(8) != velocity_2d_t._get_packed_fingerprint():
             raise ValueError("Decode error")
-        return point32_t._decode_one(buf)
+        return velocity_2d_t._decode_one(buf)
 
     @staticmethod
     def _decode_one(buf):
-        self = point32_t()
-        self.x, self.y, self.z = struct.unpack(">fff", buf.read(12))
+        self = velocity_2d_t()
+        self.v_x, self.v_y, self.w = struct.unpack(">fff", buf.read(12))
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
-        if point32_t in parents: return 0
-        tmphash = (0x2a14f112c253ac0c) & 0xffffffffffffffff
+        if velocity_2d_t in parents: return 0
+        tmphash = (0xff693f6c7add67e3) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None
 
     @staticmethod
     def _get_packed_fingerprint():
-        if point32_t._packed_fingerprint is None:
-            point32_t._packed_fingerprint = struct.pack(">Q", point32_t._get_hash_recursive([]))
-        return point32_t._packed_fingerprint
+        if velocity_2d_t._packed_fingerprint is None:
+            velocity_2d_t._packed_fingerprint = struct.pack(">Q", velocity_2d_t._get_hash_recursive([]))
+        return velocity_2d_t._packed_fingerprint
 
     def get_hash(self):
         """Get the LCM hash of the struct"""
-        return struct.unpack(">Q", point32_t._get_packed_fingerprint())[0]
+        return struct.unpack(">Q", velocity_2d_t._get_packed_fingerprint())[0]
 

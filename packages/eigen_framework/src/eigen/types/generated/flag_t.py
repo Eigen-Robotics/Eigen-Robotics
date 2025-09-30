@@ -7,30 +7,34 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-class uint16_t_msg(object):
+class flag_t(object):
+    """
+    This file defines standard message types used in LCM.
+    General Purpose //////////////////
+    """
 
-    __slots__ = ["data"]
+    __slots__ = ["flag"]
 
     __typenames__ = ["int16_t"]
 
     __dimensions__ = [None]
 
     def __init__(self):
-        self.data = 0
+        self.flag = 0
         """
-        ROS: std_msgs/UInt16 — emulate with signed 16-bit; keep values in [0, 65535]
+        The flag value, it can be any integer value depending on the application.
         LCM Type: int16_t
         """
 
 
     def encode(self):
         buf = BytesIO()
-        buf.write(uint16_t_msg._get_packed_fingerprint())
+        buf.write(flag_t._get_packed_fingerprint())
         self._encode_one(buf)
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        buf.write(struct.pack(">h", self.data))
+        buf.write(struct.pack(">h", self.flag))
 
     @staticmethod
     def decode(data: bytes):
@@ -38,31 +42,31 @@ class uint16_t_msg(object):
             buf = data
         else:
             buf = BytesIO(data)
-        if buf.read(8) != uint16_t_msg._get_packed_fingerprint():
+        if buf.read(8) != flag_t._get_packed_fingerprint():
             raise ValueError("Decode error")
-        return uint16_t_msg._decode_one(buf)
+        return flag_t._decode_one(buf)
 
     @staticmethod
     def _decode_one(buf):
-        self = uint16_t_msg()
-        self.data = struct.unpack(">h", buf.read(2))[0]
+        self = flag_t()
+        self.flag = struct.unpack(">h", buf.read(2))[0]
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
-        if uint16_t_msg in parents: return 0
-        tmphash = (0x165e7cf9f948811f) & 0xffffffffffffffff
+        if flag_t in parents: return 0
+        tmphash = (0x165e7cfe0f22751f) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
     _packed_fingerprint = None
 
     @staticmethod
     def _get_packed_fingerprint():
-        if uint16_t_msg._packed_fingerprint is None:
-            uint16_t_msg._packed_fingerprint = struct.pack(">Q", uint16_t_msg._get_hash_recursive([]))
-        return uint16_t_msg._packed_fingerprint
+        if flag_t._packed_fingerprint is None:
+            flag_t._packed_fingerprint = struct.pack(">Q", flag_t._get_hash_recursive([]))
+        return flag_t._packed_fingerprint
 
     def get_hash(self):
         """Get the LCM hash of the struct"""
-        return struct.unpack(">Q", uint16_t_msg._get_packed_fingerprint())[0]
+        return struct.unpack(">Q", flag_t._get_packed_fingerprint())[0]
 

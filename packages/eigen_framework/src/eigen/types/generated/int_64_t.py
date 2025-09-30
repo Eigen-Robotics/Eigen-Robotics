@@ -7,7 +7,7 @@ DO NOT MODIFY BY HAND!!!!
 from io import BytesIO
 import struct
 
-class int64_t_msg(object):
+class int_64_t(object):
 
     __slots__ = ["data"]
 
@@ -18,14 +18,14 @@ class int64_t_msg(object):
     def __init__(self):
         self.data = 0
         """
-        ROS: std_msgs/Int64
+        The 64-bit integer.
         LCM Type: int64_t
         """
 
 
     def encode(self):
         buf = BytesIO()
-        buf.write(int64_t_msg._get_packed_fingerprint())
+        buf.write(int_64_t._get_packed_fingerprint())
         self._encode_one(buf)
         return buf.getvalue()
 
@@ -38,19 +38,19 @@ class int64_t_msg(object):
             buf = data
         else:
             buf = BytesIO(data)
-        if buf.read(8) != int64_t_msg._get_packed_fingerprint():
+        if buf.read(8) != int_64_t._get_packed_fingerprint():
             raise ValueError("Decode error")
-        return int64_t_msg._decode_one(buf)
+        return int_64_t._decode_one(buf)
 
     @staticmethod
     def _decode_one(buf):
-        self = int64_t_msg()
+        self = int_64_t()
         self.data = struct.unpack(">q", buf.read(8))[0]
         return self
 
     @staticmethod
     def _get_hash_recursive(parents):
-        if int64_t_msg in parents: return 0
+        if int_64_t in parents: return 0
         tmphash = (0x165e7cfef748811f) & 0xffffffffffffffff
         tmphash  = (((tmphash<<1)&0xffffffffffffffff) + (tmphash>>63)) & 0xffffffffffffffff
         return tmphash
@@ -58,11 +58,11 @@ class int64_t_msg(object):
 
     @staticmethod
     def _get_packed_fingerprint():
-        if int64_t_msg._packed_fingerprint is None:
-            int64_t_msg._packed_fingerprint = struct.pack(">Q", int64_t_msg._get_hash_recursive([]))
-        return int64_t_msg._packed_fingerprint
+        if int_64_t._packed_fingerprint is None:
+            int_64_t._packed_fingerprint = struct.pack(">Q", int_64_t._get_hash_recursive([]))
+        return int_64_t._packed_fingerprint
 
     def get_hash(self):
         """Get the LCM hash of the struct"""
-        return struct.unpack(">Q", int64_t_msg._get_packed_fingerprint())[0]
+        return struct.unpack(">Q", int_64_t._get_packed_fingerprint())[0]
 
