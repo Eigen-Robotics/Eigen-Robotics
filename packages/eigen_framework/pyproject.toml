@@ -53,7 +53,7 @@ environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
 # and depends on the entry in dependencies above, python version and
 # the platform architecture!!
 
-pybullet = { path = "../../.wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl", marker = "sys_platform == 'darwin'" }
+pybullet = { path = "../../.wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl", marker = "sys_platform == 'darwin'" }
 [project.scripts]
 eigen = "eigen.cli:main"
 

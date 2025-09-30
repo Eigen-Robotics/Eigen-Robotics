@@ -213,7 +213,7 @@ default = [
     { name = "ipython" },
     { name = "opencv-python" },
     { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'darwin' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "sys_platform == 'darwin' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl" }, marker = "sys_platform == 'darwin' or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "rich" },
     { name = "typer" },
 ]
@@ -223,12 +223,12 @@ jupyter = [
 sim-pybullet-gui = [
     { name = "opencv-python" },
     { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-gui') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless')" },
 ]
 sim-pybullet-headless = [
     { name = "opencv-python-headless", marker = "(extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
     { name = "pybullet", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "(sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform != 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless')" },
-    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless')" },
+    { name = "pybullet", version = "3.2.7", source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl" }, marker = "(sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-sim-pybullet-headless' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (sys_platform == 'darwin' and extra != 'extra-14-eigen-robotics-default' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-15-eigen-framework-sim-pybullet-gui' and extra == 'extra-15-eigen-framework-sim-pybullet-headless') or (extra == 'extra-14-eigen-robotics-default' and extra == 'extra-14-eigen-robotics-sim-pybullet-headless')" },
 ]
 
 [package.dev-dependencies]
@@ -252,8 +252,8 @@ requires-dist = [
     { name = "opencv-python-headless", marker = "extra == 'sim-pybullet-headless'", specifier = ">=4.8.1.78" },
     { name = "pandas", specifier = ">=2.1.0" },
     { name = "pillow", specifier = ">=10.3.0" },
-    { name = "pybullet", marker = "sys_platform == 'darwin' and extra == 'sim-pybullet-gui'", path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" },
-    { name = "pybullet", marker = "sys_platform == 'darwin' and extra == 'sim-pybullet-headless'", path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" },
+    { name = "pybullet", marker = "sys_platform == 'darwin' and extra == 'sim-pybullet-gui'", path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl" },
+    { name = "pybullet", marker = "sys_platform == 'darwin' and extra == 'sim-pybullet-headless'", path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl" },
     { name = "pybullet", marker = "sys_platform != 'darwin' and extra == 'sim-pybullet-gui'", specifier = "==3.2.7" },
     { name = "pybullet", marker = "sys_platform != 'darwin' and extra == 'sim-pybullet-headless'", specifier = "==3.2.7" },
     { name = "pydantic", specifier = ">=2.11.7" },
@@ -853,12 +853,12 @@ wheels = [
 [[package]]
 name = "pybullet"
 version = "3.2.7"
-source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl" }
+source = { path = ".wheels/pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl" }
 resolution-markers = [
     "sys_platform == 'darwin'",
 ]
 wheels = [
-    { filename = "pybullet-3.2.7-cp311-cp311-macosx_10_15_x86_64.whl", hash = "sha256:86f814847d3a00fe36e24c05c1098d0c6fd47360bccc4c4401406e52f93a9208" },
+    { filename = "pybullet-3.2.7-cp311-cp311-macosx_14_0_x86_64.whl", hash = "sha256:57e7b8005cb941b2d344d6512866ecc5e560a0a26e4837204db23230291d95f7" },
 ]
 
 [[package]]
