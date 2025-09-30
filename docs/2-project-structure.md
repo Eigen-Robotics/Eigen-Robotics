@@ -68,7 +68,7 @@ eigen_robotics/                           # Single package
 ### Approach 3 Semantic Packages (Workspace)
 
 ```output
-eigen_monster/                            # Workspace root
+eigen_robotics/                           # Workspace root
 ├── Makefile                           # Cross-platform setup automation
 ├── scripts/
 │   └── build_pybullet_macos.py       # macOS PyBullet builder

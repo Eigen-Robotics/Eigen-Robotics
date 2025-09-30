@@ -1,4 +1,4 @@
-# EigenMonster
+# EigenRobotics
 
 Called a monster because that is how it looks at first sight, but...
 
@@ -11,11 +11,11 @@ Short introduction meant to be carried forward, everything including and after [
 
 ### General info
 
-The project is based around `uv` workspaces and PEP 420 namespaces. `uv` uses plain Pyhton `venv` environment to install the dependencies using its custom dependency resolution algorithms, the resolution is then saved into `uv.lock`, which is a proprietary format that attempts to resolve the dependency constraints on all project-supported platforms (presently linux+x86_64/macos+x86_64+arm64) ahead of time. This won't prevent runtime issues, or problems with packages that do not conform to general Python package versioning/naming schemas. The lock file is updated whenever a package is added or removed from either the mata `src/eigen_monster/` package or any of the `/packages`.
+The project is based around `uv` workspaces and PEP 420 namespaces. `uv` uses plain Pyhton `venv` environment to install the dependencies using its custom dependency resolution algorithms, the resolution is then saved into `uv.lock`, which is a proprietary format that attempts to resolve the dependency constraints on all project-supported platforms (presently linux+x86_64/macos+x86_64+arm64) ahead of time. This won't prevent runtime issues, or problems with packages that do not conform to general Python package versioning/naming schemas. The lock file is updated whenever a package is added or removed from either the mata `src/eigen_robotics/` package or any of the `/packages`.
 
-#### eigen_monster
+#### eigen_robotics
 
-`eigen_monster` is purely a meta-package, you can think of it as a convenient way to getting some predefined configuration of dependencies. To just get strated, the _default_ group of optionals is suitable. `eigen_monster` is not nescessary to get started with Eigen overall, an advanced user might opt to install individual packages with theor specific optinal gorups from `/packages` instead.
+`eigen_robotics` is purely a meta-package, you can think of it as a convenient way to getting some predefined configuration of dependencies. To just get strated, the _default_ group of optionals is suitable. `eigen_robotics` is not nescessary to get started with Eigen overall, an advanced user might opt to install individual packages with theor specific optinal gorups from `/packages` instead.
 
 #### PEP 420 namespaces
 
@@ -53,7 +53,7 @@ After 'make install', you can use 'uv sync' directly
 
 1. run `make install` in the project root
     - if you are running on macos it will download the pybullet reporitory and built a wheel from scratch
-    - it will proceed to implicitly create a Python venv and install the _default_ and _dev_ dependency extras of `eigen_monster`
+    - it will proceed to implicitly create a Python venv and install the _default_ and _dev_ dependency extras of `eigen_robotics`
 2. activate the venv by executing `source .venv/bin/activate`
 3. run `eigen --help` to verify the installation
 4. run `pytest` to run the tests included
@@ -68,7 +68,7 @@ When the `.venv` is created, you can just create a python script and convenientl
   - focus on moving small pieces and building up the tests as you go
 - finally a renaming of the root package
 
-Currently the `eigen_monster` package is a metadata package through which the rest of the packages and their PEP 735 extras are installable. `eigen_monster` defines these through its own extras.
+Currently the `eigen_robotics` package is a metadata package through which the rest of the packages and their PEP 735 extras are installable. `eigen_robotics` defines these through its own extras.
 
 ## Migrating Code over
 

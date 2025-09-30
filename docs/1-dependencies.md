@@ -1,4 +1,4 @@
-# eigen-monster
+# eigen-robotics
 
 [back to README](../README.md)
 
@@ -24,7 +24,7 @@ That's it (the basic)! Works on both Linux and macOS.
 ## Project Structure
 
 ```output
-eigen_monster/                         # Workspace root
+eigen_robotics/                        # Workspace root
 ├── Makefile                        # Cross-platform automation
 ├── scripts/
 │   └── build_pybullet_macos.py     # PyBullet build script for macOS
@@ -61,7 +61,7 @@ from eigen.ml.rl import PolicyNetwork    # from eigen-ml
 
 ## Flexibility
 
-Work-In-Progress, the final picture will be something more aking to `install eigen_robots[husky,franka]; install eigen_sensors[...]` with an implicit dependency on famework. In another words, optional dependencies get grouped and abstracted away once more, similar to the `--dev` dependency group. `eigen_monster` and the `/src/eigen_monster/__init__.py` is a stub to glue all of this together for now, it might have more meaningful uses later or we find a way to get rid of it
+Work-In-Progress, the final picture will be something more aking to `install eigen_robots[husky,franka]; install eigen_sensors[...]` with an implicit dependency on famework. In another words, optional dependencies get grouped and abstracted away once more, similar to the `--dev` dependency group. `eigen_robotics` and the `/src/eigen_robotics/__init__.py` is a stub to glue all of this together for now, it might have more meaningful uses later or we find a way to get rid of it
 
 ### Install all capabilities
 

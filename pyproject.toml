@@ -1,5 +1,5 @@
 [project]
-name = "eigen-monster"
+name = "eigen-robotics"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -25,7 +25,7 @@ dev = [
 # or
 # --extra ml
 # or
-# ? install eigen_monster[default]
+# ? install eigen_robotics[default]
 # etc.
 [project.optional-dependencies]
 robots = ["eigen-robots"]
@@ -34,7 +34,7 @@ ml = ["eigen-ml"]
 alia = ["eigen-alia"]
 sim-pybullet-gui = ["eigen-framework[sim-pybullet-gui]"]
 sim-pybullet-headless = ["eigen-framework[sim-pybullet-headless]"]
-default = ["eigen_framework[default]", "eigen_ml[jupyter]", "eigen_monster[sensors, robots, alia]"]
+default = ["eigen_framework[default]", "eigen_ml[jupyter]", "eigen_robotics[sensors, robots, alia]"]
 
 [tool.uv]
 conflicts = [[{ extra = "default" }, { extra = "sim-pybullet-headless" }]]
