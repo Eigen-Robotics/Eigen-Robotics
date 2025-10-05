@@ -3,15 +3,12 @@ from enum import Enum
 from typing import Any
 
 import numpy as np
+import sys
+import argparse
 
 # from viper_300s_driver import Viper300sDriver
 from eigen.core.client.comm_infrastructure.base_node import main
 from eigen.core.system.component.robot import Robot
-from eigen.core.system.component_registry import (
-    ComponentSpec,
-    ComponentType,
-    _register_default_component,
-)
 from eigen.core.system.driver.robot_driver import RobotDriver
 from eigen.core.tools.log import log
 from eigen.sim.pybullet.pybullet_robot_driver import BulletRobotDriver
@@ -23,17 +20,13 @@ from eigen.types import (
 )
 from eigen.types.utils import pack, unpack
 
+from .so100_driver import SO100Driver
 
 @dataclass
 class Drivers(Enum):
     PYBULLET_DRIVER = BulletRobotDriver
+    DRIVER = SO100Driver
 
-
-@_register_default_component(
-    ComponentSpec(
-        component_type=ComponentType.ROBOT, id="franka-base", is_driver=False
-    )
-)
 class SO100(Robot):
     """SO100 robot component.
 
@@ -150,12 +143,21 @@ class SO100(Robot):
             "name": name,
         }
 
-
-CONFIG_PATH = "so-100.yaml"
 if __name__ == "__main__":
-    name = "Franka"
-    # TODO(FV): review, had to import again here
-    from eigen.robots.franka_panda.franka_driver import FrankaResearch3Driver
+    # sys.argv[0] is the script name, the rest are arguments
+    p = argparse.ArgumentParser()
+    p.add_argument("--name", type=str, default="so100", help="Name of the robot")
+    p.add_argument(
+        "--config",
+        type=str,
+        default="so-100.yaml",
+        help="Path to the robot configuration file",
+    )
+    args = p.parse_args()
+    name = args.name
+    config_path = args.config
 
-    driver = FrankaResearch3Driver(name, CONFIG_PATH)
-    main(FrankaPanda, name, CONFIG_PATH, driver)
+    driver = SO100Driver(name, config_path)
+    main(SO100, name, config_path, driver)
+
+

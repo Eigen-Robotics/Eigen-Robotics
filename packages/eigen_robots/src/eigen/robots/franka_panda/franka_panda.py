@@ -7,11 +7,6 @@ import numpy as np
 # from viper_300s_driver import Viper300sDriver
 from eigen.core.client.comm_infrastructure.base_node import main
 from eigen.core.system.component.robot import Robot
-from eigen.core.system.component_registry import (
-    ComponentSpec,
-    ComponentType,
-    _register_default_component,
-)
 from eigen.core.system.driver.robot_driver import RobotDriver
 from eigen.core.tools.log import log
 from eigen.robots.franka_panda.franka_pybullet_driver import FrankaPyBulletDriver
@@ -23,26 +18,19 @@ from eigen.types import (
 )
 from eigen.types.utils import pack, unpack
 
+try:
+    from eigen.robots.franka_panda.franka_driver import FrankaResearch3Driver
+    HAS_REAL_DRIVER = True
+except ImportError:
+    HAS_REAL_DRIVER = False
+
 
 @dataclass
 class Drivers(Enum):
     PYBULLET_DRIVER = FrankaPyBulletDriver
-
-    try:
-        from eigen.robots.franka_panda.franka_driver import FrankaResearch3Driver
-
-        DRIVER = FrankaResearch3Driver
-    except ImportError:
-        log.warn(
-            "FrankaResearch3Driver is failing, OS might be incompatible with the Real Franka Panda Robot"
-        )
+    DRIVER = FrankaResearch3Driver if HAS_REAL_DRIVER else None
 
 
-@_register_default_component(
-    ComponentSpec(
-        component_type=ComponentType.ROBOT, id="franka-base", is_driver=False
-    )
-)
 class FrankaPanda(Robot):
     """Franka Panda robot component.
 
