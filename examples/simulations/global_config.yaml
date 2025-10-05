@@ -39,11 +39,11 @@ objects:
       base_orientation: [0.0, 0.0, 0.0, 1.0]
 
 robots: 
-  - name: "Franka"
+  - name: "SO100"
     config:
       source: "urdf"
-      urdf_path: "panda_with_gripper.urdf"
-      class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/packages/eigen_robots/src/eigen/robots/franka_panda"
+      urdf_path: "SO100/so100.urdf"
+      class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/packages/eigen_robots/src/eigen/robots/SO-100"
       frequency: 240  # Control frequency in Hz
       base_position:
         - 0
@@ -56,13 +56,9 @@ robots:
         - 1
       use_fixed_base: true
       initial_configuration:  # Starting joint angles
-        - 0.0002
-        - 0.6739
-        - 0.0006
-        - -2.6541
-        - 0.0021
-        - 3.3288
-        - -0.7869
+        - 0
+        - 0
+        - 0
         - 0
         - 0
         - 0

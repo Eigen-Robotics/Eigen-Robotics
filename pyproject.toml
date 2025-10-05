@@ -32,13 +32,8 @@ robots = ["eigen-robots"]
 sensors = ["eigen-sensors"]
 ml = ["eigen-ml"]
 alia = ["eigen-alia"]
-sim-pybullet-gui = ["eigen-framework[sim-pybullet-gui]"]
-sim-pybullet-headless = ["eigen-framework[sim-pybullet-headless]"]
+pybullet = ["eigen-framework[pybullet]"]
 default = ["eigen_framework[default]", "eigen_ml[jupyter]", "eigen_robotics[sensors, robots, alia]"]
-
-[tool.uv]
-conflicts = [[{ extra = "default" }, { extra = "sim-pybullet-headless" }]]
-
 [build-system]
 requires = ["uv_build>=0.8.8,<0.9.0"]
 build-backend = "uv_build"

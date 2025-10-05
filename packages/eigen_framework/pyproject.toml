@@ -27,9 +27,8 @@ dependencies = [
 dev = ["ruff>=0.12.8", "wheel>=0.45.1"]
 
 [project.optional-dependencies]
-default = ["eigen_framework[sim-pybullet-gui, jupyter, cli]"]
-sim-pybullet-gui = ["pybullet==3.2.7", "opencv-python>=4.8.1.78"]
-sim-pybullet-headless = ["pybullet==3.2.7", "opencv-python-headless>=4.8.1.78"]
+default = ["eigen_framework[pybullet, jupyter, cli]"]
+pybullet = ["pybullet==3.2.7", "opencv-python>=4.8.1.78"]
 jupyter = [
     "ipython>=8.37.0",
 ]
@@ -39,12 +38,6 @@ cli = [
 ]
 
 [tool.uv]
-conflicts = [
-  [
-    { extra = "sim-pybullet-gui" },
-    { extra = "sim-pybullet-headless" },
-  ],
-]
 environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
 
 
