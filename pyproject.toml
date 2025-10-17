@@ -20,6 +20,11 @@ dev = [
   "ruff>=0.12.8",
 ]
 
+[project.urls]
+Homepage = "https://github.com/Eigen-Robotics/Eigen-Robotics"
+Repository = "https://github.com/Eigen-Robotics/Eigen-Robotics"
+Issues = "https://github.com/Eigen-Robotics/Eigen-Robotics/issues"
+
 # These become the package's extras
 # --extra default
 # or
