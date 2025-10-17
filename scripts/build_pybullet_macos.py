@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # /// script
-# requires-python = ">=3.10"
+# requires-python = ">=3.11,<3.12"
 # dependencies = [
 #     "setuptools",
 #     "wheel",
@@ -21,7 +21,7 @@ import tempfile
 import urllib.request
 
 WHEELS_CACHE_DIR_PATH = Path(".wheels")
-PROJECT_TOML_PATH = Path("packages/ark_framework/pyproject.toml")
+PROJECT_TOML_PATH = Path("packages/eigen_framework/pyproject.toml")
 
 
 # This prevents package managers from failing reinstalling attempts that
@@ -314,24 +314,45 @@ def patch_zlib_header(bullet_dir: Path) -> None:
     print("✓ Patched zlib header")
 
 
-def check_existing_wheel(version: str) -> str | None:
-    """Check if a wheel for the given version already exists.
+def _current_wheel_tags() -> tuple[str, str, str]:
+    """Return (py_tag, abi_tag, platform_tag) for current interpreter.
 
-    Returns the wheel filename if it exists, None otherwise.
+    Example: ("cp310", "cp310", "macosx_14_0_arm64")
+    """
+    import distutils.util as du  # stdlib
+
+    py_tag = f"cp{sys.version_info.major}{sys.version_info.minor}"
+    abi_tag = py_tag  # PyBullet builds a CPython abi-specific wheel
+    plat = du.get_platform().replace("-", "_").replace(".", "_")
+    return py_tag, abi_tag, plat
+
+
+def check_existing_wheel(version: str) -> str | None:
+    """Return a cached wheel filename matching version AND current tags.
+
+    Matches py tag, abi tag, and platform tag to avoid incompatible reuse.
     """
     if not WHEELS_CACHE_DIR_PATH.exists():
         return None
 
-    # Look for existing wheels matching the version pattern
-    # PyBullet wheels typically follow pattern: pybullet-{version}-{python_tag}-{abi_tag}-{platform_tag}.whl
-    pattern = f"pybullet-{version}-*.whl"
-    existing_wheels = list(WHEELS_CACHE_DIR_PATH.glob(pattern))
+    py_tag, abi_tag, plat_tag = _current_wheel_tags()
+    pattern = f"pybullet-{version}-{py_tag}-{abi_tag}-{plat_tag}.whl"
+    exact = list(WHEELS_CACHE_DIR_PATH.glob(pattern))
+    if exact:
+        print(f"✅ Compatible wheel found: {exact[0].name}")
+        return exact[0].name
 
-    if existing_wheels:
-        wheel_file = existing_wheels[0]
-        print(f"✅ Wheel already exists: {wheel_file.name}")
-        return wheel_file.name
-
+    # If there's a wheel with the version but mismatched tags, surface why
+    any_version = sorted(WHEELS_CACHE_DIR_PATH.glob(f"pybullet-{version}-*.whl"))
+    if any_version:
+        print(
+            "⚠️  Found cached wheel(s) for version but tags don't match current interpreter/platform:"
+        )
+        for wf in any_version:
+            print(f"   - {wf.name}")
+        print(
+            f"   Wanted: pybullet-{version}-{py_tag}-{abi_tag}-{plat_tag}.whl (will rebuild)"
+        )
     return None
 
 
@@ -341,9 +362,7 @@ def update_pyproject_sources(wheel_filename: str) -> None:
         with PROJECT_TOML_PATH.open("r") as f:
             content = f.read()
 
-        framework_relative_wheel_path = (
-            "../../" / WHEELS_CACHE_DIR_PATH / wheel_filename
-        )
+        framework_relative_wheel_path = str(Path("../../") / WHEELS_CACHE_DIR_PATH / wheel_filename)
         new_source_line = f'pybullet = {{ path = "{framework_relative_wheel_path}", marker = "sys_platform == \'darwin\'" }}'
 
         # Replace or add the [tool.uv.sources] section
@@ -382,11 +401,50 @@ def update_pyproject_sources(wheel_filename: str) -> None:
         with PROJECT_TOML_PATH.open("w") as f:
             f.write(content)
 
-        print(
-            f"✓ Updated {PROJECT_TOML_PATH.name} sources with: {framework_relative_wheel_path}"
-        )
+        print(f"✓ Updated {PROJECT_TOML_PATH.name} sources with: {framework_relative_wheel_path}")
     except Exception as e:
         print(f"⚠️  Failed to update {PROJECT_TOML_PATH.name}: {e}")
+
+
+def remove_pyproject_pybullet_source() -> None:
+    """Remove any existing pybullet entry from [tool.uv.sources].
+
+    This avoids stale, incompatible wheel paths breaking installation when
+    a rebuild is required but fails. Only manipulates lines within the
+    [tool.uv.sources] section.
+    """
+    try:
+        if not PROJECT_TOML_PATH.exists():
+            return
+
+        with PROJECT_TOML_PATH.open("r") as f:
+            lines = f.read().splitlines()
+
+        out: list[str] = []
+        in_sources = False
+        removed = False
+        for line in lines:
+            stripped = line.strip()
+            if stripped == "[tool.uv.sources]":
+                in_sources = True
+                out.append(line)
+                continue
+            if in_sources and stripped.startswith("[") and not stripped.startswith("[tool.uv.sources]"):
+                in_sources = False
+                out.append(line)
+                continue
+            if in_sources and stripped.startswith("pybullet") and "=" in stripped:
+                removed = True
+                # skip this line (remove stale pybullet source)
+                continue
+            out.append(line)
+
+        if removed:
+            with PROJECT_TOML_PATH.open("w") as f:
+                f.write("\n".join(out) + "\n")
+            print(f"✓ Removed stale pybullet source from {PROJECT_TOML_PATH.name}")
+    except Exception as e:
+        print(f"⚠️  Failed to clean {PROJECT_TOML_PATH.name}: {e}")
 
 
 def build_pybullet_wheel() -> None:
@@ -394,10 +452,13 @@ def build_pybullet_wheel() -> None:
     print("🚀 Building PyBullet from source...")
     setup_reproducible_environment()
 
+    # Ensure we don't keep a stale source override around
+    remove_pyproject_pybullet_source()
+    
     # Determine which version to build
     required_version = get_required_pybullet_version()
     if required_version:
-        # Check if wheel already exists
+        # Check if wheel already exists and is compatible
         existing_wheel = check_existing_wheel(required_version)
         if existing_wheel:
             update_pyproject_sources(existing_wheel)
@@ -407,7 +468,6 @@ def build_pybullet_wheel() -> None:
     else:
         branch_or_tag = "master"
         print("📋 Using master branch (no version specified)")
-
     # Create wheels directory
     WHEELS_CACHE_DIR_PATH.mkdir(exist_ok=True)
 
@@ -462,20 +522,27 @@ def build_pybullet_wheel() -> None:
         print(f"   CPPFLAGS: {env['CPPFLAGS']}")
 
         print("🔨 Building PyBullet wheel...")
-        result = run_command(
-            ["python", "setup.py", "bdist_wheel"],
-            cwd=bullet_dir,
-            check=False,
-            env=env,
-        )
-
-        if result.returncode != 0:
-            print("❌ Build failed. Trying with verbose output...")
-            run_command(
-                ["python", "setup.py", "bdist_wheel", "--verbose"],
+        try:
+            # Build with the same interpreter running this script to ensure
+            # the wheel's Python/ABI tag matches (e.g., cp311 on Python 3.11).
+            result = run_command(
+                [sys.executable, "setup.py", "bdist_wheel"],
                 cwd=bullet_dir,
+                check=False,
                 env=env,
             )
+
+            if result.returncode != 0:
+                print("❌ Build failed. Trying with verbose output...")
+                run_command(
+                    [sys.executable, "setup.py", "bdist_wheel", "--verbose"],
+                    cwd=bullet_dir,
+                    env=env,
+                )
+        except Exception as e:
+            print(f"❌ Build raised an exception: {e}")
+            print("⚠️  Leaving pyproject without a stale pybullet source override.")
+            raise
 
         # Find the built wheel
         dist_dir = bullet_dir / "dist"

@@ -6,10 +6,10 @@ class TestRobotIntegration:
 
     def test_types_import(self):
         """Test that robot package imports work correctly."""
-        import ark.types  # noqa: F401
+        import eigen.types  # noqa: F401
 
     def test_generated_types_have_encode_decode(self):
-        from ark.types import generated
+        from eigen.types import generated
 
         for i in dir(generated):
             # Enumerate all generated types

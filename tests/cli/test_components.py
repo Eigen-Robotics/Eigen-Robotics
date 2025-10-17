@@ -2,15 +2,15 @@
 
 from typer.testing import CliRunner
 
-from ark.cli.components import app
-from ark.core.system.component_registry import (
+from eigen.cli.components import app
+from eigen.core.system.component_registry import (
     ComponentSpec,
     ComponentType,
     _component_registry,
     _register_default_component,
     register_component,
 )
-from ark.core.system.driver import RobotDriver, SensorDriver
+from eigen.core.system.driver import RobotDriver, SensorDriver
 
 
 class TestComponentsCLI:

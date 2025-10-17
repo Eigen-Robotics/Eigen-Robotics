@@ -1,0 +1,12 @@
+package eigen.types.generated;
+
+struct grid_config_t {
+    // World-space bounds of the grid along the X axis: [min_x, max_x]
+    float x_bounds[2];
+
+    // World-space bounds of the grid along the Y axis: [min_y, max_y]
+    float y_bounds[2];
+
+    // Side length of each square grid cell, in world units
+    float grid_size;
+}

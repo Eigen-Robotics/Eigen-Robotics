@@ -13,7 +13,7 @@ Ruff formatter automatically fixes code style issues. It handles spacing, indent
 uv run ruff format .
 
 # Format specific files
-uv run ruff format ark/system/component/robot.py
+uv run ruff format eigen/system/component/robot.py
 
 # Check formatting without applying changes
 uv run ruff format --check .
@@ -24,10 +24,10 @@ uv run ruff format --diff .
 
 ## Configuration
 
-ARK uses a dedicated `.ruff.toml` configuration file:
+EIGEN uses a dedicated `.ruff.toml` configuration file:
 
 ```toml
-# Ruff configuration for ARK robotics framework
+# Ruff configuration for EIGEN robotics framework
 line-length = 80
 indent-width = 4
 target-version = "py310"
@@ -64,7 +64,7 @@ ignore = [
 ]
 
 [lint.isort]
-known-first-party = ["ark", "arktypes"]
+known-first-party = ["eigen", "eigentypes"]
 known-third-party = [
     "numpy", "scipy", "matplotlib", "cv2", "pybullet",
     "torch", "tensorflow", "gym", "typing_extensions",
@@ -88,7 +88,7 @@ def func(a,
         c):
   return a + b + c
 
-# After (ARK uses 4-space indentation)
+# After (EIGEN uses 4-space indentation)
 def func(a,
          b,
          c):
@@ -353,7 +353,7 @@ For semantic workspace structure:
 uv run ruff format packages/
 
 # Format specific package
-uv run ruff format packages/ark_robots/
+uv run ruff format packages/eigen_robots/
 
 # Check all packages
 find packages/ -name "*.py" -exec ruff format --check {} +

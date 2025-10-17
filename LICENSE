@@ -1,0 +1,32 @@
+Eigen Robotics Academic License (ERAL) v1.0
+==========================================
+
+Copyright (c) 2025 Eigen Robotics
+
+1. Grant of Rights
+   a. You may use, reproduce, and modify the Software solely for non-commercial academic research, teaching, or personal educational purposes.
+   b. You may distribute the Software, or modifications thereof, only to students, faculty, or staff of an accredited academic institution, provided that this License accompanies all such distributions.
+
+2. Restrictions
+   a. Commercial Use Prohibited. The Software may not be used, in whole or in part, for any commercial purpose. “Commercial purpose” includes any use by or for the benefit of a for-profit entity, any organization engaged in commercial activity, or any use intended for revenue generation or commercial advantage.
+   b. Company Use Prohibited. The Software may not be used by any corporation, limited liability company, partnership, or other for-profit organization, regardless of whether the use is commercial in nature.
+   c. No sublicensing. You may not sublicense the Software or grant any rights under this License to third parties other than as expressly permitted in Section 1(b).
+
+3. Attribution
+   You must retain all copyright notices and attribution statements in the Software and any copies or substantial portions of the Software. Publications or presentations that result from use of the Software must acknowledge “Eigen Robotics”.
+
+4. No Trademark License
+   This License does not grant permission to use the trade names, trademarks, service marks, or product names of Eigen Robotics, except as required to comply with Section 3.
+
+5. Termination
+   Any breach of this License automatically terminates the rights granted herein. Upon termination, you must cease all use and distribution of the Software and destroy all copies in your possession or control.
+
+6. Disclaimer of Warranty
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+7. Limitation of Liability
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL EIGEN ROBOTICS OR ITS CONTRIBUTORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES ARISING OUT OF OR RELATING TO THIS SOFTWARE OR THIS LICENSE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+8. Governing Law
+   This License is governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law principles.
+
