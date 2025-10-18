@@ -17,7 +17,7 @@ else
 endif
 endif
 	@echo "📦 Installing dependencies with uv..."
-	@uv sync --extra default
+	@uv sync
 	@echo "Installing lcm types..."
 	@uv run lcm-gen -p --ppath $(EIGEN_TYPE_DESTINATION) $(EIGEN_TYPE_DEFS)/*
 	@rm -f "packages/eigen_framework/src/eigen/__init__.py"

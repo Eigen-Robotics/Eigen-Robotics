@@ -1,16 +1,19 @@
 [project]
 name = "eigen-robotics"
-version = "0.1.10"
-description = "Add your description here"
+version = "0.1.11a1"
+description = "A Python First Robotics Framework"
 readme = "README.md"
 authors = [{ name = "Sarthak Das", email = "sdas@icloud.com" }]
 requires-python = "==3.11.*"
+dependencies = [
+  # make all subpackages compulsory
+  "eigen-framework[pybullet]",
+  "eigen-robots",
+  "eigen-sensors",
+  "eigen-ml",
+  "eigen-alia",
+]
 
-# These are not included in packages, meant for non-package projects (usecase, testing, etc.)
-# --dev = --group dev (special)
-# otherwise
-# --group <group_name>
-# etc.
 [dependency-groups]
 dev = [
   "pre-commit>=4.3.0",
@@ -24,20 +27,8 @@ Homepage = "https://github.com/Eigen-Robotics/Eigen-Robotics"
 Repository = "https://github.com/Eigen-Robotics/Eigen-Robotics"
 Issues = "https://github.com/Eigen-Robotics/Eigen-Robotics/issues"
 
-# These become the package's extras
-# --extra default
-# or
-# --extra ml
-# or
-# ? install eigen_robotics[default]
-# etc.
-[project.optional-dependencies]
-robots = ["eigen-robots"]
-sensors = ["eigen-sensors"]
-ml = ["eigen-ml"]
-alia = ["eigen-alia"]
-pybullet = ["eigen-framework[pybullet]"]
-default = ["eigen_framework[default]", "eigen_ml[jupyter]", "eigen_robotics[sensors, robots, alia]"]
+# 🚫 remove the whole [project.optional-dependencies] section
+
 [build-system]
 requires = ["uv_build>=0.8.8,<0.9.0"]
 build-backend = "uv_build"

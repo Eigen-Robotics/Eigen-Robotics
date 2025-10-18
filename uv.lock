@@ -282,30 +282,10 @@ name = "eigen-robotics"
 version = "0.1.10"
 source = { editable = "." }
 dependencies = [
-    { name = "eigen-framework" },
-]
-
-[package.optional-dependencies]
-alia = [
     { name = "eigen-alia" },
-]
-default = [
-    { name = "eigen-alia" },
-    { name = "eigen-framework", extra = ["default"] },
-    { name = "eigen-ml", extra = ["jupyter"] },
-    { name = "eigen-robots" },
-    { name = "eigen-sensors" },
-]
-ml = [
-    { name = "eigen-ml" },
-]
-pybullet = [
     { name = "eigen-framework", extra = ["pybullet"] },
-]
-robots = [
+    { name = "eigen-ml" },
     { name = "eigen-robots" },
-]
-sensors = [
     { name = "eigen-sensors" },
 ]
 
@@ -319,17 +299,12 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "eigen-alia", marker = "extra == 'alia'", editable = "packages/eigen_alia" },
-    { name = "eigen-framework", editable = "packages/eigen_framework" },
-    { name = "eigen-framework", extras = ["default"], marker = "extra == 'default'", editable = "packages/eigen_framework" },
-    { name = "eigen-framework", extras = ["pybullet"], marker = "extra == 'pybullet'", editable = "packages/eigen_framework" },
-    { name = "eigen-ml", marker = "extra == 'ml'", editable = "packages/eigen_ml" },
-    { name = "eigen-ml", extras = ["jupyter"], marker = "extra == 'default'", editable = "packages/eigen_ml" },
-    { name = "eigen-robotics", extras = ["sensors", "robots", "alia"], marker = "extra == 'default'" },
-    { name = "eigen-robots", marker = "extra == 'robots'", editable = "packages/eigen_robots" },
-    { name = "eigen-sensors", marker = "extra == 'sensors'", editable = "packages/eigen_sensors" },
+    { name = "eigen-alia", editable = "packages/eigen_alia" },
+    { name = "eigen-framework", extras = ["pybullet"], editable = "packages/eigen_framework" },
+    { name = "eigen-ml", editable = "packages/eigen_ml" },
+    { name = "eigen-robots", editable = "packages/eigen_robots" },
+    { name = "eigen-sensors", editable = "packages/eigen_sensors" },
 ]
-provides-extras = ["robots", "sensors", "ml", "alia", "pybullet", "default"]
 
 [package.metadata.requires-dev]
 dev = [
