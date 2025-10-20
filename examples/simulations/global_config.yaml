@@ -43,7 +43,7 @@ robots:
     config:
       source: "urdf"
       urdf_path: "SO100/so100.urdf"
-      class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/packages/eigen_robots/src/eigen/robots/SO-100"
+      class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/src/eigen/robots/so100"
       frequency: 240  # Control frequency in Hz
       base_position:
         - 0

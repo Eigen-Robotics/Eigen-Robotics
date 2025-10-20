@@ -1,56 +1,59 @@
 [project]
-name = "eigen-robotics"
-version = "0.1.11a2"
-description = "A Python First Robotics Framework"
+name = "eigen-robotics"                     # <— PyPI distribution name
+version = "0.1.11a3"
+description = "A Python-first robotics framework (framework, robots, sensors) in one package."
 readme = "README.md"
-authors = [{ name = "Sarthak Das", email = "sdas@icloud.com" }]
-requires-python = "==3.11.*"
+requires-python = ">=3.11,<3.12"            # match your target exactly if needed
+authors = [{ name = "Sarthak Das", email = "sdas4@icloud.com" }]
+license = { file = "LICENSE" }
+keywords = ["robotics", "ml", "framework"]
+
+# Runtime deps shared by everything
 dependencies = [
-  # make all subpackages compulsory
-  "eigen-framework",
-  "eigen-robots",
-  "eigen-sensors",
-  "eigen-ml",
-  "eigen-alia",
+    # e.g. "numpy>=1.26", "pydantic>=2", ...
+    "ipython>=8.26",
+    "numpy==1.25",
+    "opencv-python>=4.10",
+    "pandas>=2.2",
+    "pillow>=10.4",
+    "pydantic>=2",
+    "scipy>=1.11",
+    "matplotlib>=3.8",
+    "tqdm>=4.66",
+    "rich>=13.5",
+    "typer>=0.9",
+    "graphviz>=0.21",
+    "lcm>=1.5.1",
+    "pyyaml>=6.0",
 ]
 
-[dependency-groups]
-dev = [
-  "pre-commit>=4.3.0",
-  "pytest>=8.4.1",
-  "pytest-cov>=6.2.1",
-  "ruff>=0.12.8",
-]
+[project.scripts]
+eigen = "eigen.framework.cli.main:app"
+
+# Optional extras (install-time feature flags for external deps; code is already included)
+[project.optional-dependencies]
+pybullet = ["pybullet>=3.2.5"]
+genesis  = ["genesis-world>=0.0.0"]            # replace with real package when ready
+dev = ["pytest>=8", "pytest-cov>=6", "ruff>=0.5", "pre-commit>=4"]
 
 [project.urls]
 Homepage = "https://github.com/Eigen-Robotics/Eigen-Robotics"
 Repository = "https://github.com/Eigen-Robotics/Eigen-Robotics"
 Issues = "https://github.com/Eigen-Robotics/Eigen-Robotics/issues"
 
-# 🚫 remove the whole [project.optional-dependencies] section
-
 [build-system]
-requires = ["uv_build>=0.8.8,<0.9.0"]
-build-backend = "uv_build"
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.uv.workspace]
-members = ["packages/*"]
+# Tell setuptools to use src/ layout and include all subpackages under eigen/*
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["eigen*"]
 
+# If you ship non-.py files:
+# [tool.setuptools.package-data]
+# "eigen*" = ["py.typed", "*.json", "assets/**/*"]
 
-[tool.uv.sources]
-eigen-alia = { workspace = true }
-eigen-framework = { workspace = true }
-eigen-sensors = { workspace = true }
-eigen-robots = { workspace = true }
-eigen-ml = { workspace = true }
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = ["--strict-markers", "--disable-warnings", "-v"]
-markers = [
-  "slow: marks tests as slow",
-  "integration: marks tests as integration tests",
-]
+# If your README is Markdown:
+[tool.setuptools]
+zip-safe = false
