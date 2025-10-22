@@ -1,0 +1,101 @@
+simulator:
+  name: "my_first_simulator"              # A unique name for your simulator node
+  backend_type: "genesis"                # The physics engine we're using
+  node_frequency: 240                     # How often your node's step() function runs (Hz)
+  config:
+    connection_mode: "GUI"                # GUI for visual interface, DIRECT for headless mode
+    gravity:                              # Gravity vector [x, y, z] in m/s²
+      - 0
+      - 0
+      - -9.81                             # Standard Earth gravity
+    sim_frequency: 240                    # Physics simulation steps per second
+  save_render: 
+    save_path: "render"                   # Directory where rendered frames will be saved
+    remove_existing: false                # Whether to clean the directory before starting
+    render_interval: 0.1                  # Save a frame every 0.1 seconds (10 FPS)
+    overwrite_file: true                  # Overwrite existing files instead of creating new ones
+
+objects:
+  - name: "floor"
+    config:
+      source: "primitive"
+      publish_ground_truth: False
+
+      visual:
+        shape_type: "GEOM_BOX"
+        visual_shape:
+          halfExtents: [1, 1, 0.1]
+          rgbaColor: [1.0, 0.0, 0.5, 1.0]  # Pink
+
+      collision:
+        shape_type: "GEOM_BOX"
+        collision_shape:
+          halfExtents: [1, 1, 0.1]
+
+      multi_body:
+        baseMass: 0  # Static object
+
+      base_position: [0.0, 0.0, 0.0]
+      base_orientation: [0.0, 0.0, 0.0, 1.0]
+
+# sensors: 
+#   - name: "Camera"
+#     config:
+#       class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/src/eigen/sensors/camera"        # Directory where the class is located
+#       type: "Camera"
+#       camera_type: "fixed"
+#       frequency: 30        # default 30
+#       width: 640           # default 640
+#       height: 480          # default 480
+#       streams:
+#         color:
+#           enable: True
+#           format: "bgr8"
+#         depth:
+#           enable: True
+#           format: "z16"
+#       sim_config:
+#         visualize: True
+#         fov: 60                          # default 60
+#         near_val: 0.1                              # default 0.1
+#         far_val: 100.0                             # default 100.0
+#         fix:
+#           camera_target_position: [0, 0, 0.1]
+#           distance: 0.75
+#           yaw: 90.0
+#           pitch: 0.0
+#           roll: 0.0
+#           up_axis_index: 2
+
+robots: 
+  - name: "SO100"
+    config:
+      source: "urdf"
+      urdf_path: "SO100/so100.urdf"
+      class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/src/eigen/robots/so100"
+      frequency: 240  # Control frequency in Hz
+      base_position:
+        - 0
+        - 0
+        - 0.2
+      base_orientation:  # Quaternion (x, y, z, w)
+        - 0
+        - 0
+        - 0
+        - 1
+      use_fixed_base: true
+      initial_configuration:  # Starting joint angles
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      joint_names:
+        - "shoulder_pan"
+        - "shoulder_lift"
+        - "elbow_flex"
+        - "wrist_flex"
+        - "wrist_roll"
+        - "gripper"
+      

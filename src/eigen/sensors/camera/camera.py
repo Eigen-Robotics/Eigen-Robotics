@@ -15,7 +15,10 @@ from eigen.types import (
 )
 from eigen.types.utils import pack, unpack
 
-from .camera_driver import CameraDriver
+try:
+    from .camera_driver import CameraDriver
+except ImportError as e:
+    from camera_driver import CameraDriver
 
 class Drivers(Enum):
     PYBULLET_DRIVER = "eigen.sim.pybullet.pybullet_camera_driver:BulletCameraDriver"

@@ -204,13 +204,10 @@ class PyBulletBackend(SimulatorBackend):
         if class_path.is_file():
             class_path = class_path.parent
 
-        SensorClass, DriverClass = import_class_from_directory(class_path)
-        DriverClass = DriverClass.value
+        SensorClass, DriverClass = import_class_from_directory(class_path, backend="pybullet")
 
         attached_body_id = None
         if sensor_config["sim_config"].get("attach", None):
-
-            print(self.global_config["objects"].keys())
             # search through robots and objects to find attach link if needed
             if (
                 sensor_config["sim_config"]["attach"]["parent_name"]
