@@ -11,14 +11,15 @@ from abc import ABC, abstractmethod
 import os
 from pathlib import Path
 from typing import Any
-
+import traceback
+import threading
 import yaml
+import sys
 
 from eigen.core.client.comm_infrastructure.base_node import BaseNode
 from eigen.core.tools.log import log
-from eigen.sim.pybullet.pybullet_backend import PyBulletBackend
 from eigen.types import flag_t
-
+from eigen.core.utils.utils import ConfigPath
 
 class SimulatorNode(BaseNode, ABC):
     """Base class for simulator nodes.
@@ -56,9 +57,14 @@ class SimulatorNode(BaseNode, ABC):
         # Setup backend
         self.backend_type = self.global_config["simulator"]["backend_type"]
         if self.backend_type == "pybullet":
+            from eigen.sim.pybullet.pybullet_backend import PyBulletBackend
             self.backend = PyBulletBackend(self.global_config)
         elif self.backend_type == "mujoco":
-            raise NotImplementedError
+            from eigen.sim.mujoco.mujoco_backend import MujocoBackend
+            self.backend = MujocoBackend(self.global_config)
+        elif self.backend_type == "genesis":
+            from eigen.sim.genesis.genesis_backend import GenesisBackend
+            self.backend = GenesisBackend(self.global_config)
         else:
             raise ValueError(f"Unsupported backend '{self.backend_type}'")
 
@@ -67,14 +73,13 @@ class SimulatorNode(BaseNode, ABC):
 
         ## Reset Backend Service
         reset_service_name = self.name + "/backend/reset/sim"
-        self.create_service(
-            reset_service_name, flag_t, flag_t, self._reset_backend
-        )
+        self.create_service(reset_service_name, flag_t, flag_t, self._reset_backend)
 
-        freq = self.global_config["simulator"]["config"].get(
-            "node_frequency", 240.0
-        )
-        self.create_stepper(freq, self._step_simulation)
+        freq = self.global_config["simulator"]["config"].get("node_frequency", 240.0)
+        # self.create_stepper(freq, self._step_simulation)
+
+        self.spin_thread = threading.Thread(target=self.spin, daemon=True)
+        self.spin_thread.start()
 
     def _load_config(self, global_config) -> None:
         """!Load and merge the global configuration.
@@ -91,59 +96,55 @@ class SimulatorNode(BaseNode, ABC):
             raise ValueError("Please provide a global configuration file.")
 
         if isinstance(global_config, str):
-            global_config = Path(global_config)
-
+            global_config = ConfigPath(global_config)
+        elif isinstance(global_config, Path):
+            global_config = ConfigPath(str(global_config))
         if not global_config.exists():
             raise ValueError(
                 "Given configuration file path does not exist, currently: "
-                + str(global_config)
+                + global_config.str
             )
 
         if not global_config.is_absolute():
             global_config = global_config.resolve()
 
-        config_path = str(global_config)
-        # TODO(FV): review, remova noqa
-        with open(config_path, "r") as file:  # noqa: PTH123, UP015
-            cfg = yaml.safe_load(file)
+        cfg = global_config.read_yaml()
 
         # assert that the config is a dict
         if not isinstance(cfg, dict):
-            raise ValueError(
-                "The configuration file must be a valid dictionary."
-            )
+            raise ValueError("The configuration file must be a valid dictionary.")
 
         # merge with subconfigs
         config = {}
         try:
             config["network"] = cfg["network"]
-        except KeyError:
+        except KeyError as e:
             config["network"] = None
         try:
             config["simulator"] = cfg["simulator"]
         except KeyError as e:
             raise ValueError(
                 "Please provide at least name and backend_type under simulation in your config file."
-            ) from e
+            )
 
         try:
-            config["robots"] = self._load_section(cfg, config_path, "robots")
-        except KeyError:
+            config["robots"] = self._load_section(cfg, global_config, "robots")
+        except KeyError as e:
             config["robots"] = {}
         try:
-            config["sensors"] = self._load_section(cfg, config_path, "sensors")
-        except KeyError:
+            config["sensors"] = self._load_section(cfg, global_config, "sensors")
+        except KeyError as e:
             config["sensors"] = {}
         try:
-            config["objects"] = self._load_section(cfg, config_path, "objects")
-        except KeyError:
+            config["objects"] = self._load_section(cfg, global_config, "objects")
+        except KeyError as e:
             config["objects"] = {}
 
-        log.ok("Config file under " + config_path + " loaded successfully.")
+        log.ok("Config file under " + global_config.str + " loaded successfully.")
         self.global_config = config
 
     def _load_section(
-        self, cfg: dict[str, Any], config_path: str, section_name: str
+        self, cfg: dict[str, Any], config_path: str | ConfigPath, section_name: str
     ) -> dict[str, Any]:
         """!Load a sub‑configuration section.
 
@@ -166,19 +167,12 @@ class SimulatorNode(BaseNode, ABC):
             elif isinstance(item, str) and item.endswith(
                 ".yaml"
             ):  # If it's a path to an external file
-                # TODO(FV): review, remova noqa
-                if os.path.isabs(  # noqa: PTH117
-                    item
-                ):  # Check if the path is absolute  # noqa: PTH117
-                    external_path = item
+                if os.path.isabs(item):  # Check if the path is absolute
+                    external_path = ConfigPath(item)
                 else:  # Relative path, use the directory of the main config file
-                    external_path = os.path.join(  # noqa: PTH118
-                        os.path.dirname(config_path),  # noqa: PTH120
-                        item,  # noqa: PTH120
-                    )
+                    external_path = config_path.parent / item
                 # Load the YAML file and return its content
-                with open(external_path, "r") as file:  # noqa: PTH123, UP015
-                    subconfig = yaml.safe_load(file)
+                subconfig = external_path.read_yaml()
             else:
                 log.error(
                     f"Invalid entry in '{section_name}': {item}. Please provide either a config or a path to another config."
@@ -230,3 +224,38 @@ class SimulatorNode(BaseNode, ABC):
         """!Shut down the node and the underlying backend."""
         self.backend.shutdown_backend()
         super().kill_node()
+
+def main(node_cls: type[SimulatorNode], *args) -> None:
+    """!
+    Initializes and runs a node.
+
+    This function creates an instance of the specified `node_cls`, spins the node to handle messages,
+    and handles exceptions that occur during the node's execution.
+
+    @param node_cls: The class of the node to run.
+    @type node_cls: Type[BaseNode]
+    """
+
+    if "--help" in sys.argv or "-h" in sys.argv:
+        print(node_cls.get_cli_doc())
+        sys.exit(0)
+
+    node = None
+    log.ok(f"Initializing {node_cls.__name__} type node")
+    try:
+        node = node_cls(*args)
+        log.ok(f"Initialized {node.name}")
+        while not node._done:
+            node._step_simulation()
+    except KeyboardInterrupt:
+        log.warning(f"User killed node {node_cls.__name__}")
+    except Exception:
+        tb = traceback.format_exc()
+        div = "=" * 30
+        log.error(f"Exception thrown during node execution:\n{div}\n{tb}\n{div}")
+    finally:
+        if node is not None:
+            node.kill_node()
+            log.ok(f"Finished running node {node_cls.__name__}")
+        else:
+            log.warning(f"Node {node_cls.__name__} failed during initialization")

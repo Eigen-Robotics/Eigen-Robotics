@@ -7,7 +7,7 @@ import importlib.util
 import sys
 from types import ModuleType
 
-__all__ = ["cli", "core", "sim", "robots", "sensors", "types"]
+__all__ = ["cli", "core", "sim", "robots", "sensors", "types", "gym"]
 
 from . import robots
 from . import sensors
@@ -118,6 +118,7 @@ _ALIAS_TARGETS = {
     "eigen.cli": "eigen.framework.cli",
     "eigen.sim": "eigen.framework.sim",
     "eigen.types": "eigen.framework.types",
+    "eigen.gym": "eigen.framework.gym",
 }
 
 if not any(isinstance(finder, _ModuleAliasFinder) and finder.mapping == _ALIAS_TARGETS for finder in sys.meta_path):

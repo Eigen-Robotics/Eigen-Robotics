@@ -26,3 +26,7 @@ def test_import_core():
 def test_import_types_utils():
     from eigen.types.utils import unpack
     assert unpack is not None
+
+def test_import_gym():
+    from eigen.gym.eigen_env import EigenEnv
+    assert EigenEnv is not None

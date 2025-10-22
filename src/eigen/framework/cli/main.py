@@ -8,6 +8,7 @@ from . import (
     network,
     registry,
     robot,
+    sensor,
 )
 
 app = typer.Typer()
@@ -18,6 +19,8 @@ app.add_typer(graph.app, name="graph")
 app.add_typer(launcher.app, name="launcher")
 app.add_typer(components.app, name="components")
 app.add_typer(robot.app, name="robot")
+app.add_typer(sensor.app, name="sensor")
+app.add_typer(sensor.app, name="sensors")
 
 # Network inspection utilities
 app.add_typer(network.node, name="node")

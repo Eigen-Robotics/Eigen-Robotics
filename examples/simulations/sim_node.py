@@ -1,6 +1,5 @@
 # Import necessary modules
-from eigen.core.client.comm_infrastructure.base_node import main
-from eigen.core.system.simulation.simulator_node import SimulatorNode
+from eigen.core.system.simulation.simulator_node import SimulatorNode, main
 from eigen.core.tools.log import log
 
 # Path to your configuration file

@@ -3,17 +3,17 @@ simulator:
   backend_type: "pybullet"                # The physics engine we're using
   node_frequency: 240                     # How often your node's step() function runs (Hz)
   config:
-    connection_mode: "DIRECT"                # GUI for visual interface, DIRECT for headless mode
+    connection_mode: "GUI"                # GUI for visual interface, DIRECT for headless mode
     gravity:                              # Gravity vector [x, y, z] in m/s²
       - 0
       - 0
       - -9.81                             # Standard Earth gravity
     sim_frequency: 240                    # Physics simulation steps per second
-  save_render: 
-    save_path: "render"                   # Directory where rendered frames will be saved
-    remove_existing: false                # Whether to clean the directory before starting
-    render_interval: 0.1                  # Save a frame every 0.1 seconds (10 FPS)
-    overwrite_file: true                  # Overwrite existing files instead of creating new ones
+  # save_render: 
+  #   save_path: "render"                   # Directory where rendered frames will be saved
+  #   remove_existing: false                # Whether to clean the directory before starting
+  #   render_interval: 0.1                  # Save a frame every 0.1 seconds (10 FPS)
+  #   overwrite_file: true                  # Overwrite existing files instead of creating new ones
 
 objects:
   - name: "floor"
@@ -62,3 +62,11 @@ robots:
         - 0
         - 0
         - 0
+      joint_names:
+        - "shoulder_pan"
+        - "shoulder_lift"
+        - "elbow_flex"
+        - "wrist_flex"
+        - "wrist_roll"
+        - "gripper"
+      

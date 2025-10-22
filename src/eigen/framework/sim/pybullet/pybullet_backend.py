@@ -8,7 +8,7 @@ import math
 import os
 from pathlib import Path
 import sys
-from typing import Any
+from typing import Any, Optional, Dict
 
 import cv2
 import numpy as np
@@ -20,73 +20,7 @@ from eigen.core.system.simulation.simulator_backend import SimulatorBackend
 from eigen.core.tools.log import log
 from eigen.sim.pybullet.pybullet_multibody import PyBulletMultiBody
 
-# from eigen.types import
-
-
-def import_class_from_directory(path: Path) -> tuple[type, type | None]:
-    """!Load a class from ``path``.
-
-    The helper searches for ``<ClassName>.py`` inside ``path`` and imports the
-    class with the same name.  If a ``Drivers`` class is present in the module
-    its ``PYBULLET_DRIVER`` attribute is returned alongside the main class.
-
-    @param path Path to the directory containing the module.
-    @return Tuple ``(cls, driver_cls)`` where ``driver_cls`` is ``None`` when no
-            driver is defined.
-    @rtype Tuple[type, Optional[type]]
-    """
-    # Extract the class name from the last part of the directory path (last directory name)
-    class_name = path.name
-    file_path = path / f"{class_name}.py"
-    # get the full absolute path
-    file_path = file_path.resolve()
-    if not file_path.exists():
-        raise FileNotFoundError(f"The file {file_path} does not exist.")
-
-    # TODO(FV): review, remova noqa
-    with open(file_path, "r", encoding="utf-8") as file:  # noqa: PTH123, UP015
-        tree = ast.parse(file.read(), filename=file_path)
-    # for imports
-    module_dir = os.path.dirname(file_path)  # noqa: PTH120
-    sys.path.insert(0, module_dir)
-    # Extract class names from the AST
-    class_names = [
-        node.name for node in ast.walk(tree) if isinstance(node, ast.ClassDef)
-    ]
-    # check if Sensor_Drivers is in the class_names
-    if "Drivers" in class_names:
-        # Load the module dynamically
-        spec = importlib.util.spec_from_file_location(class_names[0], file_path)
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[class_names[0]] = module
-        spec.loader.exec_module(module)
-
-        class_ = getattr(module, class_names[0])
-        sys.path.pop(0)
-
-        drivers = class_.PYBULLET_DRIVER
-        class_names.remove("Drivers")
-
-    # Retrieve the class from the module (has to be list of one)
-    class_ = getattr(module, class_names[0])
-
-    if len(class_names) != 1:
-        raise ValueError(
-            f"Expected exactly two class definition in {file_path}, but found {len(class_names)}."
-        )
-
-    # Load the module dynamically
-    spec = importlib.util.spec_from_file_location(class_name, file_path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[class_name] = module
-    spec.loader.exec_module(module)
-
-    # Retrieve the class from the module (has to be list of one)
-    class_ = getattr(module, class_names[0])
-    sys.path.pop(0)
-
-    # Return the class
-    return class_, drivers
+from eigen.core.utils.driver_loader import import_class_from_directory
 
 
 class PyBulletBackend(SimulatorBackend):
@@ -120,9 +54,7 @@ class PyBulletBackend(SimulatorBackend):
             self.save_path.mkdir(parents=True, exist_ok=True)
 
             # Remove existing files
-            remove_existing = self.save_render_config.get(
-                "remove_existing", True
-            )
+            remove_existing = self.save_render_config.get("remove_existing", True)
             if remove_existing:
                 for child in self.save_path.iterdir():
                     if child.is_file():
@@ -142,12 +74,8 @@ class PyBulletBackend(SimulatorBackend):
                 "near_plane": 0.1,
                 "far_plane": 100.0,
             }
-            self.save_interval = self.save_render_config.get(
-                "save_interval", 1 / 30
-            )
-            self.overwrite_file = self.save_render_config.get(
-                "overwrite_file", False
-            )
+            self.save_interval = self.save_render_config.get("save_interval", 1 / 30)
+            self.overwrite_file = self.save_render_config.get("overwrite_file", False)
             self.extrinsics = self.save_render_config.get(
                 "extrinsics", default_extrinsics
             )
@@ -155,9 +83,9 @@ class PyBulletBackend(SimulatorBackend):
                 "intrinsics", default_intrinsics
             )
 
-        for additional_urdf_dir in self.global_config["simulator"][
-            "config"
-        ].get("urdf_dirs", []):
+        for additional_urdf_dir in self.global_config["simulator"]["config"].get(
+            "urdf_dirs", []
+        ):
             self.client.setAdditionalSearchPath(additional_urdf_dir)
 
         gravity = self.global_config["simulator"]["config"].get(
@@ -172,9 +100,7 @@ class PyBulletBackend(SimulatorBackend):
 
         # Setup robots
         if self.global_config.get("robots", None):
-            for robot_name, robot_config in self.global_config[
-                "robots"
-            ].items():
+            for robot_name, robot_config in self.global_config["robots"].items():
                 self.add_robot(robot_name, robot_config)
 
         # Setup objects
@@ -185,9 +111,7 @@ class PyBulletBackend(SimulatorBackend):
         # Sensors have to be set up last, as e.g. cameras might need
         # a parent to attach to
         if self.global_config.get("sensors", None):
-            for sensor_name, sensor_config in self.global_config[
-                "sensors"
-            ].items():
+            for sensor_name, sensor_config in self.global_config["sensors"].items():
                 self.add_sensor(sensor_name, sensor_config)
         self.ready = True
 
@@ -211,13 +135,11 @@ class PyBulletBackend(SimulatorBackend):
         @return Initialized :class:`BulletClient` instance.
         @rtype BulletClient
         """
-        kwargs = {"options": ""}
+        kwargs = dict(options="")
         mp4 = config.get("mp4")
         if mp4:
             kwargs["options"] = f"--mp4={mp4}"
-        connection_mode_str = config["simulator"]["config"][
-            "connection_mode"
-        ].upper()
+        connection_mode_str = config["simulator"]["config"]["connection_mode"].upper()
         connection_mode = getattr(p, connection_mode_str)
         return BulletClient(connection_mode, **kwargs)
 
@@ -240,7 +162,7 @@ class PyBulletBackend(SimulatorBackend):
     ####            ROBOTS, SENSORS AND OBJECTS           ####
     ##########################################################
 
-    def add_robot(self, name: str, robot_config: dict[str, Any]):
+    def add_robot(self, name: str, robot_config: Dict[str, Any]):
         """!Instantiate and register a robot in the simulation.
 
         @param name Identifier for the robot.
@@ -249,19 +171,17 @@ class PyBulletBackend(SimulatorBackend):
         class_path = Path(robot_config["class_dir"])
         if class_path.is_file():
             class_path = class_path.parent
-        RobotClass, DriverClass = import_class_from_directory(class_path)
-        DriverClass = DriverClass.value
+        RobotClass, DriverClass = import_class_from_directory(class_path, backend="pybullet")
+        # DriverClass = DriverClass.value
         driver = DriverClass(name, robot_config, self.client)
-        robot = RobotClass(
-            name=name, global_config=self.global_config, driver=driver
-        )
+        robot = RobotClass(name=name, global_config=self.global_config, driver=driver)
 
         self.robot_ref[name] = robot
 
     def add_sim_component(
         self,
         name: str,
-        obj_config: dict[str, Any],
+        obj_config: Dict[str, Any],
     ) -> None:
         """!Add a generic simulated object.
 
@@ -273,13 +193,13 @@ class PyBulletBackend(SimulatorBackend):
         )
         self.object_ref[name] = sim_component
 
-    def add_sensor(self, name: str, sensor_config: dict[str, Any]) -> None:
+    def add_sensor(self, name: str, sensor_config: Dict[str, Any]) -> None:
         """!Instantiate and register a sensor.
 
         @param name Name of the sensor component.
         @param sensor_config Sensor configuration dictionary.
         """
-        # sensor_type = sensor_config["type"]
+        sensor_type = sensor_config["type"]
         class_path = Path(sensor_config["class_dir"])
         if class_path.is_file():
             class_path = class_path.parent
@@ -289,6 +209,7 @@ class PyBulletBackend(SimulatorBackend):
 
         attached_body_id = None
         if sensor_config["sim_config"].get("attach", None):
+
             print(self.global_config["objects"].keys())
             # search through robots and objects to find attach link if needed
             if (
@@ -306,7 +227,7 @@ class PyBulletBackend(SimulatorBackend):
                     sensor_config["sim_config"]["attach"]["parent_name"]
                 ].ref_body_id
             else:
-                log.error(f"Parent to attach sensor {name} to does not exist !")
+                log.error(f"Parent to attach sensor " + name + " to does not exist !")
         driver = DriverClass(name, sensor_config, attached_body_id, self.client)
         sensor = SensorClass(
             name=name,
@@ -365,9 +286,7 @@ class PyBulletBackend(SimulatorBackend):
             self._simulation_time += self._time_step
 
             if self.save_render_config is not None:
-                if (
-                    self._simulation_time - self._rendered_time
-                ) > self.save_interval:
+                if (self._simulation_time - self._rendered_time) > self.save_interval:
                     self.save_render()
                     self._rendered_time = self._simulation_time
 
@@ -408,13 +327,17 @@ class PyBulletBackend(SimulatorBackend):
         )
 
         # Render the image
-        img_w, img_h, rgba, _, _ = self.client.getCameraImage(
-            width,
-            height,
-            viewMatrix=view_matrix,
-            projectionMatrix=projection_matrix,
+        image = p.getCameraImage(
+            width, height, viewMatrix=view_matrix, projectionMatrix=projection_matrix
         )
-        rgba = np.reshape(rgba, (img_h, img_w, 4)).astype(np.uint8)
+        print(
+            f"width:{width}, height:{height}, viewMatrix:{view_matrix}, projectionMatrix:{projection_matrix}"
+        )
+        print("DEBUG")
+        print(f"DEBUG1: {type(image)}")
+
+        # image[2] contains the color image (RGBA) as a numpy array
+        rgba = image[2]
 
         # Save image
         bgra = cv2.cvtColor(rgba, cv2.COLOR_RGB2BGR)

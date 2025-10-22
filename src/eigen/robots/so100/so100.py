@@ -6,12 +6,11 @@ import numpy as np
 import sys
 import argparse
 
-# from viper_300s_driver import Viper300sDriver
 from eigen.core.client.comm_infrastructure.base_node import main
 from eigen.core.system.component.robot import Robot
 from eigen.core.system.driver.robot_driver import RobotDriver
 from eigen.core.tools.log import log
-from eigen.sim.pybullet.pybullet_robot_driver import BulletRobotDriver
+# from eigen.sim.pybullet.pybullet_robot_driver import BulletRobotDriver
 from eigen.types import (
     joint_group_command_t,
     joint_state_t,
@@ -22,10 +21,11 @@ from eigen.types.utils import pack, unpack
 
 from so100_driver import SO100Driver
 
-@dataclass
+
 class Drivers(Enum):
-    PYBULLET_DRIVER = BulletRobotDriver
-    DRIVER = SO100Driver
+    PYBULLET_DRIVER = "eigen.sim.pybullet.pybullet_robot_driver:BulletRobotDriver"
+    DRIVER    = "eigen.robots.so100_driver:SO100Driver"
+    GENESIS_DRIVER  = "eigen.sim.genesis.genesis_robot_driver:GenesisRobotDriver"  # will only import if requested
 
 class SO100(Robot):
     """SO100 robot component.

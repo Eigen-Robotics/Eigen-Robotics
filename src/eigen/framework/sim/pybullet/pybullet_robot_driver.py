@@ -34,6 +34,7 @@ class BulletRobotDriver(SimRobotDriver):
         @param client Bullet client instance.
         @return ``None``
         """
+        print("Initializing BulletRobotDriver...")
         super().__init__(component_name, component_config, True)
 
         self.client = client
@@ -155,7 +156,6 @@ class BulletRobotDriver(SimRobotDriver):
         @param q_init Optional list of initial joint positions.
         """
         kwargs = {}
-
         kwargs["useFixedBase"] = self.config.get("use_fixed_base", 1)
 
         if self.config.get("merge_fixed_links", True):
