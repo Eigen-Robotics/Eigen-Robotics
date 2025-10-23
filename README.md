@@ -1,4 +1,4 @@
-<br><br>
+<br>
 
 <p align="center">
   <img src="assets/eigen_logo_vertical.png" alt="Eigen Robotics Logo" width="300"/>
