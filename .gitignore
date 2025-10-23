@@ -140,3 +140,6 @@ Thumbs.db
 
 .whl
 
+# But NEVER ignore assets folder
+!assets/
+!assets/**
