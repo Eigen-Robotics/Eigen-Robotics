@@ -1,8 +1,9 @@
+<br><br>
+
 <p align="center">
-  <img src="assets/eigen_logo.svg" alt="Eigen Robotics Logo" width="120"/>
+  <img src="assets/eigen_logo_vertical.png" alt="Eigen Robotics Logo" width="300"/>
 </p>
 
-<h1 align="center">Eigen Robotics</h1>
 
 <p align="center">
   <em>Python-First Robotics — Build, Simulate, and Deploy Robots 10× Faster</em>
