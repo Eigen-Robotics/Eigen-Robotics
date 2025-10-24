@@ -19,7 +19,10 @@ from eigen.types import (
 )
 from eigen.types.utils import pack, unpack
 
-from so100_driver import SO100Driver
+try:
+    from so100_driver import SO100Driver
+except ImportError:
+    from .so100_driver import SO100Driver
 
 
 class Drivers(Enum):

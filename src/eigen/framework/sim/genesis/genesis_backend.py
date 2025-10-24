@@ -211,25 +211,16 @@ class GenesisBackend(SimulatorBackend):
 
         if self.render_cam is None or self.save_path is None:
             return
-
-        rgba = self.render_cam.render()
+        
+        rgb, depth, segmentation, normal = self.render_cam.render(depth=True, segmentation=True, normal=True)
         time_us = int(1e6 * self._simulation_time)
         if self.overwrite_file:
             save_path = self.save_path / "render.png"
         else:
             save_path = self.save_path / f"{time_us}.png"
-        # Convert renderer output to uint8 BGR image for OpenCV
-        img = np.asarray(rgba)
-        # Drop alpha channel if present
-        if img.ndim == 3 and img.shape[-1] == 4:
-            img = img[..., :3]
-        # Normalize to uint8 if needed (assume float in [0,1])
-        if img.dtype != np.uint8:
-            img = np.clip(img, 0.0, 1.0)
-            img = (img * 255.0).astype(np.uint8)
-        # Convert RGB -> BGR for OpenCV
-        img_bgr = img[..., ::-1]
-        cv2.imwrite(str(save_path), img_bgr)
+
+        bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+        cv2.imwrite(str(save_path), bgr)
 
 
     def step(self) -> None:
