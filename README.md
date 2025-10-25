@@ -123,7 +123,7 @@ See `CONTRIBUTING.md` for full guidelines.
 ## 📚 Documentation & Links
 
 - 📘 Documentation: coming soon
-- 🌍 Website: coming soon
+- 🌍 Website: https://eigen-robotics.com
 - 💬 Discord: coming soon
 
 ---
