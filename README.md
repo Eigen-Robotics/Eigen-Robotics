@@ -1,7 +1,10 @@
 <br>
 
 <p align="center">
-  <img src="assets/eigen_logo_vertical.png" alt="Eigen Robotics Logo" width="300"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/eigen_logo_vertical_dark.png">
+    <img src="assets/eigen_logo_vertical_light.png" alt="Eigen Robotics Logo" width="300"/>
+  </picture>
 </p>
 
 
