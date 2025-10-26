@@ -109,6 +109,10 @@ class SO100(Robot):
                 cmd_dict[joint] = goal
             self._joint_cmd_msg = None
             control_mode = self.joint_groups[group_name]["control_mode"]
+
+            if self._driver.sim == True: 
+                cmd_dict["shoulder_pan"] = -cmd_dict["shoulder_pan"]
+
             self.control_joint_group(control_mode, cmd_dict)
 
         self.joint_group_command = None

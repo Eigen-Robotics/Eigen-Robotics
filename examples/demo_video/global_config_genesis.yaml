@@ -1,9 +1,9 @@
 simulator:
-  name: "my_first_simulator"              # A unique name for your simulator node
-  backend_type: "pybullet"                # The physics engine we're using
+  name: "Genesis Simulator"              # A unique name for your simulator node
+  backend_type: "genesis"                # The physics engine we're using
   node_frequency: 240                     # How often your node's step() function runs (Hz)
   config:
-    connection_mode: "GUI"                # GUI for visual interface, DIRECT for headless mode
+    connection_mode: "DIRECT"                # GUI for visual interface, DIRECT for headless mode
     gravity:                              # Gravity vector [x, y, z] in m/s²
       - 0
       - 0
@@ -39,7 +39,7 @@ objects:
       base_orientation: [0.0, 0.0, 0.0, 1.0]
 
 sensors: 
-  - name: "Camera"
+  - name: "Camera/Genesis"
     config:
       class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/src/eigen/sensors/camera"        # Directory where the class is located
       type: "Camera"
@@ -61,6 +61,7 @@ sensors:
         far_val: 100.0                             # default 100.0
         fix:
           camera_target_position: [0, 0, 0.1]
+          camera_position: [0.5, 0.0, 0.5]
           distance: 0.75
           yaw: 90.0
           pitch: 0.0
@@ -68,7 +69,7 @@ sensors:
           up_axis_index: 2
 
 robots: 
-  - name: "SO100"
+  - name: "SO101/Genesis"
     config:
       source: "urdf"
       urdf_path: "SO100/so100.urdf"

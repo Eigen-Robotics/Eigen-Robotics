@@ -8,7 +8,7 @@ import eigen.core.tools.log as log
 class CameraDriver(SensorDriver):
     def __init__(self, sensor_name: str, sensor_config: dict[str, Any] = None) -> None:
         super().__init__(sensor_name, sensor_config, False)
-        self.cap = cv2.VideoCapture(0)  # 0 = default camera
+        self.cap = cv2.VideoCapture(1)  # 0 = default camera
 
         if not self.cap.isOpened():
             log.error("Error: Could not open camera.")

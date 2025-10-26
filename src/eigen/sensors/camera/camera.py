@@ -23,7 +23,7 @@ except ImportError as e:
 class Drivers(Enum):
     PYBULLET_DRIVER = "eigen.sim.pybullet.pybullet_camera_driver:BulletCameraDriver"
     DRIVER    = "eigen.robots.camera_driver.camera_driver"
-    GENESIS_DRIVER  = ""  # will only import if requested
+    GENESIS_DRIVER  = "eigen.sim.genesis.genesis_camera_driver:GenesisCameraDriver"  # will only import if requested
 
 class BasicCamera(Sensor):
     """Basic camera sensor component.

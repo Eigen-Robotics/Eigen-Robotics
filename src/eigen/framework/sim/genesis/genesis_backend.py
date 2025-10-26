@@ -181,9 +181,19 @@ class GenesisBackend(SimulatorBackend):
         @param name Name of the sensor component.
         @param sensor_config Sensor configuration dictionary.
         """
-        raise NotImplementedError("Sensors are not compatible with Genesis yet.")
-        # Cameras are not supported on MacOS, Ubuntu Cameras are not working
-        # Genesis-Embodied-AI/Genesis#1739
+        class_path = Path(sensor_config["class_dir"])
+        if class_path.is_file():
+            class_path = class_path.parent
+
+        sensor_class, driver_class = import_class_from_directory(class_path, backend="genesis")
+
+        if self.scene is None:
+            raise RuntimeError("Genesis scene is not initialized.")
+
+        driver = driver_class(name, sensor_config, client=self.scene)
+        sensor = sensor_class(name=name, global_config=self.global_config, driver=driver)
+
+        self.sensor_ref[name] = sensor
 
     def remove(self, name: str) -> None:
         """!Remove a component from the simulator.

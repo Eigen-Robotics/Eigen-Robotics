@@ -3,7 +3,7 @@ simulator:
   backend_type: "genesis"                # The physics engine we're using
   node_frequency: 240                     # How often your node's step() function runs (Hz)
   config:
-    connection_mode: "GUI"                # GUI for visual interface, DIRECT for headless mode
+    connection_mode: "DIRECT"                # GUI for visual interface, DIRECT for headless mode
     gravity:                              # Gravity vector [x, y, z] in m/s²
       - 0
       - 0
@@ -69,7 +69,7 @@ sensors:
           up_axis_index: 2
 
 robots: 
-  - name: "SO100"
+  - name: "SO101"
     config:
       source: "urdf"
       urdf_path: "SO100/so100.urdf"

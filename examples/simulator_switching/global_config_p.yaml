@@ -1,5 +1,5 @@
 simulator:
-  name: "my_first_simulator"              # A unique name for your simulator node
+  name: "Pybullet Simulator"              # A unique name for your simulator node
   backend_type: "pybullet"                # The physics engine we're using
   node_frequency: 240                     # How often your node's step() function runs (Hz)
   config:
@@ -38,34 +38,34 @@ objects:
       base_position: [0.0, 0.0, 0.0]
       base_orientation: [0.0, 0.0, 0.0, 1.0]
 
-# sensors: 
-#   - name: "Camera"
-#     config:
-#       class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/src/eigen/sensors/camera"        # Directory where the class is located
-#       type: "Camera"
-#       camera_type: "fixed"
-#       frequency: 30        # default 30
-#       width: 640           # default 640
-#       height: 480          # default 480
-#       streams:
-#         color:
-#           enable: True
-#           format: "bgr8"
-#         depth:
-#           enable: True
-#           format: "z16"
-#       sim_config:
-#         visualize: True
-#         fov: 60                          # default 60
-#         near_val: 0.1                              # default 0.1
-#         far_val: 100.0                             # default 100.0
-#         fix:
-#           camera_target_position: [0, 0, 0.1]
-#           distance: 0.75
-#           yaw: 90.0
-#           pitch: 0.0
-#           roll: 0.0
-#           up_axis_index: 2
+sensors: 
+  - name: "Camera"
+    config:
+      class_dir: "/Users/sarthakdas/Documents/Documents - Sarthak’s MacBook Pro 2020/Projects/Eigen Robotics/Codebase/Eigen-Robotics/src/eigen/sensors/camera"        # Directory where the class is located
+      type: "Camera"
+      camera_type: "fixed"
+      frequency: 30        # default 30
+      width: 640           # default 640
+      height: 480          # default 480
+      streams:
+        color:
+          enable: True
+          format: "bgr8"
+        depth:
+          enable: True
+          format: "z16"
+      sim_config:
+        visualize: True
+        fov: 60                          # default 60
+        near_val: 0.1                              # default 0.1
+        far_val: 100.0                             # default 100.0
+        fix:
+          camera_target_position: [0, 0, 0.1]
+          distance: 0.75
+          yaw: 90.0
+          pitch: 0.0
+          roll: 0.0
+          up_axis_index: 2
 
 robots: 
   - name: "SO100"
