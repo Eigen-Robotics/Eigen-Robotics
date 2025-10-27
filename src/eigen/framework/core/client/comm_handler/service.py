@@ -114,9 +114,10 @@ class Service(CommHandler):
                     return False
                 response = json.loads(data.decode("utf-8"))
                 if response.get("status") == "OK":
-                    log.info(
-                        f"Service: Successfully registered '{self.service_name}' with registry."
-                    )
+                    # log.info(
+                    #     f"Service: Successfully registered '{self.service_name}' with registry."
+                    # )
+                    pass
                 else:
                     log.error(
                         f"Service: Registration failed - {response.get('message')}"

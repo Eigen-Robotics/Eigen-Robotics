@@ -78,9 +78,8 @@ class RobotEnv(EigenEnv):
     def action_packing(self, action: Any) -> Dict[str, Any]:
         """Pack a joint_group_command on the configured action channel."""
 
-        if self.simulator_name == "none":
-            action = percentage_to_radians_list(action)
-
+        action = percentage_to_radians_list(action)
+        print(f"Action: {action}")
         return {
             self.action_channel_name: pack.joint_group_command(
                 name="all",

@@ -120,9 +120,10 @@ class EndPoint:
 
         # If no configuration is provided (None), log a warning and use the default config
         elif global_config is None:
-            log.warning(
-                "No global configuration provided. Using default system configuration."
-            )
+            # log.warning(
+            #     "No global configuration provided. Using default system configuration."
+            # )
+            pass
 
         # If global_config is of an unsupported type, log an error and use the default config
         else:

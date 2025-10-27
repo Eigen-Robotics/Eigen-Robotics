@@ -287,7 +287,7 @@ class EigenEnv(Env, InstanceNode, ABC):
         @param global_config Path or dictionary to parse.
         """
         if global_config is None:
-            log.warning("No configuration file provided. Using default configuration.")
+            # log.warning("No configuration file provided. Using default configuration.")
             self.global_config = None
             return
         if isinstance(global_config, str):

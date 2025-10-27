@@ -56,12 +56,12 @@ sensors:
           format: "z16"
       sim_config:
         visualize: True
-        fov: 60                          # default 60
+        fov: 82                          # default 60
         near_val: 0.1                              # default 0.1
         far_val: 100.0                             # default 100.0
         fix:
           camera_target_position: [0, 0, 0.1]
-          camera_position: [0.5, 0.0, 0.5]
+          camera_position: [-0.35, 0.2, 0.2]
           distance: 0.75
           yaw: 90.0
           pitch: 0.0
@@ -78,7 +78,7 @@ robots:
       base_position:
         - 0
         - 0
-        - 0.2
+        - 0.1
       base_orientation:  # Quaternion (x, y, z, w)
         - 0
         - 0

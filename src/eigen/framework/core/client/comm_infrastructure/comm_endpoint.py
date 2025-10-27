@@ -210,10 +210,12 @@ class CommEndpoint(EndPoint):
                         )
                     return component_config
             if not config:
-                log.error(f"Couldn't find type '{self.name}' in config.")
+                # log.error(f"Couldn't find type '{self.name}' in config.")
+                pass
             return config
         else:
-            log.error(f"Couldn't load config for {type} '{self.name}'")
+            # log.error(f"Couldn't load config for {type} '{self.name}'")
+            pass
 
     def get_info(self) -> dict:
         """!
