@@ -30,7 +30,7 @@
 
 ## ✨ Features
 
-- 🚀 **Unified Codebase** — Run the same task in PyBullet, MuJoCo, or on the real robot.
+- 🚀 **Unified Codebase** — Run the same task in PyBullet, MuJoCo, Genesis or on the real robot.
 - 🔌 **Extensible Drivers** — Integrate any robot or sensor through a simple interface.
 - 🧠 **ML-Native Design** — Plug directly into PyTorch, imitation learning, and RL pipelines.
 - 🧩 **Plug-and-Play Architecture** — Add robots, sensors, and simulators via YAML configs.
