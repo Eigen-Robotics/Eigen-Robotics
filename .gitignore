@@ -77,7 +77,6 @@ pdm.lock
 # Jupyter
 # --------------------
 .ipynb_checkpoints
-*.ipynb
 
 # --------------------
 # Robotics / Simulation

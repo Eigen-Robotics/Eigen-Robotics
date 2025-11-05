@@ -3,7 +3,7 @@ from eigen.core.system.simulation.simulator_node import SimulatorNode, main
 from eigen.core.tools.log import log
 
 # Path to your configuration file
-CONFIG_PATH = "global_config.yaml"
+CONFIG_PATH = "global_config_g.yaml"
 
 # Create your custom simulator by inheriting from SimulatorNode
 class MySimulatorNode(SimulatorNode):

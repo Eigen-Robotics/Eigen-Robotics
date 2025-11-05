@@ -1,0 +1,32 @@
+package eigen.types;
+
+struct bullet_dynamics_t {
+    int32_t          bodyUniqueId;                // Required: object unique id, as returned by loadURDF etc.
+    int32_t          linkIndex;                   // Required: link index or -1 for the base
+
+    // Optional fields
+    float          mass;                        // Mass of the link (or base for linkIndex -1)
+    float          lateralFriction;             // Lateral (linear) contact friction
+    float          spinningFriction;            // Torsional friction around the contact normal
+    float          rollingFriction;             // Torsional friction orthogonal to contact normal
+    float          restitution;                 // Bounciness of contact (keep < 1, preferably closer to 0)
+    float          linearDamping;               // Linear damping of the link
+    float          angularDamping;              // Angular damping of the link
+    float          contactStiffness;            // Stiffness of the contact constraints
+    float          contactDamping;              // Damping of the contact constraints
+    int32_t          frictionAnchor;              // Enable/disable friction anchor
+    float_vector_t localInertiaDiagonal;        // Diagonal elements of the inertia tensor
+    float          ccdSweptSphereRadius;        // Radius of the sphere for continuous collision detection
+    float          contactProcessingThreshold;  // Threshold for processing contacts
+    int32_t          activationState;             // Activation state (e.g., sleeping, wake-up state)
+
+    float          jointDamping;                // Joint damping coefficient
+    float          anisotropicFriction;         // Anisotropic friction coefficient
+    float          maxJointVelocity;            // Maximum joint velocity
+    float          collisionMargin;             // Collision margin
+    float          jointLowerLimit;             // Lower limit of a joint
+    float          jointUpperLimit;             // Upper limit of a joint
+    float          jointLimitForce;             // Maximum force applied to satisfy a joint limit
+
+    int32_t          physicsClientId;             // Physics client ID (in case of multiple servers)
+}

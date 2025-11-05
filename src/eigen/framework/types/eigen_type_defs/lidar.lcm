@@ -1,0 +1,34 @@
+package eigen.types;
+
+struct point_field_t {
+    const int8_t INT8 = 1;
+    const int8_t UINT8 = 2;
+    const int8_t INT16 = 3; 
+    const int8_t UINT16 = 4;
+    const int8_t INT32 = 5;
+    const int8_t UINT32 = 6;
+    const int8_t FLOAT32 = 7;
+    const int8_t FLOAT64 = 8;
+
+    string name;
+    int32_t offset;
+    int8_t datatype; 
+    int32_t count;
+}
+
+struct point_cloud2_t {
+    int32_t height; 
+    int32_t width; 
+
+    int64_t num_fields;
+    point_field_t fields[num_fields];
+
+    boolean is_bigendian; 
+    int32_t point_step;
+    int32_t row_step;
+
+    int64_t num_bytes;
+    int32_t data[num_bytes];
+
+    boolean is_dense;
+}

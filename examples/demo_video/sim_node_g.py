@@ -3,14 +3,14 @@ from eigen.core.system.simulation.simulator_node import SimulatorNode, main
 from eigen.core.tools.log import log
 
 # Path to your configuration file
-CONFIG_PATH = "global_config.yaml"
+CONFIG_PATH = "global_config_genesis.yaml"
 
 # Create your custom simulator by inheriting from SimulatorNode
 class MySimulatorNode(SimulatorNode):
 
     def initialize_scene(self):
         """
-        This function is called after objects are loaded but before simulation starts.
+        This function is .called after objects are loaded but before simulation starts.
         Use it to set up your scene, modify parameters, or add custom objects.
         """
         pass
