@@ -58,7 +58,32 @@ KNOWN_ROBOTS: dict[str, RobotDescriptor] = {
         run_module="eigen.robots.so100",
         description="Eigen SO-100 6-DoF arm",
     ),
+    "ur5": RobotDescriptor(
+        name="ur5",
+        module="eigen.robots.ur5.ur5",
+        run_module="eigen.robots.ur5",
+        description="Universal Robots UR5 manipulator",
+    ),
+    "kuka_iiwa": RobotDescriptor(
+        name="kuka_iiwa",
+        module="eigen.robots.kuka_iiwa.kuka_iiwa",
+        run_module="eigen.robots.kuka_iiwa",
+        description="KUKA LBR iiwa 7-DoF collaborative arm",
+    ),
+    "unitree_go2": RobotDescriptor(
+        name="unitree_go2",
+        module="eigen.robots.unitree_go2.unitree_go2",
+        run_module="eigen.robots.unitree_go2",
+        description="Unitree Go2 quadruped robot",
+    ),
+    "unitree_g1": RobotDescriptor(
+        name="unitree_g1",
+        module="eigen.robots.unitree_g1.unitree_g1",
+        run_module="eigen.robots.unitree_g1",
+        description="Unitree G1 humanoid robot",
+    ),
 }
+
 
 
 def _get_descriptor(name: str) -> Optional[RobotDescriptor]:

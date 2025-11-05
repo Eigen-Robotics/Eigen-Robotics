@@ -54,6 +54,7 @@ class SO100(Robot):
         #######################################
         ##     custom communication setup    ##
         #######################################
+        self.joint_group_command = None
         self._joint_cmd_msg, self._cartesian_cmd_msg = None, None
 
         self.joint_group_command_ch = self.name + "/joint_group_command"
@@ -85,8 +86,6 @@ class SO100(Robot):
                     self.joint_states_pub: joint_state_t,
                 }
             )
-
-        self.joint_group_command = None
 
     def control_robot(self):
         """
@@ -138,7 +137,10 @@ class SO100(Robot):
         joint_msg.velocity = [0.0] * joint_msg.n
         joint_msg.effort = [0.0] * joint_msg.n
 
-        return {self.joint_states_pub: joint_msg}
+        try:
+            return {self.joint_states_pub: joint_msg}
+        except: 
+            return {}
 
     ####################################################
     ##      Franka Subscriber Callbacks               ##

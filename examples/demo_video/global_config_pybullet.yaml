@@ -25,7 +25,7 @@ objects:
         shape_type: "GEOM_BOX"
         visual_shape:
           halfExtents: [1, 1, 0.1]
-          rgbaColor: [1.0, 0.0, 0.5, 1.0]  # Pink
+          rgbaColor: [1.0, 1.0, 1.0, 1.0]  # White
 
       collision:
         shape_type: "GEOM_BOX"
@@ -62,7 +62,7 @@ sensors:
         fix:
           camera_target_position: [0, 0, 0.2]
           distance: 0.4
-          yaw: 30
+          yaw: 60
           pitch: 0.0
           roll: 0
           up_axis_index: 2
