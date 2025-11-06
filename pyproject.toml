@@ -10,6 +10,7 @@ license = { text = "MIT" }
 dependencies = [
   "lcm>=1.5.2",
   "numpy>=1.26",
+  "omegaconf>=2.3.0",
   "pydantic>=2",
 ]
 

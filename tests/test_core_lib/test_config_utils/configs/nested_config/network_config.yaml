@@ -1,0 +1,3 @@
+registry_host: "127.0.0.1"
+registry_port: 1234
+lcm_network_bounces: 1
