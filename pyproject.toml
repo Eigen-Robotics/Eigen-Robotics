@@ -8,6 +8,7 @@ license = { text = "MIT" }
 
 # core deps everyone gets
 dependencies = [
+  "lcm>=1.5.2",
   "numpy>=1.26",
   "pydantic>=2",
 ]
@@ -51,5 +52,6 @@ include = ["LICENSE", "README.md"]
 
 [dependency-groups]
 dev = [
+    "black>=25.9.0",
     "pytest>=8.4.2",
 ]
