@@ -54,4 +54,5 @@ include = ["LICENSE", "README.md"]
 dev = [
     "black>=25.9.0",
     "pytest>=8.4.2",
+    "ruff>=0.14.3",
 ]

@@ -406,6 +406,7 @@ mujoco = [
 dev = [
     { name = "black" },
     { name = "pytest" },
+    { name = "ruff" },
 ]
 
 [package.metadata]
@@ -425,6 +426,7 @@ provides-extras = ["mujoco", "genesis", "dev"]
 dev = [
     { name = "black", specifier = ">=25.9.0" },
     { name = "pytest", specifier = ">=8.4.2" },
+    { name = "ruff", specifier = ">=0.14.3" },
 ]
 
 [[package]]

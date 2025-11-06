@@ -1,9 +1,7 @@
 from lcm import LCM
 
 from eigen.core.tools import log
-
 from .comm_handler import CommHandler
-
 
 
 class Publisher(CommHandler):
@@ -28,7 +26,7 @@ class Publisher(CommHandler):
         self.channel_type = channel_type
         self.comm_type = "Publisher"
         super().__init__(lcm, channel_name, channel_type)
-        log.ok(f"setup publisher {self}")
+        log.info(f"setup publisher {self}")
 
     def publish(self, msg: object) -> None:
         """!
@@ -44,23 +42,21 @@ class Publisher(CommHandler):
         if self.active:
             self._lcm.publish(self.channel_name, self.channel_type.encode(msg))
         else:
-            log.warning(
-                f"publisher {self} is not enabled, cannot publish messages"
-            )
+            log.warning(f"publisher {self} is not enabled, cannot publish messages")
 
     def restart(self) -> None:
         """!
         Restarts the publisher by enabling it again and logging the action.
         """
         self.active = True
-        log.ok(f"enabled {self}")
+        log.info(f"enabled {self}")
 
     def suspend(self) -> None:
         """!
         Shuts down the publisher by disabling it and logging the shutdown action.
         """
         self.active = False
-        log.ok(f"suspended publisher {self}")
+        log.info(f"suspended publisher {self}")
 
     def get_info(self):
         """!

@@ -60,9 +60,7 @@ class Subscriber(CommHandler):
             msg: object = self.channel_type.decode(data)
             self._user_callback(t, channel_name, msg, *self._callback_args)
         except ValueError as e:
-            log.warning(
-                f"failed to decode message on channel '{channel_name}': {e}"
-            )
+            log.warning(f"failed to decode message on channel '{channel_name}': {e}")
 
     def subscribe(self):
         """!
@@ -70,11 +68,9 @@ class Subscriber(CommHandler):
 
         @return: ``None``
         """
-        self._sub = self._lcm.subscribe(
-            self.channel_name, self.subscriber_callback
-        )
+        self._sub = self._lcm.subscribe(self.channel_name, self.subscriber_callback)
         self._sub.set_queue_capacity(1)  # keep only the latest message
-        log.ok(f"subscribed to {self}")
+        log.info(f"subscribed to {self}")
         self.active = True
 
     def restart(self):
@@ -92,7 +88,7 @@ class Subscriber(CommHandler):
         """
         if self.active:
             self._lcm.unsubscribe(self._sub)
-            log.ok(f"unsubscribed from {self}")
+            log.info(f"unsubscribed from {self}")
             self.active = False
 
     def get_info(self):

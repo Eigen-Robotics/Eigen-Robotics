@@ -48,9 +48,7 @@ def apply_panda_style(text: str) -> str:
     return styled_text + bcolors.ENDC
 
 
-def logger_panda(
-    self: logging.Logger, message: str, *args: Any, **kwargs: Any
-) -> None:
+def logger_panda(self: logging.Logger, message: str, *args: Any, **kwargs: Any) -> None:
     """Log a message using panda styling at INFO level."""
     if self.isEnabledFor(logging.INFO):
         styled_message = apply_panda_style(message)
@@ -142,11 +140,8 @@ __all__ = ["log"]
 # Demo
 # =========================
 if __name__ == "__main__":
-    usrin = log.query("ready?")
-    log.debug(f"user said '{usrin}'")
-    log.ok("all good")
+    log.debug("debug message")
     log.info("hello world")
     log.warning("warn message")
     log.error("oh no")
     log.critical("bad times")
-    log.panda("this is a panda log")

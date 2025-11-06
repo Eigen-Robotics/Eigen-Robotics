@@ -6,6 +6,7 @@ from eigen.core.client import Publisher
 def _assert_instantiable(cls: type) -> None:
     """Assert that `cls` can be subclassed (i.e. is importable and valid)."""
     try:
+
         class _Test(cls):
             pass
     except Exception as e:
