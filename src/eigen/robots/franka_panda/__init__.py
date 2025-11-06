@@ -1,1 +1,0 @@
-"""Franka Panda robot components."""
