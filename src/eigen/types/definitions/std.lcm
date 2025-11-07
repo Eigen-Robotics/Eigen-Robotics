@@ -1,0 +1,202 @@
+// ======================================================
+// ROS std_msgs equivalents (no geometry, no sensors)
+// ======================================================
+
+// std_msgs/Empty
+struct empty_t {
+    // no fields
+}
+
+// std_msgs/Bool
+struct bool_t {
+    boolean data;
+}
+
+// std_msgs/Byte  (ROS: int8)
+struct byte_t {
+    int8_t data;
+}
+
+// std_msgs/Char  (ROS: uint8)
+struct char_t {
+    byte data;   // unsigned 8-bit
+}
+
+// std_msgs/Int8
+struct int_8_t {
+    int8_t data;
+}
+
+// std_msgs/UInt8
+struct uint_8_t {
+    byte data;
+}
+
+// std_msgs/Int16
+struct int_16_t {
+    int16_t data;
+}
+
+// std_msgs/Int32
+struct int_32_t {
+    int32_t data;
+}
+
+// std_msgs/Int64
+struct int_64_t {
+    int64_t data;
+}
+
+// std_msgs/Float32
+struct float_32_t {
+    float data;
+}
+
+// std_msgs/Float64
+struct float_64_t {
+    double data;
+}
+
+// std_msgs/String
+struct string_t {
+    string data;
+}
+
+// std_msgs/ColorRGBA
+struct color_rgba_t {
+    float r;
+    float g;
+    float b;
+    float a;
+}
+
+// ======================================================
+// std_msgs/Header
+// (std_msgs itself uses builtin_interfaces/Time in ROS 2,
+// but we can inline a simple time struct.)
+// ======================================================
+struct time_t {
+    int32_t sec;
+    int32_t nanosec;
+}
+
+struct header_t {
+    time_t stamp;
+    string frame_id;
+}
+
+// ======================================================
+// std_msgs MultiArray family
+// (used by Float32MultiArray, Int32MultiArray, etc.)
+// ======================================================
+
+// std_msgs/MultiArrayDimension
+struct multi_array_dimension_t {
+    string label;
+    int32_t size;
+    int32_t stride;
+}
+
+// std_msgs/MultiArrayLayout
+struct multi_array_layout_t {
+    int32_t dim_num;
+    multi_array_dimension_t dim[dim_num];
+    int32_t data_offset;
+}
+
+// ----------------------------------------------------
+// std_msgs/Float32MultiArray
+// ----------------------------------------------------
+struct float32_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    float data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/Float64MultiArray
+// ----------------------------------------------------
+struct float64_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    double data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/Int8MultiArray
+// ----------------------------------------------------
+struct int8_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int8_t data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/UInt8MultiArray
+// ROS UInt8 → LCM byte
+// ----------------------------------------------------
+struct uint8_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    byte data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/Int16MultiArray
+// ----------------------------------------------------
+struct int16_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int16_t data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/UInt16MultiArray
+// LCM has no uint16, so we store as int32_t
+// Consumers should treat values as 0..65535
+// ----------------------------------------------------
+struct uint16_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int32_t data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/Int32MultiArray
+// ----------------------------------------------------
+struct int32_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int32_t data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/UInt32MultiArray
+// LCM has no uint32, so we store as int64_t
+// (this can represent full 0..4,294,967,295)
+// ----------------------------------------------------
+struct uint32_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int64_t data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/Int64MultiArray
+// ----------------------------------------------------
+struct int64_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int64_t data[data_length];
+}
+
+// ----------------------------------------------------
+// std_msgs/UInt64MultiArray
+// LCM has no uint64; we store as int64_t.
+// This won’t cover the very top of uint64 range, but is the closest.
+// ----------------------------------------------------
+struct uint64_multi_array_t {
+    multi_array_layout_t layout;
+    int32_t data_length;
+    int64_t data[data_length];
+}
