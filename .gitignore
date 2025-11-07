@@ -13,6 +13,7 @@ pip-wheel-metadata/
 
 # Virtual environments
 .venv/
+.venv-test/
 venv/
 env/
  ENV/
