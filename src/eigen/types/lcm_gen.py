@@ -57,6 +57,18 @@ PrimitiveType = enum.Enum(
 )
 PrimitiveType.__str__ = lambda self: self.name
 
+# add this helper near the top (after PRIM_TO_FMT)
+PRIM_TO_CODE = {
+    PrimitiveType.boolean: "b",
+    PrimitiveType.byte: "B",
+    PrimitiveType.int8_t: "b",
+    PrimitiveType.int16_t: "h",
+    PrimitiveType.int32_t: "i",
+    PrimitiveType.int64_t: "q",
+    PrimitiveType.float: "f",
+    PrimitiveType.double: "d",
+}
+
 
 @dataclasses.dataclass(frozen=True)
 class UserType:
@@ -512,36 +524,29 @@ class LcmPythonGen:
 
     def _emit_encode_field(self, f: StructField) -> List[str]:
         lines: List[str] = []
-        # arrays
         if f.array_dims:
             first_dim = f.array_dims[0]
-            # fixed-size primitive array → single struct.pack
+            # fixed-size primitive array → single struct.pack('>Nd', ...)
             if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, int):
-                fmt, size = PRIM_TO_FMT[f.typ]
-                # e.g. '>3d'
+                code = PRIM_TO_CODE[f.typ]
                 lines.append(
-                    f"        buf.write(struct.pack('>{first_dim}{fmt[2:]}', *self.{f.name}[:{first_dim}]))\n"
+                    f"        buf.write(struct.pack('>{first_dim}{code}', *self.{f.name}[:{first_dim}]))\n"
                 )
                 return lines
-            # variable-length primitive array, first dim is a name (e.g. num_ranges)
+            # variable-size primitive array → struct.pack('>%sH' % self.len, ...)
             if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, str):
-                fmt, size = PRIM_TO_FMT[f.typ]
+                code = PRIM_TO_CODE[f.typ]
                 lines.append(
-                    f"        buf.write(struct.pack('>%s{fmt[2:]}' % self.{first_dim}, *self.{f.name}[:self.{first_dim}]))\n"
+                    f"        buf.write(struct.pack('>%s{code}' % self.{first_dim}, *self.{f.name}[:self.{first_dim}]))\n"
                 )
                 return lines
-            # non-primitive arrays fall back to per-element encode
+            # non-primitive / fallback
             if isinstance(first_dim, str):
-                lines.append(
-                    f"        # variable-sized array of non-primitive\n"
-                    f"        for _x in self.{f.name}:\n"
-                )
+                lines.append(f"        for _x in self.{f.name}:\n")
             else:
-                lines.append(
-                    f"        for _x in self.{f.name}:\n"
-                )
+                lines.append(f"        for _x in self.{f.name}:\n")
             if isinstance(f.typ, PrimitiveType):
-                fmt, size = PRIM_TO_FMT[f.typ]
+                fmt, _ = PRIM_TO_FMT[f.typ]
                 lines.append(f"            buf.write(struct.pack('{fmt}', _x))\n")
             else:
                 lines.append(f"            assert _x._get_packed_fingerprint() == {f.typ.name}._get_packed_fingerprint()\n")
@@ -570,19 +575,21 @@ class LcmPythonGen:
         if f.array_dims:
             first_dim = f.array_dims[0]
             if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, int):
-                fmt, size = PRIM_TO_FMT[f.typ]
+                code = PRIM_TO_CODE[f.typ]
+                size = PRIM_TO_FMT[f.typ][1]
                 total_bytes = first_dim * size
                 lines.append(
-                    f"        self.{f.name} = struct.unpack('>{first_dim}{fmt[2:]}', buf.read({total_bytes}))\n"
+                    f"        self.{f.name} = struct.unpack('>{first_dim}{code}', buf.read({total_bytes}))\n"
                 )
                 return lines
             if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, str):
-                fmt, size = PRIM_TO_FMT[f.typ]
-                # read exactly self.<sizefield> items
+                code = PRIM_TO_CODE[f.typ]
+                size = PRIM_TO_FMT[f.typ][1]
                 lines.append(
-                    f"        self.{f.name} = struct.unpack('>%s{fmt[2:]}' % self.{first_dim}, buf.read(self.{first_dim} * {size}))\n"
+                    f"        self.{f.name} = struct.unpack('>%s{code}' % self.{first_dim}, buf.read(self.{first_dim} * {size}))\n"
                 )
                 return lines
+
             # non-primitive or odd arrays
             if isinstance(first_dim, str):
                 lines.append(f"        self.{f.name} = []\n")
@@ -665,9 +672,15 @@ def main():
 
     # write __init__.py
     if args.no_package_dirs:
+        msgs = sorted(package_to_msgs.get((), []))
         init_lines = []
-        for msg in sorted(package_to_msgs.get((), [])):
+        for msg in msgs:
             init_lines.append(f"from .{msg} import {msg}\n")
+        if msgs:
+            init_lines.append("\n__all__ = [\n")
+            for msg in msgs:
+                init_lines.append(f"    '{msg}',\n")
+            init_lines.append("]\n")
         (args.py_out / "__init__.py").write_text("".join(init_lines), encoding="utf-8")
     else:
         for pkg_parts, msgs in package_to_msgs.items():
@@ -676,11 +689,18 @@ def main():
                 dir_path = dir_path / part
             dir_path.mkdir(parents=True, exist_ok=True)
             init_path = dir_path / "__init__.py"
+            msgs_sorted = sorted(msgs)
             lines = []
-            for msg in sorted(msgs):
+            for msg in msgs_sorted:
                 lines.append(f"from .{msg} import {msg}\n")
+            if msgs_sorted:
+                lines.append("\n__all__ = [\n")
+                for msg in msgs_sorted:
+                    lines.append(f"    '{msg}',\n")
+                lines.append("]\n")
             init_path.write_text("".join(lines), encoding="utf-8")
         (args.py_out / "__init__.py").touch(exist_ok=True)
+
 
 
 if __name__ == "__main__":

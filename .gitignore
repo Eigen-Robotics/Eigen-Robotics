@@ -38,3 +38,5 @@ htmlcov/
 # macOS metadata
 .DS_Store
 
+# Ignore output generated files
+src/eigen/types/generated/
