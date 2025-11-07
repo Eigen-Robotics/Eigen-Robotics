@@ -131,3 +131,27 @@ def load_config(global_config: dict | str | Path | None = None) -> DictConfig:
         "Must be dict, str, Path, or None."
     )
     return OmegaConf.create({})
+
+def get_node_config(global_config: DictConfig, type: str, name: str) -> tuple[DictConfig, str]:
+    """Safely retrieve node config and file path from a nested global config."""
+    section_config = global_config.get(type)
+    if section_config is None:
+        log.warning(f"Section '{type}' not found in global config.")
+        return OmegaConf.create({}), ""
+
+    node_entry = section_config.get(name)
+    if node_entry is None:
+        log.warning(f"Node '{name}' not found under section '{type}'.")
+        return OmegaConf.create({}), ""
+
+    node_config = getattr(node_entry, "config", None)
+    node_file = getattr(node_entry, "file", "")
+
+    if node_config is None:
+        log.warning(f"Missing 'config' for node '{name}' in section '{type}'.")
+        node_config = OmegaConf.create({})
+
+    if not node_file:
+        log.warning(f"Missing 'file' for node '{name}' in section '{type}'.")
+
+    return node_config, node_file

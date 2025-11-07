@@ -4,20 +4,36 @@ network:
   lcm_network_bounces: 1
 
 simulator:
-  name: "Genesis Simulator"              # A unique name for your simulator node
-  config:
-    file: "simulator/genesis_simulator.py"  # Path to the simulator script
+  genesis_simulator:             # A unique name for your simulator node
+    file: "example_file"          # Type/category of the simulator
+    config:
+      file: "simulator/genesis_simulator.py"  # Path to the simulator script
 
-    backend_type: "genesis"                # The physics engine we're using
-    node_frequency: 240                     # How often your node's step() function runs (Hz)
-    connection_mode: "DIRECT"                # GUI for visual interface, DIRECT for headless mode
-    gravity:                              # Gravity vector [x, y, z] in m/s²
-      - 0
-      - 0
-      - -9.81                             # Standard Earth gravity
-    sim_frequency: 240                    # Physics simulation steps per second
-  save_render: 
-    save_path: "render"                   # Directory where rendered frames will be saved
-    remove_existing: false                # Whether to clean the directory before starting
-    render_interval: 0.1                  # Save a frame every 0.1 seconds (10 FPS)
-    overwrite_file: true                  # Overwrite existing files instead of creating new ones
+      backend_type: "genesis"                # The physics engine we're using
+      node_frequency: 240                     # How often your node's step() function runs (Hz)
+      connection_mode: "DIRECT"                # GUI for visual interface, DIRECT for headless mode
+      gravity:                              # Gravity vector [x, y, z] in m/s²
+        - 0
+        - 0
+        - -9.81                             # Standard Earth gravity
+      sim_frequency: 240                    # Physics simulation steps per second
+    save_render: 
+      save_path: "render"                   # Directory where rendered frames will be saved
+      remove_existing: false                # Whether to clean the directory before starting
+      render_interval: 0.1                  # Save a frame every 0.1 seconds (10 FPS)
+      overwrite_file: true                  # Overwrite existing files instead of creating new ones
+
+robots: 
+  my_robot:                               # Unique name for the robot
+    file: "example_file"                  # Type/category of the robot
+    config:
+      param1: "value1"                    # Example parameter 1
+      param2: 42                          # Example parameter 2
+
+
+sensors: 
+  camera_sensor:
+    file: "camera_sensor"                 # Type/category of the sensor
+    config:
+      resolution: [640, 480]             # Camera resolution
+      fov: 90                            # Field of view in degrees

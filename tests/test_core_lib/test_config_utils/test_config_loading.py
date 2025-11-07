@@ -1,8 +1,9 @@
 from pathlib import Path
 
-from omegaconf import DictConfig
+from omegaconf import DictConfig, ListConfig
 
 from eigen.core.config_utils.load_config import load_config
+from eigen.core.config_utils.config import load_node_config
 
 # --- Utility function for reuse ---
 def assert_network_cfg(cfg, host="127.0.0.1", port=1234, bounces=1):
@@ -94,3 +95,20 @@ def test_cycle_detection_replaces_reference_with_empty_mapping(caplog):
     assert isinstance(loop_value, (DictConfig, dict))
     assert len(loop_value) == 0
     assert any("Detected config include cycle" in record.message for record in caplog.records)
+
+def test_load_node_config():
+    base_config = load_config("tests/test_core_lib/test_config_utils/configs/whole_config/global_config.yaml")
+    robot_node_config, robot_file = load_node_config("my_robot", "robots", base_config)
+
+    assert isinstance(robot_node_config, DictConfig)
+    assert robot_file == "example_file"
+    assert robot_node_config.param1 == "value1"
+    assert robot_node_config.param2 == 42
+
+    sensor_node_config, sensor_file = load_node_config("camera_sensor", "sensors", base_config)
+    assert isinstance(sensor_node_config, DictConfig)
+    assert sensor_file == "camera_sensor"
+    assert sensor_node_config.resolution == [640, 480]
+    assert sensor_node_config.fov == 90
+
+    

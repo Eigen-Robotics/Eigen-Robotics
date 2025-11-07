@@ -1,10 +1,11 @@
 from pathlib import Path
+from typing import Tuple
 
 import lcm
 from lcm import LCM
 from omegaconf import DictConfig
 
-from eigen.core.config_utils.load_config import load_config
+from eigen.core.config_utils.load_config import load_config, get_node_config
 
 class EndPoint:
     def __init__(self, name: str, type: str, global_config: dict | Path | str | None) -> None:
@@ -14,8 +15,11 @@ class EndPoint:
 
         @param global_config: Global configuration containing network settings.
         """
+        self.name: str = name
+        self.type: str = type
         self.global_config: DictConfig = load_config(global_config)
-        self.config = load_config(global_config)
+        self.config, self.file = get_node_config(self.global_config, type, name)  #ignore type: tuple[DictConfig, str]
+        
         self.network_config = self.global_config.get("network", {})
 
         self.registry_host = self.network_config.get(
