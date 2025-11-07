@@ -1,5 +1,7 @@
 from pathlib import Path
+
 from omegaconf import DictConfig
+
 from eigen.core.config_utils.load_config import load_config
 
 # --- Utility function for reuse ---
@@ -44,3 +46,51 @@ def test_inline_path_config():
     config_path = Path("tests/test_core_lib/test_config_utils/configs/whole_config/global_config.yaml")
     cfg = load_config(config_path)
     assert_network_cfg(cfg)
+
+
+def test_missing_config_path_returns_empty(caplog):
+    missing_path = Path("tests/test_core_lib/test_config_utils/configs/whole_config/missing.yaml")
+    assert not missing_path.exists(), "Missing config unexpectedly exists"
+
+    with caplog.at_level("ERROR"):
+        cfg = load_config(missing_path)
+
+    assert len(cfg) == 0
+    assert any("Config file not found" in record.message for record in caplog.records)
+
+
+def test_invalid_config_type_returns_empty(caplog):
+    with caplog.at_level("ERROR"):
+        cfg = load_config(123)  # type: ignore[arg-type]
+
+    assert len(cfg) == 0
+    assert any("Invalid type for global_config" in record.message for record in caplog.records)
+
+
+def test_none_config_logs_warning(caplog):
+    with caplog.at_level("WARNING"):
+        cfg = load_config(None)
+
+    assert len(cfg) == 0
+    assert any("No global configuration provided" in record.message for record in caplog.records)
+
+
+def test_list_based_config_returns_empty(caplog):
+    config_path = Path("tests/test_core_lib/test_config_utils/configs/invalid_structure/list_config.yaml")
+    with caplog.at_level("ERROR"):
+        cfg = load_config(config_path)
+
+    assert len(cfg) == 0
+    assert any("Expected DictConfig" in record.message for record in caplog.records)
+
+
+def test_cycle_detection_replaces_reference_with_empty_mapping(caplog):
+    config_path = Path("tests/test_core_lib/test_config_utils/configs/cycle_config/global_config.yaml")
+    with caplog.at_level("ERROR"):
+        cfg = load_config(config_path)
+
+    assert cfg.network.registry_host == "127.0.0.1"
+    loop_value = cfg.network.global_ref
+    assert isinstance(loop_value, (DictConfig, dict))
+    assert len(loop_value) == 0
+    assert any("Detected config include cycle" in record.message for record in caplog.records)

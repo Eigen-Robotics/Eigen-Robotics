@@ -25,7 +25,7 @@ class Subscriber(CommHandler):
         channel_name: str,
         channel_type: type,
         callback: Callable[[int, str, object], None],
-        callback_args: list[object] = [None],
+        callback_args: list[object] | None = None,
     ) -> None:
         """!
         Initializes the subscriber with the necessary parameters for subscribing

@@ -1,0 +1,4 @@
+registry_host: "127.0.0.1"
+registry_port: 4321
+lcm_network_bounces: 2
+global_ref: "global_config.yaml"
