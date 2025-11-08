@@ -6,7 +6,6 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 
-# core deps everyone gets
 dependencies = [
   "lcm>=1.5.2",
   "numpy>=1.26",
@@ -14,7 +13,6 @@ dependencies = [
   "pydantic>=2",
 ]
 
-# this is the important bit
 [project.optional-dependencies]
 mujoco = [
   "mujoco>=3.1.5",
@@ -28,6 +26,16 @@ dev = [
   "mypy",
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# tell hatch: the code is in src/eigen
+[tool.hatch.build.targets.wheel]
+packages = ["src/eigen"]
+include = ["LICENSE", "README.md"]
+
+# pytest config
 [tool.pytest.ini_options]
 testpaths = [
   "tests",
@@ -35,25 +43,4 @@ testpaths = [
 ]
 pythonpath = [
   "src",
-]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.uv]
-default-groups = ["dev"]
-
-[tool.uv.workspace]
-members = ["."]
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/eigen_robotics", "src/eigen"]
-include = ["LICENSE", "README.md"]
-
-[dependency-groups]
-dev = [
-    "black>=25.9.0",
-    "pytest>=8.4.2",
-    "ruff>=0.14.3",
 ]

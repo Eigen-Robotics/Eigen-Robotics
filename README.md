@@ -51,7 +51,9 @@ pip install eigen-robotics
 ```bash
 git clone https://github.com/Eigen-Robotics/Eigen-Robotics.git
 cd Eigen-Robotics
-uv sync --extra default
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
 ```
 Supports Python 3.11+ on macOS and Ubuntu.
 

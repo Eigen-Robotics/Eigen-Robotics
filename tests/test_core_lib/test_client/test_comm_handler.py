@@ -1,8 +1,6 @@
 import pytest
 
-from eigen.core.client import Listener
-from eigen.core.client import Publisher
-from eigen.core.client import Subscriber
+from eigen.core.client import Listener, Publisher, Subscriber
 
 
 class DummyMessage:

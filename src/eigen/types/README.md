@@ -169,5 +169,5 @@ print(decoded.name)  # -> "sensor"
 
 ## To Generate Default Types
 ```bash
-uv run lcm_gen.py --py-out generated/ --no-package-dirs definitions/*
+python lcm_gen.py --py-out generated/ --no-package-dirs definitions/*
 ```

@@ -32,10 +32,8 @@ class Listener(Subscriber):
         """
         self.mutex: threading.Lock = threading.Lock()
         self._msg: Any = None
-        self.channel_name = channel_name
-        self.channel_type = channel_type
-        self.comm_type = "Listener"
         super().__init__(lcm, channel_name, channel_type, self.callback)
+        self.comm_type = "Listener"
 
     def received(self) -> bool:
         """!

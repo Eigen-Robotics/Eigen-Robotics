@@ -1,10 +1,10 @@
 from lcm import LCM
 
 from eigen.core.tools import log
-from .comm_handler import CommHandler
+from .comm_handler import LCMCommHandler
 
 
-class Publisher(CommHandler):
+class Publisher(LCMCommHandler):
     """!
     A Publisher class that extends the CommHandler base class. This class handles
     the publishing of messages to a specified communication channel using LCM.
@@ -22,10 +22,7 @@ class Publisher(CommHandler):
         @param channel_name: The name of the channel for publishing messages.
         @param channel_type: The type of message expected for the channel.
         """
-        self.channel_name = channel_name
-        self.channel_type = channel_type
-        self.comm_type = "Publisher"
-        super().__init__(lcm, channel_name, channel_type)
+        super().__init__(lcm, channel_name, channel_type, comm_type="Publisher")
         log.info(f"setup publisher {self}")
 
     def publish(self, msg: object) -> None:

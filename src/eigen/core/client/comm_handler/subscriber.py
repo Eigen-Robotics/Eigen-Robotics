@@ -3,11 +3,11 @@ import time
 
 from lcm import LCM
 
-from .comm_handler import CommHandler
+from .comm_handler import LCMCommHandler
 from eigen.core.tools import log
 
 
-class Subscriber(CommHandler):
+class Subscriber(LCMCommHandler):
     """!
     A subscriber for listening to messages on a communication channel.
 
@@ -39,10 +39,9 @@ class Subscriber(CommHandler):
         """
         if callback_args is None:
             callback_args = []
-        super().__init__(lcm, channel_name, channel_type)
+        super().__init__(lcm, channel_name, channel_type, comm_type="Subscriber")
         self._user_callback: Callable[[int, str, object], None] = callback
         self._callback_args: list[object] = callback_args
-        self.comm_type = "Subscriber"
         self.subscribe()
 
     def subscriber_callback(self, channel_name: str, data: bytes) -> None:

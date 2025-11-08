@@ -132,7 +132,7 @@ def load_config(global_config: dict | str | Path | None = None) -> DictConfig:
     )
     return OmegaConf.create({})
 
-def get_node_config(global_config: DictConfig, type: str, name: str) -> tuple[DictConfig, str]:
+def get_node_config(name: str, type: str, global_config: DictConfig) -> tuple[DictConfig, str]:
     """Safely retrieve node config and file path from a nested global config."""
     section_config = global_config.get(type)
     if section_config is None:

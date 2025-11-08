@@ -18,8 +18,8 @@ python3 lcm_gen.py --py-out gen_py defs/*.lcm
     => creates package dirs from .lcm packages
 
 python3 lcm_gen.py --py-out gen_py --no-package-dirs defs/*.lcm
-    => writes all .py into gen_py, but generated imports STILL follow
-       the package written in the .lcm file
+    => writes all .py into gen_py, but generated imports become relative
+       (from .Msg import Msg) so everything works from a flat package
 """
 
 import argparse
@@ -308,8 +308,11 @@ def _primitive_default(typ: PrimitiveType):
 
 
 class LcmPythonGen:
-    def __init__(self, struct: Struct):
+    def __init__(self, struct: Struct, *, no_package_dirs: bool = False):
         self.struct = struct
+        # if True, we should emit relative imports for user types, e.g. `from .Foo import Foo`
+        # regardless of what the .lcm file's `package` said.
+        self.no_package_dirs = no_package_dirs
 
     def _compute_base_hash(self) -> int:
         data = []
@@ -341,39 +344,41 @@ class LcmPythonGen:
         cls_name = self.struct.typ.name
         base_hash = self._compute_base_hash()
 
-        # imports: always follow package from the lcm file
+        # imports: controlled by self.no_package_dirs
         imports: List[str] = []
         for f in self.struct.fields:
             if isinstance(f.typ, UserType):
-                if f.typ.package:
-                    imports.append(f"from {f.typ.package}.{f.typ.name} import {f.typ.name}")
+                if self.no_package_dirs:
+                    # flat output → relative import
+                    imports.append(f"from .{f.typ.name} import {f.typ.name}")
                 else:
-                    imports.append(f"import {f.typ.name}")
+                    if f.typ.package:
+                        imports.append(f"from {f.typ.package}.{f.typ.name} import {f.typ.name}")
+                    else:
+                        imports.append(f"import {f.typ.name}")
         imports = sorted(set(imports))
 
         # build __typenames__ and __dimensions__
         typenames = []
         dimensions = []
         for f in self.struct.fields:
-            # typenames
             if isinstance(f.typ, PrimitiveType):
                 typenames.append(f.typ.name)
             else:
-                if f.typ.package:
+                if f.typ.package and not self.no_package_dirs:
                     typenames.append(f"{f.typ.package}.{f.typ.name}")
                 else:
+                    # in no-package-dirs mode, just use the bare name
                     typenames.append(f.typ.name)
-            # dimensions: match your example
             if not f.array_dims:
                 dimensions.append(None)
             else:
-                # produce a list, e.g. [3] or ["num_ranges"]
                 dim_list = []
                 for d in f.array_dims:
                     if isinstance(d, int):
                         dim_list.append(d)
                     else:
-                        dim_list.append(d)  # will render as string in code
+                        dim_list.append(d)
                 dimensions.append(dim_list)
 
         lines: List[str] = []
@@ -387,7 +392,6 @@ class LcmPythonGen:
         slots = [f.name for f in self.struct.fields]
         lines.append(f"    __slots__ = {slots!r}\n\n")
         lines.append(f"    __typenames__ = {typenames!r}\n\n")
-        # we need to render dimension names as strings in Python
         dim_repr_parts = []
         for d in dimensions:
             if d is None:
@@ -407,7 +411,6 @@ class LcmPythonGen:
         if self.struct.fields:
             for f in self.struct.fields:
                 if not f.array_dims:
-                    # scalar
                     if isinstance(f.typ, PrimitiveType):
                         lines.append(f"        self.{f.name} = {_primitive_default(f.typ)}\n")
                         lines.append(f"        \"\"\" LCM Type: {f.typ.name} \"\"\"\n")
@@ -415,10 +418,8 @@ class LcmPythonGen:
                         lines.append(f"        self.{f.name} = {f.typ.name}()\n")
                         lines.append(f"        \"\"\" LCM Type: {f.typ.name} \"\"\"\n")
                 else:
-                    # array
                     first_dim = f.array_dims[0]
                     if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, int):
-                        # fixed-size primitive array -> list comprehension, like your example
                         default = _primitive_default(f.typ)
                         lines.append(
                             f"        self.{f.name} = [ {default} for dim0 in range({first_dim}) ]\n"
@@ -427,9 +428,7 @@ class LcmPythonGen:
                             f"        \"\"\" LCM Type: {f.typ.name}[{first_dim}] \"\"\"\n"
                         )
                     else:
-                        # variable or non-primitive arrays
                         lines.append(f"        self.{f.name} = []\n")
-                        # mention size if it's a name
                         if isinstance(first_dim, str):
                             lines.append(
                                 f"        \"\"\" LCM Type: {self._field_type_str(f)}[{first_dim}] \"\"\"\n"
@@ -516,7 +515,7 @@ class LcmPythonGen:
     def _field_type_str(self, f: StructField) -> str:
         if isinstance(f.typ, PrimitiveType):
             return f.typ.name
-        if f.typ.package:
+        if f.typ.package and not self.no_package_dirs:
             return f"{f.typ.package}.{f.typ.name}"
         return f.typ.name
 
@@ -526,21 +525,18 @@ class LcmPythonGen:
         lines: List[str] = []
         if f.array_dims:
             first_dim = f.array_dims[0]
-            # fixed-size primitive array → single struct.pack('>Nd', ...)
             if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, int):
                 code = PRIM_TO_CODE[f.typ]
                 lines.append(
                     f"        buf.write(struct.pack('>{first_dim}{code}', *self.{f.name}[:{first_dim}]))\n"
                 )
                 return lines
-            # variable-size primitive array → struct.pack('>%sH' % self.len, ...)
             if isinstance(f.typ, PrimitiveType) and isinstance(first_dim, str):
                 code = PRIM_TO_CODE[f.typ]
                 lines.append(
                     f"        buf.write(struct.pack('>%s{code}' % self.{first_dim}, *self.{f.name}[:self.{first_dim}]))\n"
                 )
                 return lines
-            # non-primitive / fallback
             if isinstance(first_dim, str):
                 lines.append(f"        for _x in self.{f.name}:\n")
             else:
@@ -553,7 +549,6 @@ class LcmPythonGen:
                 lines.append("            _x._encode_one(buf)\n")
             return lines
 
-        # scalar
         if isinstance(f.typ, PrimitiveType):
             if f.typ == PrimitiveType.string:
                 lines.append(f"        __{f.name}_encoded = self.{f.name}.encode('utf-8')\n")
@@ -590,7 +585,6 @@ class LcmPythonGen:
                 )
                 return lines
 
-            # non-primitive or odd arrays
             if isinstance(first_dim, str):
                 lines.append(f"        self.{f.name} = []\n")
                 lines.append(f"        for _ in range(self.{first_dim}):\n")
@@ -606,7 +600,6 @@ class LcmPythonGen:
                 lines.append(f"            self.{f.name}.append(_v)\n")
             return lines
 
-        # scalar
         if isinstance(f.typ, PrimitiveType):
             if f.typ == PrimitiveType.string:
                 lines.append("        __len = struct.unpack('>I', buf.read(4))[0]\n")
@@ -630,7 +623,7 @@ def main():
     parser.add_argument(
         "--no-package-dirs",
         action="store_true",
-        help="do NOT create subfolders from LCM package; write all files into --py-out (imports still use the LCM package!)",
+        help="do NOT create subfolders from LCM package; write all files into --py-out AND make imports relative",
     )
     args = parser.parse_args()
 
@@ -646,7 +639,7 @@ def main():
     for src in args.src:
         structs = Parser.parse(filename=src)
         for st in structs:
-            gen = LcmPythonGen(st)
+            gen = LcmPythonGen(st, no_package_dirs=args.no_package_dirs)
             content = gen.generate()
 
             if args.no_package_dirs:
@@ -700,7 +693,6 @@ def main():
                 lines.append("]\n")
             init_path.write_text("".join(lines), encoding="utf-8")
         (args.py_out / "__init__.py").touch(exist_ok=True)
-
 
 
 if __name__ == "__main__":
