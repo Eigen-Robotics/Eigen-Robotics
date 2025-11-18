@@ -58,7 +58,7 @@ SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 ---
 
 ## ARK Ark (MIT License)
-Copyright (c) 2020 Eric Han
+Copyright (c) 2020 TU Darmstadt, Huawei
 
 ```
 Permission is hereby granted, free of charge, to any person obtaining a copy
